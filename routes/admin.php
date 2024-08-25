@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Route;
 // Rutas para el Panel de Admin
 Route::get('/', [HomeController::class, 'index']);
 
+Route::get('caquita', function(){
+    return 'Caquita';
+});
+
 // Productos (Crear Controlador)
 Route::get('productos', function(){
     return view('admin.productos.index');
