@@ -68,6 +68,7 @@
         <a href="{{ route('productos.index') }}" class="text-blue-500 hover:underline mt-2">
             Reset Filter
         </a>
+        <a href="{{ route('productos.create') }}" class="bg-blue-500 text-white rounded px-4 py-2">Crear producto</a>
     </form>
 @endsection
 
@@ -107,11 +108,7 @@
                             <!-- Botoniza por cambiar -->
                             <a href="{{ route('productos.edit', $product->ID_producto) }}" class="btn btn-warning btn-sm">Editar</a>
 
-                            <form action="{{ route('productos.destroy', $product->ID_producto) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?')">Eliminar</button>
-                            </form>
+                            
                         </td>
                     </tr>
                 @empty

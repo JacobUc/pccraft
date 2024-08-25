@@ -15,6 +15,7 @@ class Product extends Model
         'fabricante',
         'descripcion',
         'precio',
+        'descuento',
         'stock',
         'fecha_agregada',
         'ID_Categoria',
@@ -29,3 +30,5 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'ID_Categoria', 'ID_Categoria');
     }
 }
+
+            

@@ -67,9 +67,14 @@ class ProductsController extends Controller
             'precio' => 'required|numeric',
             'stock' => 'required|integer',
             'ID_Categoria' => 'required|exists:categories,ID_Categoria',
+            'url_photo' => 'required|image|max:2048',
 
         ]);
         $data = $request->all();
+        if ($request->hasFile('url_photo')) {
+            $path = $request->file('url_photo')->store('photos', 'public');
+            $data['url_photo'] = $path;
+        }
         $data['vendidos'] = 0;
         Product::create($data);
 
@@ -95,16 +100,27 @@ class ProductsController extends Controller
             'precio' => 'required|numeric',
             'stock' => 'required|integer',
             'ID_Categoria' => 'required|exists:categories,ID_Categoria',
+            'url_photo' => 'nullable|image|max:2048',
         ]);
-
+    
         $product = Product::findOrFail($id);
         $product->fecha_agregada = now()->setTimezone('America/Mexico_City');
     
-    // Actualizar el resto de los campos
-    $product->update($request->except('fecha_agregada'));
-
+        if ($request->hasFile('url_photo')) {
+            if ($product->url_photo && file_exists(storage_path('app/public/' . $product->url_photo))) {
+                unlink(storage_path('app/public/' . $product->url_photo));
+            }
+    
+            $path = $request->file('url_photo')->store('photos', 'public');
+            $product->url_photo = $path;
+        }
+    
+        // Actualiza el resto de los campos
+        $product->update($request->except('fecha_agregada', 'url_photo'));
+    
         return redirect()->route('productos.index')->with('success', 'Producto actualizado con éxito.');
     }
+    
 
     // FORMUALRIO BASE
     public function destroy($id)
@@ -112,6 +128,6 @@ class ProductsController extends Controller
         $product = Product::findOrFail($id);
         $product->delete();
 
-        return redirect()->route('admin.productos.index')->with('success', 'Producto eliminado con éxito.');
+        return redirect()->route('productos.index')->with('success', 'Producto eliminado con éxito.');
     }
 }
