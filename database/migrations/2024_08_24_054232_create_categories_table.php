@@ -23,6 +23,7 @@ return new class extends Migration
             ['ID_Categoria' => 5, 'nombre_categoria' => 'Disco Duro'],
             ['ID_Categoria' => 6, 'nombre_categoria' => 'Gabinete'],
             ['ID_Categoria' => 7, 'nombre_categoria' => 'Accesorios'],
+            ['ID_Categoria' => 8, 'nombre_categoria' => 'Fuente de poder'],
         ]);
     }
 
