@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('numero_exterior');
             $table->string('numero_interior')->nullable();
             $table->text('detalles')->nullable();
-            $table->timestamps();
         
             $table->foreign('ID_Usuario')->references('id')->on('users')->onDelete('cascade'); 
         

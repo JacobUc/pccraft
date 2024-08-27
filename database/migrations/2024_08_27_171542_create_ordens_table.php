@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ordens', function (Blueprint $table) {
-        $table->char('ID_Orden', 50)->primary();
+        $table->id('ID_Orden');
         $table->unsignedBigInteger('ID_Usuario');  
         $table->date('fecha');
         $table->decimal('total', 10, 2);
         $table->string('estado');
-        $table->timestamps();
+        $table->timestamp('agregada')->useCurrent();
 
         $table->foreign('ID_Usuario')->references('id')->on('users')->onDelete('cascade');  
 

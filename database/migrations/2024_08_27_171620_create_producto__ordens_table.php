@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('producto__ordens', function (Blueprint $table) {
             $table->id('ID_Producto_Orden');
             $table->unsignedBigInteger('ID_Producto');
-            $table->char('ID_Orden', 50);
+            $table->unsignedBigInteger('ID_Orden');
             $table->integer('cantidad');
             $table->integer('calificacion')->nullable()->default(null)->unsigned()->check('calificacion >= 1 AND calificacion <= 5');
-            $table->text('reseña')->nullable();
-            $table->timestamp('fecha_agregada')->useCurrent();
+            $table->text('resena')->nullable();
+            $table->timestamp('agregado')->useCurrent();
 
             $table->foreign('ID_Producto')->references('ID_Producto')->on('products')->onDelete('cascade');
             $table->foreign('ID_Orden')->references('ID_Orden')->on('ordens')->onDelete('cascade');
