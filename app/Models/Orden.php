@@ -12,6 +12,7 @@ class Orden extends Model
     protected $primaryKey = 'ID_Orden';
     protected $fillable = [
         'ID_Usuario',
+        'ID_Direccion',
         'fecha',
         'total',
         'estado',
@@ -24,5 +25,9 @@ class Orden extends Model
     public function productos()
     {
         return $this->hasMany(Producto_Orden::class, 'ID_Orden', 'ID_Orden');
+    }
+    public function direccion()
+    {
+        return $this->belongsTo(Direccion::class, 'ID_Direccion');
     }
 }

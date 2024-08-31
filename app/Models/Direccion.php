@@ -11,7 +11,6 @@ class Direccion extends Model
     protected $table = 'direccions';
     protected $primaryKey = 'ID_Direccion';
     protected $fillable = [
-        'ID_Direccion',
         'ID_Usuario',
         'ciudad',
         'codigo_postal',
@@ -25,5 +24,9 @@ class Direccion extends Model
     public function usuario()
     {
         return $this->belongsTo(User::class, 'ID_Usuario');
+    }
+    public function ordenes()
+    {
+        return $this->hasMany(Order::class, 'ID_Direccion');
     }
 }

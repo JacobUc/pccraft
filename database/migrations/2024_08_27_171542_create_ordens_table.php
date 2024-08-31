@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('ordens', function (Blueprint $table) {
         $table->id('ID_Orden');
         $table->unsignedBigInteger('ID_Usuario');  
+        $table->unsignedBigInteger('ID_Direccion');
         $table->date('fecha');
         $table->decimal('total', 10, 2);
         $table->string('estado');
         $table->timestamp('agregada')->useCurrent();
 
         $table->foreign('ID_Usuario')->references('id')->on('users')->onDelete('cascade');  
+        $table->foreign('ID_Direccion')->references('ID_Direccion')->on('direccions')->onDelete('cascade');
 
 
         });

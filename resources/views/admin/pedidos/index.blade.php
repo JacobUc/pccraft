@@ -75,6 +75,7 @@
           <tr>
               <th>ID Orden</th>
               <th>Usuario</th>
+              <th>Direccion</th>
               <th>Fecha</th>
               <th>Total</th>
               <th>Estado</th>
@@ -86,6 +87,15 @@
           <tr>
               <td>{{ $orden->ID_Orden }}</td>
               <td>{{ $orden->usuario->name }}</td>
+              <td>
+                <p>Ciudad: {{ $orden->direccion->ciudad}}</p> 
+                <p>CP: {{ $orden->direccion->codigo_postal }}</p>
+                <p>Calle:  {{ $orden->direccion->calle_principal}}</p> 
+                <p>Cruzamientos: {{ $orden->direccion->cruzamientos }}</p>
+                <p>No. Ext. {{ $orden->direccion->numero_exterior}}</p> 
+                <p>No. Int.: {{ $orden->direccion->numero_interior }}</p>
+                <p>Detalles: {{ $orden->direccion->detalles }}</p>
+              </td>
               <td>{{ $orden->fecha }}</td>
               <td>{{ $orden->total }}</td>
               <td>{{ $orden->estado }}</td>
