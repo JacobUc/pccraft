@@ -100,7 +100,7 @@
               <td>{{ $orden->total }}</td>
               <td>{{ $orden->estado }}</td>
               <td>
-                  <a href="{{ route('pedidos.edit', $orden->ID_Orden) }}" class="btn btn-info">Más detalles</a>
+                  <a href="{{ route('pedidos.edit', $orden->ID_Orden) }}" class="btn btn-warning btn-sm">Más Detalles</a>
               </td>
           </tr>
           @empty

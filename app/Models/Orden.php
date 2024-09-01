@@ -18,6 +18,9 @@ class Orden extends Model
         'estado',
         'agregada'
     ];
+
+    public $timestamps = false;
+
     public function usuario()
     {
         return $this->belongsTo(User::class, 'ID_Usuario');

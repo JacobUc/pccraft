@@ -6,6 +6,7 @@ use App\Models\Orden;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Producto_Orden;
+use App\Models\Direccion;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -86,17 +87,27 @@ class OrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $orden = Orden::findOrFail($id);
+
+        return view('admin.pedidos.edit', compact('orden'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'estado' => 'required|in:pedido,enviado,entregado',
+        ]);
+    
+        $orden = Orden::findOrFail($id);
+        $orden->estado = $request->estado;
+        $orden->save();  // Cambia esto
+    
+        return redirect()->route('pedidos.index')->with('success', 'Estado de la orden actualizado.');
     }
 
     /**
