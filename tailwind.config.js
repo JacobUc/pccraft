@@ -13,7 +13,15 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                roboto: ['Roboto', 'sans-serif'], 
+                poppins: ["Poppins", 'system-ui'],
+                montserrat: ["Montserrat", 'sans-serif'],
             },
+            colors:{
+                azul: '#0075FF',
+                negro: '#272727',
+                verde: '#11743E'
+            }
         },
     },
 

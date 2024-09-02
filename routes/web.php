@@ -17,7 +17,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
     
-});
+})->name('home');
+
+// Rutas creadas para el Frontend del E-commerce
+Route::get('productos', function( ){ return 'Hola'; } )->name('productos');
+Route::get('nosotros', function( ){ return 'Hola'; } )->name('nosotros');
+Route::get('soporte', function( ){ return 'Hola'; } )->name('soporte');
+Route::get('pedidos', function( ){ return 'Hola'; } )->name('pedidos');
+
+
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
