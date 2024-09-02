@@ -68,7 +68,7 @@
         <div class="mb-6">
             <label class="block text-gray-700">Agregar imagen</label>
             <div class="border-2 border-dashed p-4 flex justify-center items-center">
-                <input type="file" name="url_photo" multiple class="w-full">
+                <input type="file" name="url_photo[]" multiple class="w-full">
             </div>
             @if ($product->imagenes)
                 <div class="mt-4 grid grid-cols-3 gap-4">
@@ -80,15 +80,78 @@
                     @endforeach
                 </div>
             @endif
+
+            <!-- Mostrar solo la primera imagen -->
+            <div>
+                @php
+                    $photos = json_decode($product->url_photo, true);
+                @endphp
+
+                @if (!empty($photos))
+                    <img src="{{ asset('storage/' . $photos[0]) }}" alt="Imagen del producto">
+                @else
+                    <p>No hay imágenes disponibles</p>
+                @endif
+            </div>
+
+            <!-- Mostrar todas las imágenes -->
+            <div>
+                @php
+                    $photos = json_decode($product->url_photo, true);
+                @endphp
+
+                @if (!empty($photos))
+                    @foreach ($photos as $photo)
+                        <img src="{{ asset('storage/' . $photo) }}" alt="Imagen del producto" style="margin-right: 10px;">
+                    @endforeach
+                @else
+                    <p>No hay imágenes disponibles</p>
+                @endif
+            </div>
+
         </div>
 
         <div class="mb-6">
             <label for="especificacionJSON" class="block text-gray-700">Especificaciones (JSON)</label>
             <input type="file" id="especificacionJSON" name="especificacionJSON" class="w-full p-2 border border-gray-300 rounded">
+            
             @if ($product->especificacionJSON)
                 <p class="mt-2">{{ basename($product->especificacionJSON) }}</p>
+                
+                @php
+                    // Leer el contenido del archivo JSON
+                    $jsonPath = storage_path('app/public/' . $product->especificacionJSON);
+                    $jsonContent = file_exists($jsonPath) ? json_decode(file_get_contents($jsonPath), true) : null;
+                @endphp
+        
+                @if ($jsonContent)
+                    <!-- Contenedor con scroll para el JSON -->
+                    <div class="border p-4 mt-2 overflow-y-auto" style="max-height: 200px;"> <!-- Limitar altura a 200px (aprox. 5 filas) -->
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr>
+                                    <th class="border-b p-2">Atributo</th>
+                                    <th class="border-b p-2">Valor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($jsonContent as $attribute => $value)
+                                    <tr>
+                                        <td class="border-b p-2">{{ $attribute }}</td>
+                                        <td class="border-b p-2">{{ $value }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <p class="text-red-500 mt-2">El archivo JSON no es válido o está vacío.</p>
+                @endif
+            @else
+                <p class="text-gray-500 mt-2">No hay especificaciones disponibles.</p>
             @endif
         </div>
+
 
         <div class="flex justify-between">
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Actualizar Producto</button>

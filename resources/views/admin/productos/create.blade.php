@@ -67,7 +67,7 @@
         <div class="mb-6">
             <label class="block text-gray-700">Agregar imagen</label>
             <div class="border-2 border-dashed p-4 flex justify-center items-center">
-                <input type="file" name="url_photo" multiple class="w-full">
+                <input type="file" name="url_photo[]" multiple class="w-full">
             </div>
         </div>
 
