@@ -3,8 +3,66 @@
 @section('title', 'Home')
 
 @section('content')
-    <div class="">
-        Carrusel en proceso...
+    {{-- Carrusel (Flowbite) --}}
+    <div id="default-carousel" class="relative w-full" data-carousel="slide">
+        <!-- Carousel wrapper -->
+        <div class="relative h-56 overflow-hidden md:h-carrusel">
+            <!-- Item 1 -->
+            <div class="hidden duration-700 ease-out" data-carousel-item>
+                <a href="#">
+                    <img src="{{asset('img/c1.jpg')}}" class="w-auto" alt="...">
+                </a>
+            </div>
+            <!-- Item 2 -->
+            <div class="hidden duration-700 ease-out flex justify-center items-center" data-carousel-item>
+                <a href="#">
+                    <img src="https://storage-asset.msi.com/mx/picture/banner/banner_1724226595498b008de895d58c9246aac3e4a5412d.jpeg" class="w-auto" alt="...">
+                </a>
+            </div>
+            <!-- Item 3 -->
+            <div class="hidden duration-700 ease-out flex justify-center items-center" data-carousel-item>
+                <a href="#">
+                    <img src="https://dlcdnwebimgs.asus.com/gain/DA860435-9650-40FC-8626-A62027D3803A/fwebp" class="w-auto" alt="...">
+                </a>
+            </div>
+            <!-- Item 4 -->
+            <div class="hidden duration-700 ease-out flex justify-center items-center" data-carousel-item>
+                <a href="#">
+                    <img src="https://storage-asset.msi.com/global/picture/image/feature/monitor/Optix-MEG381CQR-Plus/images/kv-bg.jpg" class="w-auto" alt="...">
+                </a>
+            </div>
+            <!-- Item 5 -->
+            <div class="hidden duration-700 ease-out flex justify-center items-center" data-carousel-item>
+                <a href="#">
+                    <img src="https://dlcdnwebimgs.asus.com/gain/E073B1CE-873D-4D1B-993B-354F264FB228/fwebp" class="w-auto" alt="...">
+                </a>
+            </div>
+        </div>
+        <!-- Slider indicators -->
+        <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+            <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+        </div>
+        <!-- Slider controls -->
+        <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                </svg>
+                <span class="sr-only">Previous</span>
+            </span>
+        </button>
+        <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                </svg>
+                <span class="sr-only">Next</span>
+            </span>
+        </button>
     </div>
 
     {{-- La mejor seleccion de componentes --}}
