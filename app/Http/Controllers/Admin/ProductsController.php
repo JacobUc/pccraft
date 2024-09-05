@@ -57,23 +57,22 @@ class ProductsController extends Controller
     }
 
     // Método para validar que el JSON tenga la estructura correcta
-    protected function validateJsonStructure($jsonPath)
+    protected function validateJsonStructure($jsonContent)
     {
-        $jsonContent = Storage::disk('public')->get($jsonPath);
         $data = json_decode($jsonContent, true);
-
-        // Verifica que el JSON sea un objeto
+    
+        // Verificar que el JSON sea un array o un objeto válido
         if (!is_array($data)) {
             return false;
         }
-
-        // Verifica que haya al menos un par clave-valor
+    
+        // Verificar que el JSON tenga pares clave-valor válidos
         foreach ($data as $key => $value) {
             if (!is_string($key)) {
-                return false; // Asegura que todas las claves sean strings (atributos)
+                return false; // Asegura que todas las claves sean cadenas
             }
         }
-
+    
         return true;
     }
 
@@ -88,13 +87,13 @@ class ProductsController extends Controller
             'precio' => 'required|numeric',
             'stock' => 'required|integer',
             'ID_Categoria' => 'required|exists:categories,ID_Categoria',
-            'url_photo.*' => 'required|image|max:2048',
+            'url_photo.*' => 'required|image|max:5128',
             'especificacionJSON' => 'nullable|file|mimes:json|max:2048', // Validación del archivo JSON
         ]);
 
         $data = $request->all();
 
-        // Manejo de las fotos
+        //fotos
         if ($request->hasFile('url_photo')) {
             $photos = [];
             foreach ($request->file('url_photo') as $image) {
@@ -104,19 +103,18 @@ class ProductsController extends Controller
             $data['url_photo'] = str_replace('\\/', '/', json_encode($photos));
         }
 
-        // Manejo del archivo JSON
+    //json y almacenar
         if ($request->hasFile('especificacionJSON')) {
-            $jsonPath = $request->file('especificacionJSON')->store('json_files', 'public');
-
-            // Validar que el JSON tenga la estructura correcta
-            if (!$this->validateJsonStructure($jsonPath)) {
-                Storage::disk('public')->delete($jsonPath); // Eliminar archivo si la validación falla
-                return back()->withErrors(['especificacionJSON' => 'El archivo JSON debe ser un objeto con pares clave-valor.']);
+            $jsonFile = $request->file('especificacionJSON');
+            $jsonContent = file_get_contents($jsonFile->getPathname());
+            if (!$this->validateJsonStructure($jsonContent)) {
+                return back()->withErrors(['especificacionJSON' => 'El archivo JSON tiene un formato inválido.']);
             }
-
-            $data['especificacionJSON'] = mb_convert_encoding($jsonPath, 'UTF-8', 'UTF-8');
+        } else {
+            $jsonContent = null;
         }
-
+        
+        $data['especificacionJSON'] = $jsonContent;
         $data['vendidos'] = 0;
         Product::create($data);
 
@@ -142,54 +140,55 @@ class ProductsController extends Controller
             'precio' => 'required|numeric',
             'stock' => 'required|integer',
             'ID_Categoria' => 'required|exists:categories,ID_Categoria',
-            'url_photo.*' => 'nullable|image|max:2048',
+            'url_photo.*' => 'nullable|image|max:5128',
             'especificacionJSON' => 'nullable|file|mimes:json|max:2048', // Validación del archivo JSON
         ]);
-
+    
         $product = Product::findOrFail($id);
         $product->fecha_agregada = now()->setTimezone('America/Mexico_City');
-
-        // Manejo de las imágenes
-        if ($request->hasFile('url_photo')) {
-            if ($product->url_photo) {
-                $oldPhotos = json_decode($product->url_photo, true);
-                if (is_array($oldPhotos)) {
-                    foreach ($oldPhotos as $oldPhoto) {
-                        if (file_exists(storage_path('app/public/' . $oldPhoto))) {
-                            unlink(storage_path('app/public/' . $oldPhoto));
-                        }
-                    }
+    
+        if ($request->filled('deleted_photos')) {
+            $deletedPhotos = json_decode($request->input('deleted_photos'), true);
+            foreach ($deletedPhotos as $photo) {
+                if (file_exists(storage_path('app/public/' . $photo))) {
+                    unlink(storage_path('app/public/' . $photo));
                 }
             }
-
-            $photos = [];
+            $product->url_photo = json_encode(array_diff(json_decode($product->url_photo, true), $deletedPhotos));
+        }
+    
+        if ($request->hasFile('url_photo')) {
+            $photos = json_decode($product->url_photo, true) ?? [];
             foreach ($request->file('url_photo') as $image) {
                 $path = $image->store('photos', 'public');
+                $path = str_replace('\\', '/', $path); 
+                \Log::info('Path after replacement: ' . $path); //amigo chat
                 $photos[] = $path;
             }
-
-            $product->url_photo = str_replace('\\/', '/', json_encode($photos));
+            $product->url_photo = json_encode($photos);
         }
-
+    
         // Manejo del archivo JSON
         if ($request->hasFile('especificacionJSON')) {
-            $jsonPath = $request->file('especificacionJSON')->store('json_files', 'public');
-
-            // Validar que el JSON tenga la estructura correcta
-            if (!$this->validateJsonStructure($jsonPath)) {
-                Storage::disk('public')->delete($jsonPath); // Eliminar archivo si la validación falla
-                return back()->withErrors(['especificacionJSON' => 'El archivo JSON debe ser un objeto con pares clave-valor.']);
+            $jsonFile = $request->file('especificacionJSON');
+            $jsonContent = file_get_contents($jsonFile->getPathname());
+    
+            // Validar contenido
+            if (!$this->validateJsonStructure($jsonContent)) {
+                return back()->withErrors(['especificacionJSON' => 'El archivo JSON tiene un formato inválido.']);
             }
-
-            $product->especificacionJSON = mb_convert_encoding($jsonPath, 'UTF-8', 'UTF-8');
-        }
-
+    
+            $product->especificacionJSON = $jsonContent; 
+            }
+    
         $product->update($request->except('fecha_agregada', 'url_photo', 'especificacionJSON'));
-
-        $product->save();
-
+    
+        $product->save(); 
+    
         return redirect()->route('productos.index')->with('success', 'Producto actualizado con éxito.');
     }
+    
+    
 
     // DESTROY - Eliminar producto
     public function destroy($id)
