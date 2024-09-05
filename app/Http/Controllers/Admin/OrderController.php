@@ -34,12 +34,10 @@ class OrderController extends Controller
             $query->where('estado', $request->estado);
         }
 
-        // Búsqueda por nombre de usuario
+        // Buscar por id orden
         if ($request->filled('search')) {
-            $query->whereHas('usuario', function($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->input('search') . '%');
-            });
-        }
+            $query->where('ID_Orden', $request->search);
+        }      
 
         /*
         if ($request->filled('search')) {
@@ -77,11 +75,7 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        // Buscar la orden por su ID, o fallar si no se encuentra
-        //$ordenes = Orden::findOrFail($id);
 
-        // Retornar la vista de detalles con la orden encontrada
-        //return view('admin.pedidos.index.show', compact('ordenes'));
     }
 
     /**
@@ -100,14 +94,14 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'estado' => 'required|in:pedido,enviado,entregado',
+            'estado' => 'required|in:pedido,enviado,entregado,cancelado',
         ]);
     
         $orden = Orden::findOrFail($id);
         $orden->estado = $request->estado;
         $orden->save();  // Cambia esto
     
-        return redirect()->route('pedidos.index')->with('success', 'Estado de la orden actualizado.');
+        return redirect()->route('pedidos.index')->with('success', '¡Estado del Pedido Actualizado Exitosamente!');
     }
 
     /**
