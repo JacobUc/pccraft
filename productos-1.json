@@ -16,11 +16,10 @@
         "frecuencia_Maxima": "4.3 GHz", 
         "cache": "12 MB"
       },
-      "url_photo": {
-        "url_photo_1":"photo/Intel Core i3-12100-1.jpg",
-        "url_photo_2":"photo/Intel Core i3-12100-2.jpg",
-        "url_photo_3":"photo/Intel Core i3-12100-3.jpg"
-      }
+      "url_photo": [
+        "photos/Intel Core i3-12100-1.jpg",
+        "photos/Intel Core i3-12100-2.jpg",
+        "photos/Intel Core i3-12100-3.jpg"]
     },
     {
       "nombre": "AMD Ryzen 7 5800X",

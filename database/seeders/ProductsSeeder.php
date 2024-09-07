@@ -27,6 +27,9 @@ class ProductsSeeder extends Seeder
                 'stock' => $productData['stock'],
                 'ID_Categoria' => $productData['ID_categoria'],
                 'especificacionJSON' => json_encode($productData['especificacionesJSON']),
+                //DENTRO DEL JSON, Cambiar de objeto a array y es "photos" no "photo"
+                //revisa el primer producto para referecia
+                //cambiar llaves por corchetes
                 'url_photo' => json_encode($productData['url_photo']),
                 'vendidos' => 0,
             ]);
