@@ -37,11 +37,10 @@
         "frecuencia_Maxima": "4.7 GHz",
         "cache": "32 MB"
       },
-      "url_photo": {
-        "url_photo_1":"photo/Ryzen7_5800X-1.jpg",
-        "url_photo_2":"photo/Ryzen7_5800X-2.jpg",
-        "url_photo_3":"photo/Ryzen7_5800X-3.jpg"
-      }
+      "url_photo": [
+        "photos/Ryzen7_5800X-1.jpg",
+        "photos/Ryzen7_5800X-2.jpg",
+        "photos/Ryzen7_5800X-3.jpg"]
     },
     {
       "nombre": "Intel Core i5-12600KF",
@@ -59,11 +58,10 @@
         "frecuencia_Maxima": "4.9 GHz",
         "cache": "20 MB"
       },
-      "url_photo": {
-        "url_photo_1":"photo/Intel Core i5-12600KF-1.jpeg",
-        "url_photo_2":"photo/Intel Core i5-12600KF-2.jpg",
-        "url_photo_3":"photo/Intel Core i5-12600KF-3.jpg"
-      }
+      "url_photo": [
+        "photos/Intel Core i5-12600KF-1.jpeg",
+        "photos/Intel Core i5-12600KF-2.jpg",
+        "photos/Intel Core i5-12600KF-3.jpg"]
     },
     {
       "nombre": "AMD Ryzen 5 5500",
@@ -81,11 +79,10 @@
         "frecuencia_Maxima": "4.2 GHz", 
         "cache": "16 MB"
       },
-      "url_photo": {
-        "url_photo_1":"photo/AMD Ryzen 5 5500-1.jpg",
-        "url_photo_2":"photo/AMD Ryzen 5 5500-2.jpg",
-        "url_photo_3":"photo/AMD Ryzen 5 5500-3.jpg"
-      }
+      "url_photo": [
+        "photos/AMD Ryzen 5 5500-1.jpg",
+        "photos/AMD Ryzen 5 5500-2.jpg",
+        "photos/AMD Ryzen 5 5500-3.jpg"]
     },
     {
       "nombre": "Intel Core i3-10100F",
@@ -103,11 +100,10 @@
         "frecuencia_Maxima": "4.3 GHz",
         "cache": "6 MB"
       },
-      "url_photo": {
-        "url_photo_1":"photo/Intel Core i3-10100F-1.jpg",
-        "url_photo_2":"photo/Intel Core i3-10100F-2.jpg",
-        "url_photo_3":"photo/Intel Core i3-10100F-3.jpg"
-      }
+      "url_photo": [
+        "photos/Intel Core i3-10100F-1.jpg",
+        "photos/Intel Core i3-10100F-2.jpg",
+        "photos/Intel Core i3-10100F-3.jpg"]
     },
     {
       "nombre": "XPG Spectrix D45G",
@@ -125,11 +121,10 @@
         "latencia": 42,
         "voltaje": "1.35V"
       },
-      "url_photo": {
-        "url_photo_1":"photo/XPG Spectrix D45G-1.jpg",
-        "url_photo_2":"photo/XPG Spectrix D45G-2.jpg",
-        "url_photo_3":"photo/XPG Spectrix D45G-3.jpg"
-      }
+      "url_photo": [
+        "photos/XPG Spectrix D45G-1.jpg",
+        "photos/XPG Spectrix D45G-2.jpg",
+        "photos/XPG Spectrix D45G-3.jpg"]
     },
     {
       "nombre": "XPG Lancer RGB",
@@ -147,11 +142,10 @@
         "latencia": 38,
         "voltaje": "1.1V"
       },
-      "url_photo": {
-        "url_photo_1":"photo/XPG Lancer RGB-1.jpg",
-        "url_photo_2":"photo/XPG Lancer RGB-2.jpg",
-        "url_photo_3":"photo/XPG Lancer RGB-3.jpg"
-      }
+      "url_photo": [
+        "photos/XPG Lancer RGB-1.jpg",
+        "photos/XPG Lancer RGB-2.jpg",
+        "photos/XPG Lancer RGB-3.jpg"]
     },
     {
       "nombre": "HP 7EH68AA",
@@ -169,11 +163,10 @@
         "latencia": 16,
         "voltaje": "1.2V" 
       },
-      "url_photo": {
-        "url_photo_1":"photo/HP_7EH68AA-1.jpg",
-        "url_photo_2":"photo/HP_7EH68AA-2.jpg",
-        "url_photo_3":"photo/HP_7EH68AA-3.jpg"
-      }
+      "url_photo": [
+        "photos/HP_7EH68AA-1.jpg",
+        "photos/HP_7EH68AA-2.jpg",
+        "photos/HP_7EH68AA-3.jpg"]
     },
     {
       "nombre": "Corsair ValueSelect",
@@ -191,11 +184,10 @@
           "latencia": 16,
           "voltaje": "1.2V"
       },
-      "url_photo": {
-          "url_photo_1":"photo/Corsair_ValueSelect-1.jpg",
-          "url_photo_2":"photo/Corsair_ValueSelect-2.jpg",
-          "url_photo_3":"photo/Corsair_ValueSelect-3.jpg"
-      }
+      "url_photo": [
+          "photos/Corsair_ValueSelect-1.jpg",
+          "photos/Corsair_ValueSelect-2.jpg",
+          "photos/Corsair_ValueSelect-3.jpg"]
     },
     {
       "nombre": "Corsair Vengeance RGB Pro",
@@ -213,11 +205,10 @@
           "latencia": 16,
           "voltaje": "1.2 V"
       },
-      "url_photo": {
-          "url_photo_1":"photo/Corsair_Vengeance_RGB_Pro-1.jpg",
-          "url_photo_2":"photo/Corsair_Vengeance_RGB_Pro-2.jpg",
-          "url_photo_3":"photo/Corsair_Vengeance_RGB_Pro-3.jpg"
-      }
+      "url_photo": [
+          "photos/Corsair_Vengeance_RGB_Pro-1.jpg",
+          "photos/Corsair_Vengeance_RGB_Pro-2.jpg",
+          "photos/Corsair_Vengeance_RGB_Pro-3.jpg"]
     },
     {
       "nombre": "Western Digital WD Caviar Blue",
@@ -235,11 +226,10 @@
           "velocidad": "7200 RPM",
           "cache": "64 MB"
       },
-      "url_photo": {
-          "url_photo_1":"photo/WD_Caviar_Blue-1.jpg",
-          "url_photo_2":"photo/WD_Caviar_Blue-2.jpg",
-          "url_photo_3":"photo/WD_Caviar_Blue-3.jpg"
-      }
+      "url_photo": [
+          "photos/WD_Caviar_Blue-1.jpg",
+          "photos/WD_Caviar_Blue-2.jpg",
+          "photos/WD_Caviar_Blue-3.jpg"]
     },
     {
       "nombre": "Toshiba L200",
@@ -257,11 +247,10 @@
           "velocidad": "5400 RPM",
           "cache": "128 MB"
       },
-      "url_photo": {
-          "url_photo_1":"photo/Toshiba_L200-1.jpg",
-          "url_photo_2":"photo/Toshiba_L200-2.jpg",
-          "url_photo_3":"photo/Toshiba_L200-3.jpg"
-      }
+      "url_photo": [
+          "photos/Toshiba_L200-1.jpg",
+          "photos/Toshiba_L200-2.jpg",
+          "photos/Toshiba_L200-3.jpg"]
     },
     {
       "nombre": "Western Digital WD Black C50",
@@ -279,11 +268,10 @@
           "velocidad": "7200 RPM",
           "cache": "256 MB"
       },
-      "url_photo": {
-          "url_photo_1":"photo/WD_Black-1.jpg",
-          "url_photo_2":"photo/WD_Black-2.jpg",
-          "url_photo_3":"photo/WD_Black-3.jpg"
-      }
+      "url_photo": [
+          "photos/WD_Black-1.jpg",
+          "photos/WD_Black-2.jpg",
+          "photos/WD_Black-3.jpg"]
     },
     {
       "nombre": "Steren HDD-1101",
@@ -301,11 +289,10 @@
           "velocidad": "7200 RPM",
           "cache": "64 MB"
       },
-      "url_photo": {
-          "url_photo_1":"photo/Steren_HDD-1101-1.jpg",
-          "url_photo_2":"photo/Steren_HDD-1101-2.jpg",
-          "url_photo_3":"photo/Steren_HDD-1101-3.jpg"
-      }
+      "url_photo": [
+          "photos/Steren_HDD-1101-1.jpg",
+          "photos/Steren_HDD-1101-2.jpg",
+          "photos/Steren_HDD-1101-3.jpg"]
     },
     {
       "nombre": "Western Digital WD1500BLHX",
@@ -323,11 +310,10 @@
           "velocidad": "10000 RPM",
           "cache": "32 MB"
       },
-      "url_photo": {
-          "url_photo_1":"photo/WD1500BLHX-1.jpg",
-          "url_photo_2":"photo/WD1500BLHX-2.jpg",
-          "url_photo_3":"photo/WD1500BLHX-3.jpg"
-      }
+      "url_photo": [
+          "photos/WD1500BLHX-1.jpg",
+          "photos/WD1500BLHX-2.jpg",
+          "photos/WD1500BLHX-3.jpg"]
     },
     {
       "nombre": "XPG INVADER",
@@ -345,11 +331,10 @@
           "dimensiones": "470mm x 206mm x 482mm", 
           "peso": "7.2 kg"
       },
-      "url_photo": {
-          "url_photo_1":"photo/XPG_INVADER-1.jpg",
-          "url_photo_2":"photo/XPG_INVADER-2.jpg",
-          "url_photo_3":"photo/XPG_INVADER-3.jpg"
-      }
+      "url_photo": [
+          "photos/XPG_INVADER-1.jpg",
+          "photos/XPG_INVADER-2.jpg",
+          "photos/XPG_INVADER-3.jpg"]
     },
     {
       "nombre": "Naceb Zion",
@@ -367,11 +352,10 @@
           "dimensiones": "440mm x 370mm x 210mm", 
           "peso": "4.5 kg"
       },
-      "url_photo": {
-          "url_photo_1":"photo/Naceb_Zion-1.jpg",
-          "url_photo_2":"photo/Naceb_Zion-2.jpg",
-          "url_photo_3":"photo/Naceb_Zion-3.jpg"
-      }
+      "url_photo": [
+          "photos/Naceb_Zion-1.jpg",
+          "photos/Naceb_Zion-2.jpg",
+          "photos/Naceb_Zion-3.jpg"]
     },
     {
       "nombre": "ASUS ROG Strix Helios",
@@ -389,11 +373,10 @@
           "dimensiones": "470mm x 206mm x 482mm", 
           "peso": "7.2 kg"
       },
-      "url_photo": {
-          "url_photo_1":"photo/ASUS_ROG_Strix_Helios-1.jpg",
-          "url_photo_2":"photo/ASUS_ROG_Strix_Helios-2.jpg",
-          "url_photo_3":"photo/ASUS_ROG_Strix_Helios-3.jpg"
-      }
+      "url_photo": [
+          "photos/ASUS_ROG_Strix_Helios-1.jpg",
+          "photos/ASUS_ROG_Strix_Helios-2.jpg",
+          "photos/ASUS_ROG_Strix_Helios-3.jpg"]
     },
     {
       "nombre": "NZXT H9 Elite",
@@ -411,11 +394,10 @@
           "dimensiones": "470mm x 206mm x 482mm", 
           "peso": "7.2 kg" 
       },
-      "url_photo": {
-          "url_photo_1":"photo/NZXT_H9_Elite-1.jpg",
-          "url_photo_2":"photo/NZXT_H9_Elite-2.jpg",
-          "url_photo_3":"photo/NZXT_H9_Elite-3.jpg"
-      }
+      "url_photo": [
+          "photos/NZXT_H9_Elite-1.jpg",
+          "photos/NZXT_H9_Elite-2.jpg",
+          "photos/NZXT_H9_Elite-3.jpg"]
     },
     {
       "nombre": "Corsair 4000D Airflow",
@@ -433,11 +415,10 @@
           "dimensiones": "464mm x 200mm x 455mm", 
           "peso": "6.9 kg" 
       },
-      "url_photo": {
-          "url_photo_1":"photo/Corsair_4000D_Airflow-1.jpg",
-          "url_photo_2":"photo/Corsair_4000D_Airflow-2.jpg",
-          "url_photo_3":"photo/Corsair_4000D_Airflow-3.jpg"
-      }
+      "url_photo": [
+          "photos/Corsair_4000D_Airflow-1.jpg",
+          "photos/Corsair_4000D_Airflow-2.jpg",
+          "photos/Corsair_4000D_Airflow-3.jpg"]
     },
     {
       "nombre": "MSI Micro-ATX B450M-A PRO MAX II",
@@ -457,11 +438,10 @@
           "slots_PCIE": "1 x PCIe 3.0 x16", 
           "puertos_USB": "2x USB 3.0, 4x USB 2.0"
       },
-      "url_photo": {
-          "url_photo_1":"photo/MSI_B450M_A_PRO_MAX_II-1.jpg",
-          "url_photo_2":"photo/MSI_B450M_A_PRO_MAX_II-2.jpg",
-          "url_photo_3":"photo/MSI_B450M_A_PRO_MAX_II-3.jpg"
-      }
+      "url_photo": [
+          "photos/MSI_B450M_A_PRO_MAX_II-1.jpg",
+          "photos/MSI_B450M_A_PRO_MAX_II-2.jpg",
+          "photos/MSI_B450M_A_PRO_MAX_II-3.jpg"]
     },
     {
       "nombre": "Gigabyte B760M DS3H DDR4",
@@ -481,11 +461,10 @@
           "slots_PCIE": "1 x PCIe 5.0 x16", 
           "puertos_USB": "2x USB 3.2 Gen 2, 4x USB 3.0"
       },
-      "url_photo": {
-          "url_photo_1":"photo/Gigabyte_B760M_DS3H_DDR4-1.jpg",
-          "url_photo_2":"photo/Gigabyte_B760M_DS3H_DDR4-2.jpg",
-          "url_photo_3":"photo/Gigabyte_B760M_DS3H_DDR4-3.jpg"
-      }
+      "url_photo": [
+          "photos/Gigabyte_B760M_DS3H_DDR4-1.jpg",
+          "photos/Gigabyte_B760M_DS3H_DDR4-2.jpg",
+          "photos/Gigabyte_B760M_DS3H_DDR4-3.jpg"]
     },
     {
       "nombre": "ASUS PRIME Z790-A WIFI",
@@ -505,11 +484,10 @@
           "slots_PCIE": "1 x PCIe 5.0 x16", 
           "puertos_USB": "2x USB 3.2 Gen 2, 4x USB 3.0"
       },
-      "url_photo": {
-          "url_photo_1":"photo/ASUS_PRIME_Z790-A_WIFI-1.jpg",
-          "url_photo_2":"photo/ASUS_PRIME_Z790-A_WIFI-2.jpg",
-          "url_photo_3":"photo/ASUS_PRIME_Z790-A_WIFI-3.jpg"
-      }
+      "url_photo": [
+          "photos/ASUS_PRIME_Z790-A_WIFI-1.jpg",
+          "photos/ASUS_PRIME_Z790-A_WIFI-2.jpg",
+          "photos/ASUS_PRIME_Z790-A_WIFI-3.jpg"]
     },
     {
       "nombre": "Gigabyte A520M S2H",
@@ -529,11 +507,10 @@
           "slots_PCIE": "1 x PCIe 4.0 x16",
           "puertos_USB": "2x USB 3.2 Gen 1, 4x USB 2.0"
       },
-      "url_photo": {
-          "url_photo_1":"photo/Gigabyte_A520M_S2H-1.jpg",
-          "url_photo_2":"photo/Gigabyte_A520M_S2H-2.jpg", 
-          "url_photo_3":"photo/Gigabyte_A520M_S2H-3.jpg" 
-      }
+      "url_photo": [
+          "photos/Gigabyte_A520M_S2H-1.jpg",
+          "photos/Gigabyte_A520M_S2H-2.jpg", 
+          "photos/Gigabyte_A520M_S2H-3.jpg"] 
     },
     {
       "nombre": "Gigabyte Micro ATX B760M AORUS ELITE AX",
@@ -553,11 +530,10 @@
           "slots_PCIE": "1 x PCIe 5.0 x16", 
           "puertos_USB": "2x USB 3.2 Gen 2x2, 4x USB 3.2 Gen 1"
       },
-      "url_photo": {
-          "url_photo_1":"photo/Gigabyte_B760M_AORUS_ELITE_AX-1.jpg",
-          "url_photo_2":"photo/Gigabyte_B760M_AORUS_ELITE_AX-2.jpg",
-          "url_photo_3":"photo/Gigabyte_B760M_AORUS_ELITE_AX-3.jpg"
-      }
+      "url_photo": [
+          "photos/Gigabyte_B760M_AORUS_ELITE_AX-1.jpg",
+          "photos/Gigabyte_B760M_AORUS_ELITE_AX-2.jpg",
+          "photos/Gigabyte_B760M_AORUS_ELITE_AX-3.jpg"]
     },
     {
       "nombre": "Cooler Master MWE GOLD 850 V2",
@@ -572,11 +548,10 @@
           "potencia_Watts": 850,
           "certificacion": "80 PLUS Gold"
       },
-      "url_photo": {
-          "url_photo_1":"photo/CoolerMaster_MWE_GOLD_850_V2-1.jpg",
-          "url_photo_2":"photo/CoolerMaster_MWE_GOLD_850_V2-2.jpg",
-          "url_photo_3":"photo/CoolerMaster_MWE_GOLD_850_V2-3.jpg"
-      }
+      "url_photo": [
+          "photos/CoolerMaster_MWE_GOLD_850_V2-1.jpg",
+          "photos/CoolerMaster_MWE_GOLD_850_V2-2.jpg",
+          "photos/CoolerMaster_MWE_GOLD_850_V2-3.jpg"]
     },
     {
       "nombre": "Cooler Master MWE 650 BRONZE V2",
@@ -591,11 +566,10 @@
           "potencia_Watts": 650,
           "certificacion": "80 PLUS Bronze"
       },
-      "url_photo": {
-          "url_photo_1":"photo/CoolerMaster_MWE_650_BRONZE_V2-1.jpg",
-          "url_photo_2":"photo/CoolerMaster_MWE_650_BRONZE_V2-2.jpg",
-          "url_photo_3":"photo/CoolerMaster_MWE_650_BRONZE_V2-3.jpg"
-      }
+      "url_photo": [
+          "photos/CoolerMaster_MWE_650_BRONZE_V2-1.jpg",
+          "photos/CoolerMaster_MWE_650_BRONZE_V2-2.jpg",
+          "photos/CoolerMaster_MWE_650_BRONZE_V2-3.jpg"]
     },
     {
       "nombre": "EVGA 700-K1",
@@ -610,11 +584,10 @@
           "potencia_Watts": 700,
           "certificacion": "80 PLUS Bronze"
       },
-      "url_photo": {
-          "url_photo_1":"photo/EVGA_700-K1-1.jpg",
-          "url_photo_2":"photo/EVGA_700-K1-2.jpg",
-          "url_photo_3":"photo/EVGA_700-K1-3.jpg"
-      }
+      "url_photo": [
+          "photos/EVGA_700-K1-1.jpg",
+          "photos/EVGA_700-K1-2.jpg",
+          "photos/EVGA_700-K1-3.jpg"]
     },
     {
       "nombre": "Cooler Master G800",
@@ -629,11 +602,10 @@
           "potencia_Watts": 800,
           "certificacion": "80 PLUS Gold"
       },
-      "url_photo": {
-          "url_photo_1":"photo/CoolerMaster_G800-1.jpg",
-          "url_photo_2":"photo/CoolerMaster_G800-2.jpg",
-          "url_photo_3":"photo/CoolerMaster_G800-3.jpg"
-      }
+      "url_photo": [
+          "photos/CoolerMaster_G800-1.jpg",
+          "photos/CoolerMaster_G800-2.jpg",
+          "photos/CoolerMaster_G800-3.jpg"]
     },
     {
       "nombre": "Gigabyte UD1000GM PG5",
@@ -648,11 +620,10 @@
           "potencia_Watts": 1000,
           "certificacion": "80 PLUS Gold"
       },
-      "url_photo": {
-          "url_photo_1":"photo/Gigabyte_UD1000GM_PG5-1.jpg",
-          "url_photo_2":"photo/Gigabyte_UD1000GM_PG5-2.jpg",
-          "url_photo_3":"photo/Gigabyte_UD1000GM_PG5-3.jpg"
-      }
+      "url_photo": [
+          "photos/Gigabyte_UD1000GM_PG5-1.jpg",
+          "photos/Gigabyte_UD1000GM_PG5-2.jpg",
+          "photos/Gigabyte_UD1000GM_PG5-3.jpg"]
     },
   
     {
@@ -671,11 +642,10 @@
           "frecuencia_boost": "2610 MHz",
           "interfaces": "3x DisplayPort 1.4a, 1x HDMI 2.1"
       },
-      "url_photo": {
-          "url_photo_1":"photo/ASUS Dual GeForce RTX™ 4060 White OC Edition-1.jpg",
-          "url_photo_2":"photo/ASUS Dual GeForce RTX™ 4060 White OC Edition-2.jpg",
-          "url_photo_3":"photo/ASUS Dual GeForce RTX™ 4060 White OC Edition-3.jpg"
-      }
+      "url_photo": [
+          "photos/ASUS Dual GeForce RTX™ 4060 White OC Edition-1.jpg",
+          "photos/ASUS Dual GeForce RTX™ 4060 White OC Edition-2.jpg",
+          "photos/ASUS Dual GeForce RTX™ 4060 White OC Edition-3.jpg"]
     },
     {
       "nombre": "Tarjeta de Video ASUS NVIDIA TUF Gaming GeForce RTX 4070 Ti",
@@ -693,11 +663,10 @@
           "frecuencia_boost": "2610 MHz",
           "interfaces": "3x DisplayPort 1.4a, 1x HDMI 2.1"
       },
-      "url_photo": {
-          "url_photo_1": "photo/ASUS TUF Gaming GeForce RTX 4070 Ti-1.jpg",
-          "url_photo_2": "photo/ASUS TUF Gaming GeForce RTX 4070 Ti-2.jpg",
-          "url_photo_3": "photo/ASUS TUF Gaming GeForce RTX 4070 Ti-3.jpg"
-      }
+      "url_photo": [
+          "photos/ASUS TUF Gaming GeForce RTX 4070 Ti-1.jpg",
+          "photos/ASUS TUF Gaming GeForce RTX 4070 Ti-2.jpg",
+          "photos/ASUS TUF Gaming GeForce RTX 4070 Ti-3.jpg"]
     },
     {
       "nombre": "Tarjeta de Video Gigabyte NVIDIA GeForce GT 1030",
@@ -715,11 +684,10 @@
           "frecuencia_boost": "1468 MHz", 
           "interfaces": "1x HDMI 2.0, 1x DVI-D"
       },
-      "url_photo": {
-          "url_photo_1": "photo/Gigabyte_GeForce_GT_1030-1.jpg",
-          "url_photo_2": "photo/Gigabyte_GeForce_GT_1030-2.jpg",
-          "url_photo_3": "photo/Gigabyte_GeForce_GT_1030-3.jpg"
-      }
+      "url_photo": [
+          "photos/Gigabyte_GeForce_GT_1030-1.jpg",
+          "photos/Gigabyte_GeForce_GT_1030-2.jpg",
+          "photos/Gigabyte_GeForce_GT_1030-3.jpg"]
     },
     {
       "nombre": "Sapphire AMD Radeon RX 7600 Pulse",
@@ -737,11 +705,10 @@
           "frecuencia_boost": "2355 MHz",
           "interfaces": "PCI-Express x8"
       },
-      "url_photo": {
-          "url_photo_1":"photo/Sapphire_AMD_Radeon_RX_7600_Pulse-1.jpg",
-          "url_photo_2":"photo/Sapphire_AMD_Radeon_RX_7600_Pulse-2.jpg",
-          "url_photo_3":"photo/Sapphire_AMD_Radeon_RX_7600_Pulse-3.jpg"
-      }
+      "url_photo": [
+          "photos/Sapphire_AMD_Radeon_RX_7600_Pulse-1.jpg",
+          "photos/Sapphire_AMD_Radeon_RX_7600_Pulse-2.jpg",
+          "photos/Sapphire_AMD_Radeon_RX_7600_Pulse-3.jpg"]
     },
   {
     "nombre": "Thermalright Frozen Prism240 Black ARGB",
@@ -757,11 +724,10 @@
         "compatibilidad": "AMD (AM4, AM5), Intel (1150, 1156, 1200, 1700, 2011)",
         "velocidad_revoluciones": "3300 RPM"
     },
-    "url_photo": {
-        "url_photo_1":"photo/Thermalright Frozen Prism240 Black ARGB-1.jpg",
-        "url_photo_2":"photo/Thermalright Frozen Prism240 Black ARGB-2.jpg",
-        "url_photo_3":"photo/Thermalright Frozen Prism240 Black ARGB-3.jpg"
-    }
+    "url_photo": [
+        "photos/Thermalright Frozen Prism240 Black ARGB-1.jpg",
+        "photos/Thermalright Frozen Prism240 Black ARGB-2.jpg",
+        "photos/Thermalright Frozen Prism240 Black ARGB-3.jpg"]
   },
   {
     "nombre": "Thermalright AQUA ELITE 240 White V3",
@@ -777,11 +743,10 @@
         "compatibilidad": "AMD (AM4, AM5), Intel (LGA1150/1151/1200/2011/1700)",
         "velocidad_revoluciones": "3300 RMP"
     },
-    "url_photo": {
-        "url_photo_1":"photo/Thermalright AQUA ELITE 240 White V3-1.jpg",
-        "url_photo_2":"photo/Thermalright AQUA ELITE 240 White V3-2.jpg",
-        "url_photo_3":"photo/Thermalright AQUA ELITE 240 White V3-3.jpg"
-    }
+    "url_photo": [
+        "photos/Thermalright AQUA ELITE 240 White V3-1.jpg",
+        "photos/Thermalright AQUA ELITE 240 White V3-2.jpg",
+        "photos/Thermalright AQUA ELITE 240 White V3-3.jpg"]
   },
   {
     "nombre": "Ocelot Gaming OFKIT-2 ARGB",
@@ -797,11 +762,10 @@
         "velocidad_revoluciones": "1200 RPM",
         "compatibilidad": "AMD (AM4, AM5), Intel LGA 115x"
     },
-    "url_photo": {
-        "url_photo_1":"photo/Ocelot_OFKIT-2-1.jpg",
-        "url_photo_2":"photo/Ocelot_OFKIT-2-2.jpg",
-        "url_photo_3":"photo/Ocelot_OFKIT-2-3.jpg"
-    }
+    "url_photo": [
+        "photos/Ocelot_OFKIT-2-1.jpg",
+        "photos/Ocelot_OFKIT-2-2.jpg",
+        "photos/Ocelot_OFKIT-2-3.jpg"]
   },
   {
     "nombre": "NZXT F240 RGB",
@@ -817,11 +781,10 @@
         "velocidad_revoluciones": "2400 RPM",
         "compatibilidad": "AMD (AM4, AM5), Intel LGA 115x, 1200, 1700"
     },
-    "url_photo": {
-        "url_photo_1":"photo/NZXT_F240_RGB-1.jpg",
-        "url_photo_2":"photo/NZXT_F240_RGB-2.jpg",
-        "url_photo_3":"photo/NZXT_F240_RGB-3.jpg"
-    }
+    "url_photo": [
+        "photos/NZXT_F240_RGB-1.jpg",
+        "photos/NZXT_F240_RGB-2.jpg",
+        "photos/NZXT_F240_RGB-3.jpg"]
   },
   {
     "nombre": "Monitor Gamer ASUS ROG Strix XG27AQ",
@@ -841,11 +804,10 @@
         "conectividad": "HDMI 2.0, DisplayPort 1.4, USB-C",
         "curvatura": "Plano"
     },
-    "url_photo": {
-        "url_photo_1":"photo/ASUS_ROG_Strix_XG27AQ-1.png",
-        "url_photo_2":"photo/ASUS_ROG_Strix_XG27AQ-2.png",
-        "url_photo_3":"photo/ASUS_ROG_Strix_XG27AQ-3.png"
-    }
+    "url_photo": [
+        "photos/ASUS_ROG_Strix_XG27AQ-1.png",
+        "photos/ASUS_ROG_Strix_XG27AQ-2.png",
+        "photos/ASUS_ROG_Strix_XG27AQ-3.png"]
   },
   {
     "nombre": "Monitor Acer V226HQL",
@@ -866,15 +828,14 @@
         "curvatura": "Plano",
         "tecnologias_adicionales": "FreeSync"
     },
-    "url_photo": {
-        "url_photo_1":"photo/Acer_V226HQL-1.jpg",
-        "url_photo_2":"photo/Acer_V226HQL-2.jpg",
-        "url_photo_3":"photo/Acer_V226HQL-3.jpg"
+    "url_photo": [
+        "photos/Acer_V226HQL-1.jpg",
+        "photos/Acer_V226HQL-2.jpg",
+        "photos/Acer_V226HQL-3.jpg"]
     }
+    ]
   }
-  ]
-}
-
+  
 
 
 
