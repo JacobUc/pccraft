@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Ecommerce\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,13 +22,13 @@ Route::get('/', function () {
 })->name('home');
 
 // Rutas creadas para el Frontend del E-commerce
-Route::get('productos', function( ){ return 'Hola'; } )->name('productos');
-Route::get('nosotros', function( ){ return 'Hola'; } )->name('nosotros');
-Route::get('soporte', function( ){ return 'Hola'; } )->name('soporte');
-Route::get('pedidos', function( ){ return 'Hola'; } )->name('pedidos');
+// Route::get('productos', function( ){ return 'Hola'; } )->name('productos');
+// Route::get('nosotros', function( ){ return 'Hola'; } )->name('nosotros');
+// Route::get('soporte', function( ){ return 'Hola'; } )->name('soporte');
+// Route::get('pedidos', function( ){ return 'Hola'; } )->name('pedidos');
 
-
-
+// Mostrar los productos individualmente
+Route::get('/productos/{product}', [ProductController::class, 'index'] );
 
 
 Route::get('/dashboard', function () {

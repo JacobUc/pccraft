@@ -15,7 +15,7 @@
         @vite('resources/js/app.js') {{-- Para Flowbite --}}
     </head>
 
-    <body class="bg-gray-100">
+    <body class="bg-white">
 
         <header class="p-5 border-b bg-white shadow">
             <div class="max-w-screen-lg container mx-auto flex justify-between items-center font-['roboto'] font-medium text-sm">
@@ -25,9 +25,9 @@
 
                 {{-- navbvar --}}
                 <nav class="flex justify-between gap-16">
-                    <a href=" {{route('productos')}} ">Productos</a>
-                    <a href=" {{route('nosotros')}} ">Nosotros</a>
-                    <a href=" {{route('soporte')}} ">Soporte</a>
+                    <a href="#">Productos</a>
+                    <a href="#">Nosotros</a>
+                    <a href="#">Soporte</a>
                 </nav>
 
                 <div class="flex justify-between">
@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="">
-                    <a href=" {{route('pedidos')}} "> 
+                    <a href="#"> 
                         <i class="fa-lg fa-regular fa-user cursor-pointer"></i> 
                     </a>
                 </div>
@@ -90,7 +90,7 @@
                 @endguest --}}
 
                 <div class="">
-                    <a href=" {{route('pedidos')}} "> 
+                    <a href="#"> 
                         <i class="fa-solid fa-cart-shopping fa-lg cursor-pointer"></i>
                     </a>
                 </div>
