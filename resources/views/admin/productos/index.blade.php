@@ -3,77 +3,62 @@
 @section('title', 'Productos')
 
 @section('content_header')
-    <div class="flex justify-between items-center">
-        <h1>Productos</h1>
+<div class="mb-2">
+    <h1 class="text-3xl font-semibold inline-block">Productos</h1>
 
-        <!-- Barra de búsqueda -->
-        <form action="{{ route('productos.index') }}" method="GET" class="flex space-x-4">
-            <input type="text" name="search" placeholder="Buscar por nombre o modelo"
-                   class="border rounded-l px-4 py-2 w-64" value="{{ request('search') }}">
-            <button type="submit" class="bg-blue-500 text-white rounded-r px-4 py-2">
-                Buscar
-            </button>
+    <!-- Barra de búsqueda -->
+    <form action="{{ route('productos.index') }}" method="GET" class="inline-block ml-4 bg-white rounded-full shadow px-4">
+        <input type="text" name="search" placeholder="Buscar Venta" class="border-0 focus:ring-0 focus:outline-none" value="{{ request('search') }}">
+        <button type="submit" class="text-blue-500">
+            Buscar
+        </button>
+    </form>
+</div>
+
+<!-- Filtros -->
+<div class="flex justify-between items-center mb-4">
+    <div class="flex space-x-4">
+        <form id="filterForm" action="{{ route('productos.index') }}" method="GET" class="flex space-x-4 items-center">
+            <label for="filtros" class="mr-4 text-lg font-bold">Filtrar Por</label>
+            <div class="flex items-center space-x-4">
+                <select name="fecha" id="fecha" class="border rounded-lg px-3 py-2 text-base font-bold w-52 truncate-text" onchange="document.getElementById('filterForm').submit();">
+                    <option value="">Fecha</option>
+                    <option value="asc" class="truncate-text" {{ request('fecha') == 'asc' ? 'selected' : '' }}>Ascendente</option>
+                    <option value="desc" class="truncate-text" {{ request('fecha') == 'desc' ? 'selected' : '' }}>Descendente</option>
+                </select>
+
+                <select name="precio" id="precio" class="border rounded-lg px-3 py-2 text-base font-bold w-52 truncate-text" onchange="document.getElementById('filterForm').submit();">
+                    <option value="">Precio</option>
+                    <option value="asc" class="truncate-text" {{ request('precio') == 'asc' ? 'selected' : '' }}>Ascendente</option>
+                    <option value="desc" class="truncate-text" {{ request('precio') == 'desc' ? 'selected' : '' }}>Descendente</option>
+                </select>
+
+                <select name="nombre" id="nombre" class="border rounded-lg px-3 py-2 text-base font-bold w-52 truncate-text" onchange="document.getElementById('filterForm').submit();">
+                    <option value="">Nombre</option>
+                    <option value="asc" class="truncate-text" {{ request('nombre') == 'asc' ? 'selected' : '' }}>Ascendente</option>
+                    <option value="desc" class="truncate-text" {{ request('nombre') == 'desc' ? 'selected' : '' }}>Descendente</option>
+                </select>
+
+                <select name="categoria" id="categoria" class="border rounded-lg px-3 py-2 text-base font-bold w-52 truncate-text" onchange="document.getElementById('filterForm').submit();">
+                    <option value="">Categoría</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->ID_Categoria }}" class="truncate-text" {{ request('categoria') == $category->ID_Categoria ? 'selected' : '' }}>
+                            {{ $category->nombre_categoria }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
         </form>
+        <a href="{{ route('productos.index') }}" class="text-red-500 hover:underline">
+            Reiniciar Filtro
+        </a>
     </div>
 
-    <!-- Filtros -->
-    <form action="{{ route('productos.index') }}" method="GET" class="flex space-x-4 mt-4">
-        <div>
-            <label for="fecha" class="block text-sm font-medium text-gray-700">Fecha</label>
-            <select name="fecha" id="fecha"
-                    class="border rounded px-4 py-2">
-                <option value="">Seleccionar</option>
-                <option value="asc" {{ request('fecha') == 'asc' ? 'selected' : '' }}>Ascendente</option>
-                <option value="desc" {{ request('fecha') == 'desc' ? 'selected' : '' }}>Descendente</option>
-            </select>
-        </div>
-
-        <div>
-            <label for="precio" class="block text-sm font-medium text-gray-700">Precio</label>
-            <select name="precio" id="precio"
-                    class="border rounded px-4 py-2">
-                <option value="">Seleccionar</option>
-                <option value="asc" {{ request('precio') == 'asc' ? 'selected' : '' }}>Ascendente</option>
-                <option value="desc" {{ request('precio') == 'desc' ? 'selected' : '' }}>Descendente</option>
-            </select>
-        </div>
-
-        <div>
-            <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
-            <select name="nombre" id="nombre"
-                    class="border rounded px-4 py-2">
-                <option value="">Seleccionar</option>
-                <option value="asc" {{ request('nombre') == 'asc' ? 'selected' : '' }}>Ascendente</option>
-                <option value="desc" {{ request('nombre') == 'desc' ? 'selected' : '' }}>Descendente</option>
-            </select>
-        </div>
-
-        <div>
-            <label for="categoria" class="block text-sm font-medium text-gray-700">Categoría</label>
-            <select name="categoria" id="categoria"
-                    class="border rounded px-4 py-2">
-                <option value="">Seleccionar</option>
-                @foreach($categories as $category)
-                    <option value="{{ $category->ID_Categoria }}" 
-                        {{ request('categoria') == $category->ID_Categoria ? 'selected' : '' }}>
-                        {{ $category->nombre_categoria }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-
-        <button type="submit" class="bg-blue-500 text-white rounded px-4 py-2">
-            Aplicar Filtros
-        </button>
-        <a href="{{ route('productos.index') }}" class="text-blue-500 hover:underline mt-2">
-            Reset Filter
-        </a>
-        <a href="{{ route('productos.create') }}" class="bg-blue-500 text-white rounded px-4 py-2">Crear producto</a>
-    </form>
+    <a href="{{ route('productos.create') }}" class="bg-blue-500 text-white rounded px-4 py-2">+ Agregar Producto</a>
+</div>
 @endsection
 
 @section('content')
-    <p>Mostrar todos los productos</p>
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
             <thead>
@@ -105,10 +90,7 @@
                         <td>{{ $product->vendidos }}</td>
                         <td>{{ $product->fecha_agregada }}</td>
                         <td>
-                            <!-- Botoniza por cambiar -->
-                            <a href="{{ route('productos.edit', $product->ID_producto) }}" class="btn btn-warning btn-sm">Editar</a>
-
-                            
+                            <a href="{{ route('productos.edit', $product->ID_producto) }}" class="btn btn-warning btn-base">Editar</a>
                         </td>
                     </tr>
                 @empty
@@ -119,4 +101,10 @@
             </tbody>
         </table>
     </div>
+
+    <!-- Agregar los enlaces de paginación -->
+    <div class="mt-4">
+        {{ $products->links() }}
+    </div>
+</div>
 @endsection

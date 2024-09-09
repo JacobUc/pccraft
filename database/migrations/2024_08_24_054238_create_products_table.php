@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('fabricante');
             $table->text('descripcion');
             $table->decimal('precio', 10, 2);
-            $table->decimal('descuento');
+            $table->integer('descuento');
             $table->integer('stock');
             $table->timestamp('fecha_agregada')->useCurrent();
             //Foreign key
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->foreign('ID_Categoria')->references('ID_Categoria')->on('categories')->onDelete('cascade');
 
             $table->json('especificacionJSON')->nullable();
-            $table->string('url_photo')->nullable();
+            $table->json('url_photo')->nullable();
             $table->integer('vendidos');
             
         });

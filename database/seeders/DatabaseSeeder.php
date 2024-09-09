@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
     {
         // Para crear los 2 usuarios: Cliente y Admin
         $this->call(UsersTableSeeder::class);
-
+        //Para crear productos
+        $this->call(ProductsSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
