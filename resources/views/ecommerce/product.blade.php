@@ -46,13 +46,23 @@
                 <p class="mt-5 text-sm">{{ $product->descripcion }}</p>
                 <p class="mt-5 font-['roboto'] text-zinc-700 font-medium">Existencias: <span class="text-verde">{{ $product->stock }}</span></p>
 
-                {{-- Agregar al Carrito--}}
-                <div class="mt-4">
-                        <button class="py-2 text-base px-3.5 bg-azul border border-azul rounded-lg text-white shadow hover:shadow-xl">
-                            <span class="mr-2"> <i class="fa-solid fa-cart-shopping"></i> </span>
-                            Agregar al carrito
-                        </button>
-                </div>
+                {{-- Agregar al Carrito --}}
+            <div class="mt-4">
+            <form action="{{ route('cart.add') }}" method="POST">
+                @csrf
+                <input type="hidden" name="id" value="{{ $product->ID_producto }}">
+                <input type="hidden" name="nombre" value="{{ $product->nombre }}">
+                <input type="hidden" name="precio" value="{{ $product->precio }}">
+                <input type="hidden" name="cantidad" value="1">  {{-- Cambiar "quantity" por "cantidad" --}}
+                <input type="hidden" name="url_photo[]" value="{{ $product->url_photo }}"> {{-- Asegúrate de que esté correcto --}}
+                <button type="submit" class="py-2 text-base px-3.5 bg-azul border border-azul rounded-lg text-white shadow hover:shadow-xl">
+                    <span class="mr-2"><i class="fa-solid fa-cart-shopping"></i></span>
+                    Agregar al carrito
+                </button>
+            </form>
+
+            </div>
+
                 
             </div>
         </div>
