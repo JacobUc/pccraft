@@ -149,7 +149,7 @@
                     </td>
                     
                     <td class="py-4 px-6 border-b border-grey-light mt-5 font-['roboto'] text-lg text-green-700 font-medium">
-                        ${{ \Cart::get($item->id)->getPriceSum() }}
+                        ${{ \Cart::get($item->id)->getPriceSum() }} MXN
                     </td>
 
                 @endif
@@ -172,7 +172,7 @@
     <!-- Aqui se redirige a pago -->
     <div class="flex justify-end mt-6 space-y-4">
         <div class="text-right">
-            <div class="text-xl font-bold mb-4">Total a pagar: ${{ \Cart::getTotal() }}</div>
+            <div class="text-xl font-bold mb-4">Total a pagar: ${{ \Cart::getTotal() }} MXN</div>
             <a href="/" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 mt-4 mb-4">Ir a Pagar</a>
         </div>
     </div>
