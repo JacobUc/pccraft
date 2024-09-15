@@ -52,6 +52,9 @@
         @csrf
         <input type="hidden" name="id" value="{{ $product->ID_producto }}">
         <input type="hidden" name="nombre" value="{{ $product->nombre }}">
+        <input type="hidden" name="modelo" value="{{ $product->modelo }}">
+        <input type="hidden" name="fabricante" value="{{ $product->fabricante }}">
+        <input type="hidden" name="descuento" value="{{ $product->descuento }}">
         <input type="hidden" name="precio" value="{{ $product->precio }}">
         <input type="hidden" name="cantidad" value="1">  {{-- Cambiar "quantity" por "cantidad" --}}
         <input type="hidden" name="url_photo[]" value="{{ $product->url_photo }}"> {{-- Asegúrate de que esté correcto --}}

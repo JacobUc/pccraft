@@ -27,7 +27,8 @@ class CartController extends Controller
 
         // Obtener el contenido del carrito desde la sesión actual del usuario
         $cartCollection = Cart::session(auth()->id())->getContent();
-        return view('ecommerce.cart')->withTitle('E-COMMERCE STORE | CART')->with(['cartCollection' => $cartCollection]);
+        $products = Product::all();
+        return view('ecommerce.cart', compact('cartCollection', 'products'))->withTitle('E-COMMERCE STORE | CART');
     }
 
     public function remove(Request $request)
@@ -47,9 +48,23 @@ class CartController extends Controller
             'nombre' => 'required|string|max:255',
             'precio' => 'required|numeric',
             'cantidad' => 'required|integer|min:1',
+            'modelo' => 'required|string|max:255',
+            'fabricante' => 'required|string|max:255',
+            'descuento' => 'required|numeric',
             'url_photo' => 'required|array',
             'url_photo.*' => 'required|string',
         ]);
+
+        // Obtener el producto
+        $producto = Product::find($validated['id']);
+
+        // Calcular el precio con descuento
+        $precioConDescuento = $validated['precio'] - ($validated['precio'] * ($validated['descuento'] / 100));
+
+        // Validar que la cantidad solicitada no exceda el stock disponible
+        if ($validated['cantidad'] > $producto->stock) {
+            return redirect()->route('cart.index')->with('errors', 'Alcanzaste limite de stock');
+        }
 
         $decodedUrls = json_decode($validated['url_photo'][0], true);
 
@@ -60,10 +75,14 @@ class CartController extends Controller
         Cart::session(auth()->id())->add([
             'id' => $validated['id'],
             'name' => $validated['nombre'],
-            'price' => $validated['precio'],
+            'price' => $precioConDescuento,
             'quantity' => $validated['cantidad'],
             'attributes' => [
                 'image' => $decodedUrls[0],
+                'model' => $validated['modelo'],
+                'manufacturer' => $validated['fabricante'],
+                'originalPrice' => $validated['precio'],
+                'discount' => $validated['descuento'],
             ]
         ]);
 
@@ -75,16 +94,34 @@ class CartController extends Controller
 
     public function update(Request $request)
     {
+        // Obtener el producto actual en el carrito
+        $item = Cart::session(auth()->id())->get($request->ID_producto);
+        $producto = Product::find($item['id']);
+        
+        // Verificar si se presionó el botón de incremento o decremento
+        if ($request->has('increment')) {
+            // Incrementar la cantidad, asegurándose de no exceder el stock máximo
+            $newQuantity = min($item->quantity + 1, $producto->stock);
+        } elseif ($request->has('decrement')) {
+            // Decrementar la cantidad, asegurándose de no bajar de 1
+            $newQuantity = max(1, $item->quantity - 1);
+        } else {
+            // Si no se presiona ningún botón, solo actualizar con el valor exacto del input
+            $newQuantity = $request->stock;
+        }
+
+        // Actualizar la cantidad del producto en el carrito
         Cart::session(auth()->id())->update($request->ID_producto, [
             'quantity' => [
                 'relative' => false,
-                'value' => $request->stock
+                'value' => $newQuantity,
             ],
         ]);
 
         // Guardar el carrito actualizado en la base de datos
         $this->saveCartToDatabase();
 
+        // Redireccionar de vuelta al carrito con un mensaje de éxito
         return redirect()->route('cart.index')->with('success_msg', '¡El carrito ha sido actualizado!');
     }
 
