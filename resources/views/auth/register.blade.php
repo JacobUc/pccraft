@@ -1,3 +1,9 @@
+@extends('layouts.app')
+
+@section('title', 'Home')
+
+@section('content')
+
 <x-guest-layout>
         <!-- Formulario con fondo azul y diseño deseado -->
         <div class="relative p-8 max-w-md w-full">
@@ -54,3 +60,5 @@
             </form>
         </div>
 </x-guest-layout>
+
+@endsection
