@@ -21,7 +21,8 @@
             <!-- Email Address -->
             <div>
                 <x-input-label for="email" :value="__('Email')" class="text-white" />
-                <x-text-input id="email" class="block mt-1 w-full p-2 rounded-md" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                <x-text-input id="email" class="block mt-1 w-full p-2 rounded-md" type="email" name="email" :value="old('email')" required autofocus autocomplete="username"
+                    pattern="^[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com|alumnos\.uady\.mx)$" title="Por favor, ingrese un correo válido (gmail.com, hotmail.com, alumnos.uady.mx)" />
                 <x-input-error :messages="$errors->get('email')" class="mt-2 text-red-500" />
             </div>
 
@@ -55,9 +56,16 @@
                     {{ __('Iniciar Sesión') }}
                 </x-primary-button>
             </div>
+
+            <div class="mt-4">
+                <span class="text-white text-sm">¿No tienes cuenta?</span>
+                <a href="{{ route('register') }}" class="underline text-sm text-gray-200 hover:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white">
+                    regístrate aquí
+                </a>
+            </div>
+
         </form>
     </div>
 </x-guest-layout>
-
 
 @endsection

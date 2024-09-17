@@ -24,7 +24,8 @@
                 <!-- Email Address -->
                 <div class="mt-4">
                     <x-input-label for="email" :value="__('Email')" class="text-white" />
-                    <x-text-input id="email" class="block mt-1 w-full p-2 rounded-md" type="email" name="email" :value="old('email')" required autocomplete="username" />
+                    <x-text-input id="email" class="block mt-1 w-full p-2 rounded-md" type="email" name="email" :value="old('email')" required autocomplete="username"
+                        pattern="^[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com|alumnos\.uady\.mx)$" title="Por favor, ingrese un correo válido (gmail.com, hotmail.com, alumnos.uady.mx)" />
                     <x-input-error :messages="$errors->get('email')" class="mt-2 text-red-500" />
                 </div>
 
@@ -34,7 +35,8 @@
                     <x-text-input id="password" class="block mt-1 w-full p-2 rounded-md"
                                   type="password"
                                   name="password"
-                                  required autocomplete="new-password" />
+                                  required autocomplete="new-password"
+                                  minlength="8" maxlength="16" title="La contraseña debe tener entre 8 y 16 caracteres." />
                     <x-input-error :messages="$errors->get('password')" class="mt-2 text-red-500" />
                 </div>
 
@@ -43,7 +45,8 @@
                     <x-input-label for="password_confirmation" :value="__('Confirmar Contraseña')" class="text-white" />
                     <x-text-input id="password_confirmation" class="block mt-1 w-full p-2 rounded-md"
                                   type="password"
-                                  name="password_confirmation" required autocomplete="new-password" />
+                                  name="password_confirmation" required autocomplete="new-password"
+                                  minlength="8" maxlength="16" />
                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2 text-red-500" />
                 </div>
 
