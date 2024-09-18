@@ -31,3 +31,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 Route::get('/admin/pedidos', [OrderController::class, 'index'])->name('pedidos.index');
+
+

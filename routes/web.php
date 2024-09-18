@@ -35,6 +35,13 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Probando hasta ver si funciona.
+// Mostrar la vista estática de preguntas frecuentes.
+Route::get('/soporte', function () {
+    return view('support/faqs'); // Asegúrate de que la vista esté en resources/views/faq.blade.php
+})->name('faqs.index');
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
