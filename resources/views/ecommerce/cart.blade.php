@@ -64,120 +64,119 @@
 
     @if(\Cart::getTotalQuantity() > 0)
     <h4 class="text-lg font-semibold">{{ \Cart::getTotalQuantity() }} Producto(s) en el carrito</h4><br>
-@else
-    <h4 class="text-lg font-semibold">No Product(s) In Your Cart</h4><br>
-    <a href="/" class="btn bg-gray-800 text-white px-4 py-2 rounded">Continue en la tienda</a>
-@endif
 
-
-    <!-- Tabla de productos -->
-    <div class="bg-white shadow-md rounded my-6">
-        <table class="text-left w-full border-collapse">
-            <!-- Encabezado de la tabla -->
-            <thead>
-                <tr>
-                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Producto</th>
-                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Precio</th>
-                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Cantidad</th>
-                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Total</th>
-                </tr>
-            </thead>
-            <!-- Cuerpo de la tabla -->
-            <tbody>
-                @foreach($cartCollection as $item)
-                @php
-                $product = $products->firstWhere('ID_producto', $item->id);
-                @endphp
-
-                @if($product)
-                <tr class="row">
-                    <td class="py-8 px-6 border-b border-grey-light">
-                        <div class="flex items-center">
-                            <div class="cart-pho mr-4">
-                                <a href="/productos/{{ $item->id }}" class="shrink-0">
-                                    <img src="{{ asset('storage/' . $item->attributes->image) }}" class="img-thumbnail w-20 h-20 h-auto" alt="{{ $item->name }}">
-                                </a>
+        <!-- Tabla de productos -->
+        <div class="bg-white shadow-md rounded my-6">
+            <table class="text-left w-full border-collapse">
+                <!-- Encabezado de la tabla -->
+                <thead>
+                    <tr>
+                        <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Producto</th>
+                        <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Precio</th>
+                        <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Cantidad</th>
+                        <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Total</th>
+                    </tr>
+                </thead>
+                <!-- Cuerpo de la tabla -->
+                <tbody>
+                    @foreach($cartCollection as $item)
+                    @php
+                    $product = $products->firstWhere('ID_producto', $item->id);
+                    @endphp
+    
+                    @if($product)
+                    <tr class="row">
+                        <td class="py-8 px-6 border-b border-grey-light">
+                            <div class="flex items-center">
+                                <div class="cart-pho mr-4">
+                                    <a href="/productos/{{ $item->id }}" class="shrink-0">
+                                        <img src="{{ asset('storage/' . $item->attributes->image) }}" class="img-thumbnail w-20 h-20 h-auto" alt="{{ $item->name }}">
+                                    </a>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p>
+                                        <b><a href="/productos/{{ $item->id }}" class="text-xl font-medium text-blue-700 hover:underline dark:text-white">{{ $item->name }}</a></b><br>
+                                        <b>Modelo: </b>{{ $item->attributes->model }}<br>
+                                        <b>Fabricante: </b>{{ $item->attributes->manufacturer }}<br>
+                                        <b>Stock: </b>{{ $product->stock }}
+                                        
+                                        <form action="{{ route('cart.remove') }}" method="POST">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" value="{{ $item->id }}" name="ID_producto">
+                                            <button class="bg-white-600 text-red-500 hover:bg-red-200  px-2 py-1 rounded"><i class="fa fa-trash"></i> Remover</button>
+                                        </form>
+                                    </p>
+                                </div>
                             </div>
-                            <div class="flex-1 min-w-0">
-                                <p>
-                                    <b><a href="/productos/{{ $item->id }}" class="text-xl font-medium text-blue-700 hover:underline dark:text-white">{{ $item->name }}</a></b><br>
-                                    <b>Modelo: </b>{{ $item->attributes->model }}<br>
-                                    <b>Fabricante: </b>{{ $item->attributes->manufacturer }}<br>
-                                    <b>Stock: </b>{{ $product->stock }}
-                                    
-                                    <form action="{{ route('cart.remove') }}" method="POST">
-                                        {{ csrf_field() }}
-                                        <input type="hidden" value="{{ $item->id }}" name="ID_producto">
-                                        <button class="bg-white-600 text-red-500 hover:bg-red-200  px-2 py-1 rounded"><i class="fa fa-trash"></i> Remover</button>
-                                    </form>
-                                </p>
-                            </div>
-                        </div>
-                    </td>
-                    
-
-                    <td class="py-4 px-6 border-b border-grey-light">
-                        <p class="mt-5 font-['roboto'] text-lg text-green-700 font-medium">
-                            ${{ (100 - $item->attributes->discount) * 0.01 * $item->attributes->originalPrice }} MXN  {{-- !Calcularlo en el Controlador --}}
-                            @if ( $item->attributes->discount > 0 )
-                                <span class="ml-1.5 text-zinc-400 line-through">${{ $item->attributes->originalPrice }}</span>
-                                <span class="ml-2 font-['roboto'] font-normal text-base text-red-600 py-1.5 px-1.5 bg-red-200 rounded-xl">-{{ $item->attributes->discount }}% </span>
-                            @endif
-                        </p>
-                    </td>
-
-                    <td class="py-4 px-6 border-b border-grey-light">
-                        <form action="{{ route('cart.update') }}" method="POST" class="flex items-center max-w-xs mx-auto">
-                            {{ csrf_field() }}
-                            <input type="hidden" value="{{ $item->id }}" id="ID_producto" name="ID_producto">
-                            <div class="relative flex items-center max-w-[8rem]">
-                                <button type="submit" name="decrement" value="1" class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
-                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
-                                    </svg>
-                                </button>
+                        </td>
                         
-                                <input type="text" id="quantity-input" name="stock" value="{{ $item->quantity }}" min="1" max="{{ $product->stock }}" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+    
+                        <td class="py-4 px-6 border-b border-grey-light">
+                            <p class="mt-5 font-['roboto'] text-lg text-green-700 font-medium">
+                                ${{ (100 - $item->attributes->discount) * 0.01 * $item->attributes->originalPrice }} MXN  {{-- !Calcularlo en el Controlador --}}
+                                @if ( $item->attributes->discount > 0 )
+                                    <span class="ml-1.5 text-zinc-400 line-through">${{ $item->attributes->originalPrice }}</span>
+                                    <span class="ml-2 font-['roboto'] font-normal text-base text-red-600 py-1.5 px-1.5 bg-red-200 rounded-xl">-{{ $item->attributes->discount }}% </span>
+                                @endif
+                            </p>
+                        </td>
+    
+                        <td class="py-4 px-6 border-b border-grey-light">
+                            <form action="{{ route('cart.update') }}" method="POST" class="flex items-center max-w-xs mx-auto">
+                                {{ csrf_field() }}
+                                <input type="hidden" value="{{ $item->id }}" id="ID_producto" name="ID_producto">
+                                <div class="relative flex items-center max-w-[8rem]">
+                                    <button type="submit" name="decrement" value="1" class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                        <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
+                                        </svg>
+                                    </button>
+                            
+                                    <input type="text" id="quantity-input" name="stock" value="{{ $item->quantity }}" min="1" max="{{ $product->stock }}" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required disabled/>
+                            
+                                    <button type="submit" name="increment" value="1" class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                        <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </form>
+                        </td>
                         
-                                <button type="submit" name="increment" value="1" class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
-                                    <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </form>
-                    </td>
-                    
-                    <td class="py-4 px-6 border-b border-grey-light mt-5 font-['roboto'] text-lg text-green-700 font-medium">
-                        ${{ \Cart::get($item->id)->getPriceSum() }} MXN
-                    </td>
-
-                @endif
-                </tr>
-
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-
-    @if(count($cartCollection) > 0)
-    <div class="flex justify-start mt-6">
-        <form action="{{ route('cart.clear') }}" method="POST">
-            {{ csrf_field() }}
-            <button class="btn bg-gray-600 text-white px-4 py-2 rounded">Vaciar Carrito</button>
-        </form>
-    </div>
-    @endif
-
-    <!-- Aqui se redirige a pago -->
-    <div class="flex justify-end mt-6 space-y-4">
-        <div class="text-right">
-            <div class="text-xl font-bold mb-4">Total a pagar: ${{ \Cart::getTotal() }} MXN</div>
-            <a href="/" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 mt-4 mb-4">Ir a Pagar</a>
+                        <td class="py-4 px-6 border-b border-grey-light mt-5 font-['roboto'] text-lg text-green-700 font-medium">
+                            ${{ \Cart::get($item->id)->getPriceSum() }} MXN
+                        </td>
+    
+                    @endif
+                    </tr>
+    
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-    </div>
-</div>
+    
+            @if(count($cartCollection) > 0)
+            <div class="flex justify-start mt-6">
+                <form action="{{ route('cart.clear') }}" method="POST">
+                    {{ csrf_field() }}
+                    <button class="btn bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-500"">Vaciar Carrito</button>
+                </form>
+            </div>
+            @endif
+    
+            <!-- Aqui se redirige a pago -->
+            <div class="flex justify-end mt-6 space-y-4">
+                <div class="text-right">
+                    <div class="text-xl font-bold mb-4">Total a pagar: ${{ \Cart::getTotal() }} MXN</div>
+                    <a href="/" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 mt-4 mb-4">Ir a Pagar</a>
+                </div>
+            </div>
+        </div>      
 
+@else
+    <h4 class="text-lg font-semibold">No hay Producto(s) en el Carrito</h4><br>
+    <a href="/" class="btn bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-500">Continuar en la tienda</a>
+@endif
 
 </section>
 

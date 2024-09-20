@@ -66,6 +66,15 @@
         @error('nombre')
             <div class="text-red-500">{{ $message }}</div>
         @enderror
+        @error('modelo')
+            <div class="text-red-500">{{ $message }}</div>
+        @enderror
+        @error('fabricante')
+            <div class="text-red-500">{{ $message }}</div>
+        @enderror
+        @error('descuento')
+            <div class="text-red-500">{{ $message }}</div>
+        @enderror
         @error('precio')
             <div class="text-red-500">{{ $message }}</div>
         @enderror
