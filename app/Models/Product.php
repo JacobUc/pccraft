@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Orden;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -28,6 +29,18 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class, 'ID_Categoria', 'ID_Categoria');
+    }
+
+    // Relación directa con la tabla pivot 'producto__ordens'
+    public function productoOrdens()
+    {
+        return $this->hasMany(Producto_Orden::class, 'ID_Producto', 'ID_producto');
+    }
+
+    // Todas las reviews de un producto
+    public function reviews()
+    {
+        return $this->hasManyThrough(Review::class, Producto_Orden::class, 'ID_Producto', 'ID_Review', 'ID_producto', 'ID_Review');
     }
 }
 
