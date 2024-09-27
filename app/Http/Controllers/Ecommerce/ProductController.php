@@ -6,7 +6,6 @@ use DateTime;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Orden;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,6 +28,7 @@ class ProductController extends Controller
         $product->comentarios = $comentarios;
         
         // Calcular calificacion promedio
+        $product->avgRaiting = $product->reviews()->avg('calificacion');
 
         // !COMPROBACIONES (SI EL USER HA COMPRADO EL PRODUCTO)
         // Si el usuario ha iniciado sesion, verificamos si ha comprado el producto y si ha hecho un review

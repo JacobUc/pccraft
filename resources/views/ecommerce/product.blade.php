@@ -71,16 +71,16 @@
                 <p class="mt-1.5 text-zinc-400">MODELO: {{ $product->modelo }}</p>
                 <a href="#detalles-comentarios" class="mt-2 flex items-center">
                     <span class="text-xs text-amber-500">
-                        {{--! Calcular media --}}
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>    
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <span class="text-sm text-black font-medium">4.9</span>
-                        {{--!Pendiente {{ $product->calificacion }}  --}}
+                        @if ($product->avgRaiting)
+                            @for ($i = round($product->avgRaiting); $i < $count; $i++)
+                                <i class="fa-solid fa-star"></i>
+                            @endfor
+                            <span class="text-sm text-black font-medium">{{$product->avgRaiting}}</span>
+                            <p class="ml-2 font-['roboto'] font-bold text-xs text-zinc-500 hover:text-azul">{{$product->total_comentarios}} calificaciones</p>
+                        @else
+                            <span class="text-sm text-black font-medium">0 calificaciones</span>
+                        @endif
                     </span>
-                    <p class="ml-2 font-['roboto'] font-bold text-xs text-zinc-500 hover:text-azul">{{$product->total_comentarios}} calificaciones</p>
                 </a>
                 <p class="mt-5 font-['roboto'] text-2xl font-medium">
                     ${{ $product->precio_final }} MXN

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Ecommerce\Cart;
 
+use App\Http\Controllers\Controller;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -204,3 +205,4 @@ class CartController extends Controller
         }
     }
 }
+
