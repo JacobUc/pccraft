@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Carrito')
+
 @section('content')
 <!-- Contenedor principal -->
 <div class="container mx-auto mt-6 mb-6 w-full lg:w-2/3">

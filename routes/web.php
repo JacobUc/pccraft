@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Ecommerce\ProductController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Ecommerce\Cart\CartController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Ecommerce\ProductController;
+use App\Http\Controllers\Ecommerce\Cart\CartController;
+use App\Http\Controllers\Ecommerce\ConfiguradorPCController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,3 +48,12 @@ Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remov
 Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
 Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 Route::post('/logout', [CartController::class, 'logout'])->name('logout');
+
+// Rutas para el Configurador PC
+Route::get('/shop', [ConfiguradorPCController::class, 'shop'])->name('shop');
+Route::get('/configuradorpc', [ConfiguradorPCController::class, 'index'])->name('configuradorpc.index');
+Route::post('/configuradorpc/add', [ConfiguradorPCController::class, 'add'])->name('configuradorpc.add');
+Route::post('/configuradorpc/remove', [ConfiguradorPCController::class, 'remove'])->name('configuradorpc.remove');
+Route::post('/configuradorpc/update', [ConfiguradorPCController::class, 'update'])->name('configuradorpc.update');
+Route::post('/configuradorpc/clear', [ConfiguradorPCController::class, 'clear'])->name('configuradorpc.clear');
+Route::post('/logout', [ConfiguradorPCController::class, 'logout'])->name('logout');
