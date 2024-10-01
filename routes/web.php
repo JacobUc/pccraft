@@ -51,6 +51,7 @@ Route::post('/logout', [CartController::class, 'logout'])->name('logout');
 
 // Rutas para el Configurador PC
 Route::get('/shop', [ConfiguradorPCController::class, 'shop'])->name('shop');
+Route::post('/configuradorpc', [ConfiguradorPCController::class, 'index'])->name('configuradorpc.index');
 Route::get('/configuradorpc', [ConfiguradorPCController::class, 'index'])->name('configuradorpc.index');
 Route::post('/configuradorpc/add', [ConfiguradorPCController::class, 'add'])->name('configuradorpc.add');
 Route::post('/configuradorpc/remove', [ConfiguradorPCController::class, 'remove'])->name('configuradorpc.remove');

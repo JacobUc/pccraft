@@ -70,7 +70,7 @@
     <h2 id="accordion-color-heading-1">
       <button type="button" class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-blue-600 border border-gray-200 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-800 dark:border-gray-700 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-color-body-1" aria-expanded="true" aria-controls="accordion-color-body-1">
         <span></span>
-        <span class="text-blue-600">Procesador</span>
+        <span class="text-blue-600 font-medium text-1xl">Procesador</span>
         <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
         </svg>
@@ -78,17 +78,21 @@
     </h2>
     <div id="accordion-color-body-1" class="hidden" aria-labelledby="accordion-color-heading-1">
       <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-        <div class="grid grid-rows-3 justify-center">
-            <span class="ustify-center items-center text-gray-600 text-2xl font-medium">Seleccionar Marca:</span>
-            <div class="flex justify-center items-center me-4">
-                <input checked id="red-checkbox" type="checkbox" value="" class="w-5 h-5 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onclick="onlyOne(this)">
-                <label for="red-checkbox" class="ms-2 text-2xl font-medium text-red-700 dark:text-gray-300">AMD</label>
+
+        <form action="{{ route('configuradorpc.index') }}" method="POST" id="marcaForm">
+            @csrf
+            <div class="grid grid-rows-3 justify-center">
+                <span class="ustify-center items-center text-gray-600 text-2xl font-medium">Seleccionar Marca:</span>
+                <div class="flex justify-center items-center me-4">
+                    <input id="red-checkbox" type="checkbox" name="marca[]" value="AMD" class="w-5 h-5 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onclick="onlyOne(this)" @checked(in_array('AMD', old('marca', [])))>
+                    <label for="red-checkbox" class="ms-2 text-2xl font-medium text-red-700 dark:text-gray-300">AMD</label>
+                </div>
+                <div class="flex justify-center items-center me-4">
+                    <input id="blue-checkbox" type="checkbox" name="marca[]" value="Intel" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onclick="onlyOne(this)" @checked(in_array('Intel', old('marca', [])))>
+                    <label for="blue-checkbox" class="ms-2 text-2xl font-medium text-blue-700 dark:text-gray-300">Intel</label>
+                </div>
             </div>
-            <div class="flex justify-center items-center me-4">
-                <input checked id="blue-checkbox" type="checkbox" value="" class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" onclick="onlyOne(this)">
-                <label for="blue-checkbox" class="ms-2 text-2xl font-medium text-blue-700 dark:text-gray-300">Intel</label>
-            </div>
-        </div>
+        </form>
 
         <section class="mt-4 mb-4 flex flex-col justify-center items-center w-full">
             <div>
@@ -97,50 +101,12 @@
             </div>
             {{-- Tarjetas de productos --}}
             <div class="grid grid-cols-4 w-full text-center mt-4 mx-4">
-                <div class="border-2 mx-3 my-5 border-gray-200 rounded-lg pt-2 pb-5 px-3 font-medium shadow-xl">
-                    {{-- Imagen --}}
-                    <div class="px-2">
-                        <img src="{{ asset('img/rtx3060.jpg') }}" alt="Imagen Producto">
-                    </div>
-                    {{-- Info Producto --}}
-                    <div>
-                        <p class="mt-4 mb-2 leading-relaxed">ZOTAC GAMING NVIDIA GEFORCE RTX 3060</p>
-                        <p class="mb-3 text-verde">Tarjeta de Video</p>
-                        <p class="mb-3 font-['roboto'] text-lg">MXN $16,000.00</p>
-                    </div>
-                    <button class="py-2 px-4 bg-azul border border-azul rounded-lg text-white shadow hover:shadow-xl">Seleccionar</button>
-                </div>
-                <div class="border-2 mx-3 my-5 border-gray-200 rounded-lg pt-2 pb-5 px-3 font-medium shadow-xl">
-                    {{-- Imagen --}}
-                    <div class="px-2">
-                        <img src="{{ asset('img/rtx3060.jpg') }}" alt="Imagen Producto">
-                    </div>
-                    {{-- Info Producto --}}
-                    <div>
-                        <p class="mt-4 mb-2 leading-relaxed">ZOTAC GAMING NVIDIA GEFORCE RTX 3060</p>
-                        <p class="mb-3 text-verde">Tarjeta de Video</p>
-                        <p class="mb-3 font-['roboto'] text-lg">MXN $16,000.00</p>
-                    </div>
-                    <button class="py-2 px-4 bg-azul border border-azul rounded-lg text-white shadow hover:shadow-xl">Seleccionar</button>
-                </div>
-                <div class="border-2 mx-3 my-5 border-gray-200 rounded-lg pt-2 pb-5 px-3 font-medium shadow-xl">
-                    {{-- Imagen --}}
-                    <div class="px-2">
-                        <img src="{{ asset('img/rtx3060.jpg') }}" alt="Imagen Producto">
-                    </div>
-                    {{-- Info Producto --}}
-                    <div>
-                        <p class="mt-4 mb-2 leading-relaxed">ZOTAC GAMING NVIDIA GEFORCE RTX 3060</p>
-                        <p class="mb-3 text-verde">Tarjeta de Video</p>
-                        <p class="mb-3 font-['roboto'] text-lg">MXN $16,000.00</p>
-                    </div>
-                    <button class="py-2 px-4 bg-azul border border-azul rounded-lg text-white shadow hover:shadow-xl">Seleccionar</button>
-                </div>
 
+                @foreach ($procesadores as $procesador)
                 <div class="border-2 mx-3 my-5 border-gray-200 rounded-lg pt-2 pb-5 px-3 font-medium shadow-xl">
                     {{-- Imagen --}}
-                    <div class="px-2">
-                        <img src="{{ asset('img/rtx3060.jpg') }}" alt="Imagen Producto">
+                    <div class="px-2 flex justify-center">
+                        <img class="flex items-center max-h-40" src="{{ asset('storage/' . json_decode($procesador->url_photo, true)[0] ) }}" alt="{{$procesador->name}}">
                     </div>
                     {{-- Info Producto --}}
                     <div>
@@ -150,8 +116,7 @@
                     </div>
                     <button class="py-2 px-4 bg-azul border border-azul rounded-lg text-white shadow hover:shadow-xl">Seleccionar</button>
                 </div>
-
-
+                @endforeach
             </div>
         </section>
 
@@ -323,7 +288,10 @@
         checkboxes.forEach((item) => {
             if (item !== checkbox) item.checked = false;
         });
+        document.getElementById('marcaForm').submit();
     }
+
+
 </script>
 
 
