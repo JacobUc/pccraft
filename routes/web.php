@@ -4,6 +4,7 @@ use App\Http\Controllers\Ecommerce\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,8 +39,12 @@ Route::get('/dashboard', function () {
 // Probando hasta ver si funciona.
 // Mostrar la vista estática de preguntas frecuentes.
 Route::get('/soporte', function () {
-    return view('support/faqs'); // Asegúrate de que la vista esté en resources/views/faq.blade.php
+    return view('support/faqs'); // Asegúrate de que la vista esté en resources/views/faqs.blade.php
 })->name('faqs.index');
+
+Route::get('/comentario', function () {
+    return view('ecommerce/comment');
+})->name('comment.index');
 
 
 Route::middleware('auth')->group(function () {

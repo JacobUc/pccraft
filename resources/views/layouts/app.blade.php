@@ -27,7 +27,7 @@
                 <nav class="flex justify-between gap-16">
                     <a href="#">Productos</a>
                     <a href="#">Nosotros</a>
-                    <a href="#">Soporte</a>
+                    <a href="{{ route('faqs.index') }}">Soporte</a>
                 </nav>
 
                 <div class="flex justify-between">
@@ -118,7 +118,7 @@
                     <li class="mb-2"> <a href="#">Configurar PC</a> </li> 
                     <li class="mb-2"> <a href="#">Productos</a> </li>
                     <li class="mb-2"> <a href="#">Nosotros</a> </li>
-                    <li class="mb-2"> <a href="#">Soporte</a> </li>
+                    <li class="mb-2"> <a href="{{ route('faqs.index') }}">Soporte</a> </li>
                 </ul>
                 
                 <ul class="w-40 text-center">
