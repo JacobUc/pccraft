@@ -60,7 +60,7 @@ class CartController extends Controller
         $producto = Product::find($validated['id']);
 
         // Calcular el precio con descuento
-        $precioConDescuento = $validated['precio'] - ($validated['precio'] * ($validated['descuento'] / 100));
+        $precioConDescuento = (100 - $validated['descuento']) * 0.01 * $validated['precio'];
 
         // Validar que la cantidad solicitada no exceda el stock disponible
         if ($validated['cantidad'] > $producto->stock) {

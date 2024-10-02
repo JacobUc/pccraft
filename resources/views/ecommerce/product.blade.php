@@ -83,7 +83,7 @@
                     </span>
                 </a>
                 <p class="mt-5 font-['roboto'] text-2xl font-medium">
-                    ${{ $product->precio_final }} MXN
+                    <span>${{ $product->precio_final }} MXN</span>
                     @if ( $product->descuento > 0 )
                         <span class="ml-1.5 text-zinc-400 line-through">${{ $product->precio }}</span>
                         <span class="ml-2 font-['roboto'] font-normal text-base text-red-600 py-1.5 px-1.5 bg-red-200 rounded-xl">-{{ $product->descuento }}% </span>
@@ -94,51 +94,50 @@
 
                 {{-- Agregar al Carrito --}}
                 <div class="mt-4">
-    <form action="{{ route('cart.add') }}" method="POST">
-        @csrf
-        <input type="hidden" name="id" value="{{ $product->ID_producto }}">
-        <input type="hidden" name="nombre" value="{{ $product->nombre }}">
-        <input type="hidden" name="modelo" value="{{ $product->modelo }}">
-        <input type="hidden" name="fabricante" value="{{ $product->fabricante }}">
-        <input type="hidden" name="descuento" value="{{ $product->descuento }}">
-        <input type="hidden" name="precio" value="{{ $product->precio }}">
-        <input type="hidden" name="cantidad" value="1">  {{-- Cambiar "quantity" por "cantidad" --}}
-        <input type="hidden" name="url_photo[]" value="{{ $product->url_photo }}"> {{-- Asegúrate de que esté correcto --}}
-        
-        {{-- Mostrar errores de validación --}}
-        @error('id')
-            <div class="text-red-500">{{ $message }}</div>
-        @enderror
-        @error('nombre')
-            <div class="text-red-500">{{ $message }}</div>
-        @enderror
-        @error('modelo')
-            <div class="text-red-500">{{ $message }}</div>
-        @enderror
-        @error('fabricante')
-            <div class="text-red-500">{{ $message }}</div>
-        @enderror
-        @error('descuento')
-            <div class="text-red-500">{{ $message }}</div>
-        @enderror
-        @error('precio')
-            <div class="text-red-500">{{ $message }}</div>
-        @enderror
-        @error('cantidad')
-            <div class="text-red-500">{{ $message }}</div>
-        @enderror
-        @error('url_photo')
-            <div class="text-red-500">{{ $message }}</div>
-        @enderror
+                    <form action="{{ route('cart.add') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $product->ID_producto }}">
+                        <input type="hidden" name="nombre" value="{{ $product->nombre }}">
+                        <input type="hidden" name="modelo" value="{{ $product->modelo }}">
+                        <input type="hidden" name="fabricante" value="{{ $product->fabricante }}">
+                        <input type="hidden" name="descuento" value="{{ $product->descuento }}">
+                        {{-- <input type="hidden" name="precio" value="{{ (float) str_replace(',', '', $product->precio_final) }}"> --}}
+                        <input type="hidden" name="precio" value="{{ $product->precio }}">
+                        <input type="hidden" name="cantidad" value="1">  {{-- Cambiar "quantity" por "cantidad" --}}
+                        <input type="hidden" name="url_photo[]" value="{{ $product->url_photo }}"> {{-- Asegúrate de que esté correcto --}}
+                        
+                        {{-- Mostrar errores de validación --}}
+                        @error('id')
+                            <div class="text-red-500">{{ $message }}</div>
+                        @enderror
+                        @error('nombre')
+                            <div class="text-red-500">{{ $message }}</div>
+                        @enderror
+                        @error('modelo')
+                            <div class="text-red-500">{{ $message }}</div>
+                        @enderror
+                        @error('fabricante')
+                            <div class="text-red-500">{{ $message }}</div>
+                        @enderror
+                        @error('descuento')
+                            <div class="text-red-500">{{ $message }}</div>
+                        @enderror
+                        @error('precio')
+                            <div class="text-red-500">{{ $message }}</div>
+                        @enderror
+                        @error('cantidad')
+                            <div class="text-red-500">{{ $message }}</div>
+                        @enderror
+                        @error('url_photo')
+                            <div class="text-red-500">{{ $message }}</div>
+                        @enderror
 
-        <button type="submit" class="py-2 text-base px-3.5 bg-azul border border-azul rounded-lg text-white shadow hover:shadow-xl">
-            <span class="mr-2"><i class="fa-solid fa-cart-shopping"></i></span>
-            Agregar al carrito
-        </button>
-    </form>
-</div>
-
-                
+                        <button type="submit" class="py-2 text-base px-3.5 bg-azul border border-azul rounded-lg text-white shadow hover:shadow-xl">
+                            <span class="mr-2"><i class="fa-solid fa-cart-shopping"></i></span>
+                            Agregar al carrito
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
 
