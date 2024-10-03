@@ -4,6 +4,7 @@ use App\Http\Controllers\Ecommerce\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Ecommerce\Cart\CartController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,17 @@ Route::get('/productos/{product}', [ProductController::class, 'index'] );
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+// Probando hasta ver si funciona.
+// Mostrar la vista estática de preguntas frecuentes.
+Route::get('/soporte', function () {
+    return view('support/faqs'); // Asegúrate de que la vista esté en resources/views/faqs.blade.php
+})->name('faqs.index');
+
+Route::get('/comentario', function () {
+    return view('ecommerce/comment');
+})->name('comment.index');
+
 
 // Sesiones de usuario
 Route::middleware('auth')->group(function () {

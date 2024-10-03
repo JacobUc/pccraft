@@ -3,34 +3,41 @@
     {
       "nombre": "Intel Core i3-12100",
       "modelo": "i3-12100",
-      "fabricante":"Intel",
-      "descripcion":"Procesador de escritorio de 12ª generación de Intel, diseñado para ofrecer un rendimiento eficiente en tareas cotidianas y multitarea ligera.",
-      "precio":2089,
-      "descuento":10,
-      "stock":15,
+      "fabricante": "Intel",
+      "descripcion": "Procesador de escritorio de 12ª generación de Intel, diseñado para ofrecer un rendimiento eficiente en tareas cotidianas y multitarea ligera.",
+      "precio": 2089,
+      "descuento": 10,
+      "stock": 15,
       "ID_categoria": 1,
       "especificacionesJSON": {
+        "generacion": "12a generacion",
+        "socket": "LGA 1700",
+        "tipo_RAM": "DDR4/DDR5",
         "nucleos": 4,
-        "hilos": 4, 
+        "hilos": 8,
         "frecuencia_base": "3.3 GHz",
-        "frecuencia_Maxima": "4.3 GHz", 
+        "frecuencia_Maxima": "4.3 GHz",
         "cache": "12 MB"
       },
       "url_photo": [
         "photos/Intel Core i3-12100-1.jpg",
         "photos/Intel Core i3-12100-2.jpg",
-        "photos/Intel Core i3-12100-3.jpg"]
+        "photos/Intel Core i3-12100-3.jpg"
+      ]
     },
     {
       "nombre": "AMD Ryzen 7 5800X",
       "modelo": "Ryzen 7 5800X",
-      "fabricante":"AMD",
-      "descripcion":"OCHO NÚCLEOS OPTIMIZADOS PARA COMPUTADORAS DE JUEGOS CON ALTO FPS. Lleva a tu equipo a la victoria con un procesador de 8 núcleos de alto rendimiento.",
-      "precio":3712,
-      "descuento":5,
-      "stock":5,
+      "fabricante": "AMD",
+      "descripcion": "OCHO NÚCLEOS OPTIMIZADOS PARA COMPUTADORAS DE JUEGOS CON ALTO FPS. Lleva a tu equipo a la victoria con un procesador de 8 núcleos de alto rendimiento.",
+      "precio": 3712,
+      "descuento": 5,
+      "stock": 5,
       "ID_categoria": 1,
       "especificacionesJSON": {
+        "generacion": "5a generacion",
+        "socket": "AM4",
+        "tipo_RAM": "DDR4",
         "nucleos": 8,
         "hilos": 16,
         "frecuencia_base": "3.8 GHz",
@@ -40,18 +47,22 @@
       "url_photo": [
         "photos/Ryzen7_5800X-1.jpg",
         "photos/Ryzen7_5800X-2.jpg",
-        "photos/Ryzen7_5800X-3.jpg"]
+        "photos/Ryzen7_5800X-3.jpg"
+      ]
     },
     {
       "nombre": "Intel Core i5-12600KF",
       "modelo": "Core i5-12600KF",
-      "fabricante":"Intel",
-      "descripcion":"Productividad y entretenimiento, todo disponible en tu computadora de escritorio. La superioridad tecnológica de INTEL es un beneficio para todo tipo de profesionales. Asegura el mejor rendimiento de las aplicaciones, de la transferencia de datos y la conexión con otros elementos tecnológicos.",
-      "precio":4900,
-      "descuento":0,
-      "stock":12,
+      "fabricante": "Intel",
+      "descripcion": "Productividad y entretenimiento, todo disponible en tu computadora de escritorio. La superioridad tecnológica de INTEL es un beneficio para todo tipo de profesionales. Asegura el mejor rendimiento de las aplicaciones, de la transferencia de datos y la conexión con otros elementos tecnológicos.",
+      "precio": 4900,
+      "descuento": 0,
+      "stock": 12,
       "ID_categoria": 1,
       "especificacionesJSON": {
+        "generacion": "12a generacion",
+        "socket": "LGA 1700",
+        "tipo_RAM": "DDR4/DDR5",
         "nucleos": 10,
         "hilos": 16,
         "frecuencia_base": "3.7 GHz",
@@ -61,39 +72,47 @@
       "url_photo": [
         "photos/Intel Core i5-12600KF-1.jpeg",
         "photos/Intel Core i5-12600KF-2.jpg",
-        "photos/Intel Core i5-12600KF-3.jpg"]
+        "photos/Intel Core i5-12600KF-3.jpg"
+      ]
     },
     {
       "nombre": "AMD Ryzen 5 5500",
       "modelo": "5 5500",
-      "fabricante":"AMD",
-      "descripcion":"Rendimiento líder para los jugadores de PC, con el rendimiento superior de los procesadores AMD Ryzen serie 5000.",
-      "precio":1750,
-      "descuento":0,
-      "stock":41,
+      "fabricante": "AMD",
+      "descripcion": "Rendimiento líder para los jugadores de PC, con el rendimiento superior de los procesadores AMD Ryzen serie 5000.",
+      "precio": 1750,
+      "descuento": 0,
+      "stock": 41,
       "ID_categoria": 1,
       "especificacionesJSON": {
+        "generacion": "5a generacion",
+        "socket": "AM4",
+        "tipo_RAM": "DDR4",
         "nucleos": 6,
         "hilos": 12,
         "frecuencia_base": "3.6 GHz",
-        "frecuencia_Maxima": "4.2 GHz", 
+        "frecuencia_Maxima": "4.2 GHz",
         "cache": "16 MB"
       },
       "url_photo": [
         "photos/AMD Ryzen 5 5500-1.jpg",
         "photos/AMD Ryzen 5 5500-2.jpg",
-        "photos/AMD Ryzen 5 5500-3.jpg"]
+        "photos/AMD Ryzen 5 5500-3.jpg"
+      ]
     },
     {
       "nombre": "Intel Core i3-10100F",
-      "modelo": "",
-      "fabricante":"Intel",
-      "descripcion":"Productividad y entretenimiento, todo disponible en tu computadora de escritorio. La superioridad tecnológica de INTEL es un beneficio para todo tipo de profesionales. Asegura el mejor rendimiento de las aplicaciones, de la transferencia de datos y la conexión con otros elementos tecnológicos.",
-      "precio":1400,
-      "descuento":0,
-      "stock":12,
+      "modelo": "i3-10100F",
+      "fabricante": "Intel",
+      "descripcion": "Productividad y entretenimiento, todo disponible en tu computadora de escritorio. La superioridad tecnológica de INTEL es un beneficio para todo tipo de profesionales. Asegura el mejor rendimiento de las aplicaciones, de la transferencia de datos y la conexión con otros elementos tecnológicos.",
+      "precio": 1400,
+      "descuento": 0,
+      "stock": 12,
       "ID_categoria": 1,
       "especificacionesJSON": {
+        "generacion": "10a generacion",
+        "socket": "LGA 1200",
+        "tipo_RAM": "DDR4",
         "nucleos": 4,
         "hilos": 8,
         "frecuencia_base": "3.6 GHz",
@@ -103,8 +122,10 @@
       "url_photo": [
         "photos/Intel Core i3-10100F-1.jpg",
         "photos/Intel Core i3-10100F-2.jpg",
-        "photos/Intel Core i3-10100F-3.jpg"]
+        "photos/Intel Core i3-10100F-3.jpg"
+      ]
     },
+    
     {
       "nombre": "XPG Spectrix D45G",
       "modelo": "Spectrix D45G",
@@ -115,9 +136,9 @@
       "stock":21,
       "ID_categoria": 4,
       "especificacionesJSON": { 
-        "capacidad": "8 GB",
+        "capacidad": 8,
         "tipo": "DDR4",
-        "velocidad": "3600 MHz",
+        "velocidad": 3600,
         "latencia": 42,
         "voltaje": "1.35V"
       },
@@ -136,9 +157,9 @@
       "stock":5,
       "ID_categoria": 4,
       "especificacionesJSON": { 
-        "capacidad": "16 GB",
+        "capacidad": 16,
         "tipo": "DDR5",
-        "velocidad": "5200 MHz",
+        "velocidad": 5200,
         "latencia": 38,
         "voltaje": "1.1V"
       },
@@ -157,9 +178,9 @@
       "stock":10,
       "ID_categoria": 4,
       "especificacionesJSON": {
-        "capacidad": "16 GB",
+        "capacidad": 16,
         "tipo": "DDR4",
-        "velocidad": "3200 MHz",
+        "velocidad": 3200,
         "latencia": 16,
         "voltaje": "1.2V" 
       },
@@ -178,9 +199,9 @@
       "stock":6,
       "ID_categoria": 4,
       "especificacionesJSON": {
-          "capacidad": "8 GB",
+          "capacidad": 8,
           "tipo": "DDR4",
-          "velocidad": "2400 MHz",
+          "velocidad": 2400,
           "latencia": 16,
           "voltaje": "1.2V"
       },
@@ -199,9 +220,9 @@
       "stock":8,
       "ID_categoria": 4,
       "especificacionesJSON": {
-          "capacidad": "8 GB",
+          "capacidad": 8,
           "tipo": "DDR4",
-          "velocidad": "2666 MHz",
+          "velocidad": 2666,
           "latencia": 16,
           "voltaje": "1.2 V"
       },
@@ -423,118 +444,128 @@
     {
       "nombre": "MSI Micro-ATX B450M-A PRO MAX II",
       "modelo": "B450M-A PRO MAX II",
-      "fabricante":"AMD",
-      "descripcion":"La Tarjeta Madre MSI Micro-ATX B450M-A PRO MAX II cuenta con un conector de ventilador CPU y un conector TPM. Dispone de 2 conectores USB 3.0 (3.1 Gen 1) y un chip de sonido Realtek ALC897. Con un ancho de 200 mm, tiene soporte para gráficos discretos y una memoria interna máxima de 64 GB.",
-      "precio":1100,
-      "descuento":0,
-      "stock":15,
+      "fabricante": "MSI",
+      "descripcion": "La Tarjeta Madre MSI Micro-ATX B450M-A PRO MAX II cuenta con un conector de ventilador CPU y un conector TPM. Dispone de 2 conectores USB 3.0 (3.1 Gen 1) y un chip de sonido Realtek ALC897. Con un ancho de 200 mm, tiene soporte para gráficos discretos y una memoria interna máxima de 64 GB.",
+      "precio": 1100,
+      "descuento": 0,
+      "stock": 15,
       "ID_categoria": 3,
       "especificacionesJSON": {
-          "chipset": "AMD B450",
-          "socket": "AM4",
-          "factor_forma": "Micro-ATX",
-          "tipo_memoria": "DDR4",
-          "memoria_maxima": "64 GB",
-          "slots_PCIE": "1 x PCIe 3.0 x16", 
-          "puertos_USB": "2x USB 3.0, 4x USB 2.0"
+        "chipset": "AMD B450",
+        "socket": "AM4",
+        "factor_forma": "Micro-ATX",
+        "tipo_memoria": "DDR4",
+        "memoria_maxima": 64,
+        "velocidad_RAM": 3200,
+        "slots_PCIE": "1 x PCIe 3.0 x16",
+        "puertos_USB": "2x USB 3.0, 4x USB 2.0"
       },
       "url_photo": [
-          "photos/MSI_B450M_A_PRO_MAX_II-1.jpg",
-          "photos/MSI_B450M_A_PRO_MAX_II-2.jpg",
-          "photos/MSI_B450M_A_PRO_MAX_II-3.jpg"]
+        "photos/MSI_B450M_A_PRO_MAX_II-1.jpg",
+        "photos/MSI_B450M_A_PRO_MAX_II-2.jpg",
+        "photos/MSI_B450M_A_PRO_MAX_II-3.jpg"
+      ]
     },
     {
       "nombre": "Gigabyte B760M DS3H DDR4",
       "modelo": "B760M DS3H DDR4",
-      "fabricante":"Gigabyte",
-      "descripcion":"La tarjeta madre Gigabyte Micro-ATX B760M DS3H DDR4 es un componente esencial para la construcción de sistemas de alto rendimiento. Soporta una memoria interna máxima de 128 GB con tecnología DDR4-SDRAM, permitiendo velocidades de reloj de memoria que alcanzan hasta 4933 MHz. Esta placa base cuenta con cuatro ranuras de memoria DIMM, organizadas en un canal de doble canal, lo que optimiza el rendimiento del sistema.",
-      "precio":2300,
-      "descuento":0,
-      "stock":10,
+      "fabricante": "Gigabyte",
+      "descripcion": "La tarjeta madre Gigabyte Micro-ATX B760M DS3H DDR4 es un componente esencial para la construcción de sistemas de alto rendimiento. Soporta una memoria interna máxima de 128 GB con tecnología DDR4-SDRAM, permitiendo velocidades de reloj de memoria que alcanzan hasta 4933 MHz. Esta placa base cuenta con cuatro ranuras de memoria DIMM, organizadas en un canal de doble canal, lo que optimiza el rendimiento del sistema.",
+      "precio": 2300,
+      "descuento": 0,
+      "stock": 10,
       "ID_categoria": 3,
       "especificacionesJSON": {
-          "chipset": "Intel B760",
-          "socket": "S-1700",
-          "factor_forma": "Micro-ATX",
-          "tipo_memoria": "DDR4",
-          "memoria_maxima": "128 GB",
-          "slots_PCIE": "1 x PCIe 5.0 x16", 
-          "puertos_USB": "2x USB 3.2 Gen 2, 4x USB 3.0"
+        "chipset": "Intel B760",
+        "socket": "S-1700",
+        "factor_forma": "Micro-ATX",
+        "tipo_memoria": "DDR4",
+        "memoria_maxima": 128,
+        "velocidad_RAM": 3200,
+        "slots_PCIE": "1 x PCIe 5.0 x16",
+        "puertos_USB": "2x USB 3.2 Gen 2, 4x USB 3.0"
       },
       "url_photo": [
-          "photos/Gigabyte_B760M_DS3H_DDR4-1.jpg",
-          "photos/Gigabyte_B760M_DS3H_DDR4-2.jpg",
-          "photos/Gigabyte_B760M_DS3H_DDR4-3.jpg"]
+        "photos/Gigabyte_B760M_DS3H_DDR4-1.jpg",
+        "photos/Gigabyte_B760M_DS3H_DDR4-2.jpg",
+        "photos/Gigabyte_B760M_DS3H_DDR4-3.jpg"
+      ]
     },
     {
       "nombre": "ASUS PRIME Z790-A WIFI",
       "modelo": "PRIME Z790-A WIFI",
-      "fabricante":"ASUS",
-      "descripcion":"Las motherboards de la serie Prime de ASUS están diseñadas por expertos para liberar todo el potencial de los procesadores Intel® Core™ de 13.ª generación. La PRIME Z790-A WIFI, que consta de un diseño de alimentación resistente, soluciones de refrigeración completas y opciones de ajuste inteligentes, proporciona a usuarios y personas que quieren montar su propio PC una serie de optimizaciones de rendimiento mediante funciones intuitivas de software y firmware.",
-      "precio":5500,
-      "descuento":0,
-      "stock":11,
+      "fabricante": "ASUS",
+      "descripcion": "Las motherboards de la serie Prime de ASUS están diseñadas por expertos para liberar todo el potencial de los procesadores Intel® Core™ de 13.ª generación. La PRIME Z790-A WIFI, que consta de un diseño de alimentación resistente, soluciones de refrigeración completas y opciones de ajuste inteligentes, proporciona a usuarios y personas que quieren montar su propio PC una serie de optimizaciones de rendimiento mediante funciones intuitivas de software y firmware.",
+      "precio": 5500,
+      "descuento": 0,
+      "stock": 11,
       "ID_categoria": 3,
       "especificacionesJSON": {
-          "chipset": "Intel Z790",
-          "socket": "S-1700",
-          "factor_forma": "ATX",
-          "tipo_memoria": "DDR5",
-          "memoria_maxima": "128 GB",
-          "slots_PCIE": "1 x PCIe 5.0 x16", 
-          "puertos_USB": "2x USB 3.2 Gen 2, 4x USB 3.0"
+        "chipset": "Intel Z790",
+        "socket": "S-1700",
+        "factor_forma": "ATX",
+        "tipo_memoria": "DDR5",
+        "memoria_maxima": 128,
+        "velocidad_RAM": 5200,
+        "slots_PCIE": "1 x PCIe 5.0 x16",
+        "puertos_USB": "2x USB 3.2 Gen 2, 4x USB 3.0"
       },
       "url_photo": [
-          "photos/ASUS_PRIME_Z790-A_WIFI-1.jpg",
-          "photos/ASUS_PRIME_Z790-A_WIFI-2.jpg",
-          "photos/ASUS_PRIME_Z790-A_WIFI-3.jpg"]
+        "photos/ASUS_PRIME_Z790-A_WIFI-1.jpg",
+        "photos/ASUS_PRIME_Z790-A_WIFI-2.jpg",
+        "photos/ASUS_PRIME_Z790-A_WIFI-3.jpg"
+      ]
     },
     {
       "nombre": "Gigabyte A520M S2H",
       "modelo": "A520M S2H",
-      "fabricante":"Gigabyte",
-      "descripcion":"En resumen, la tarjeta madre Gigabyte micro ATX A520M S2H es una opción robusta y versátil para quienes buscan construir un sistema basado en procesadores AMD, ofreciendo una amplia gama de características y conectividad para satisfacer diversas necesidades informáticas.",
-      "precio":1500,
-      "descuento":12,
-      "stock":3,
+      "fabricante": "Gigabyte",
+      "descripcion": "En resumen, la tarjeta madre Gigabyte micro ATX A520M S2H es una opción robusta y versátil para quienes buscan construir un sistema basado en procesadores AMD, ofreciendo una amplia gama de características y conectividad para satisfacer diversas necesidades informáticas.",
+      "precio": 1500,
+      "descuento": 12,
+      "stock": 3,
       "ID_categoria": 3,
       "especificacionesJSON": {
-          "chipset": "AMD A520",
-          "socket": "S-AM4",
-          "factor_forma": "Micro-ATX",
-          "tipo_memoria": "DDR4",
-          "memoria_maxima": "64 GB",
-          "slots_PCIE": "1 x PCIe 4.0 x16",
-          "puertos_USB": "2x USB 3.2 Gen 1, 4x USB 2.0"
+        "chipset": "AMD A520",
+        "socket": "S-AM4",
+        "factor_forma": "Micro-ATX",
+        "tipo_memoria": "DDR4",
+        "memoria_maxima": 64,
+        "velocidad_RAM": 3200,
+        "slots_PCIE": "1 x PCIe 4.0 x16",
+        "puertos_USB": "2x USB 3.2 Gen 1, 4x USB 2.0"
       },
       "url_photo": [
-          "photos/Gigabyte_A520M_S2H-1.jpg",
-          "photos/Gigabyte_A520M_S2H-2.jpg", 
-          "photos/Gigabyte_A520M_S2H-3.jpg"] 
+        "photos/Gigabyte_A520M_S2H-1.jpg",
+        "photos/Gigabyte_A520M_S2H-2.jpg",
+        "photos/Gigabyte_A520M_S2H-3.jpg"
+      ]
     },
     {
       "nombre": "Gigabyte Micro ATX B760M AORUS ELITE AX",
       "modelo": "B760M AORUS ELITE AX",
-      "fabricante":"Gigabyte",
-      "descripcion":"La Tarjeta Madre Gigabyte Micro ATX B760M AORUS ELITE AX es una excelente opción para aquellos que buscan un rendimiento confiable y una gran capacidad de expansión en su PC. Con una amplia gama de características y tecnologías avanzadas, esta tarjeta madre ofrece un rendimiento excepcional y una experiencia de usuario mejorada.",
-      "precio":4000,
-      "descuento":25,
-      "stock":10,
+      "fabricante": "Gigabyte",
+      "descripcion": "La Tarjeta Madre Gigabyte Micro ATX B760M AORUS ELITE AX es una excelente opción para aquellos que buscan un rendimiento confiable y una gran capacidad de expansión en su PC. Con una amplia gama de características y tecnologías avanzadas, esta tarjeta madre ofrece un rendimiento excepcional y una experiencia de usuario mejorada.",
+      "precio": 4000,
+      "descuento": 25,
+      "stock": 10,
       "ID_categoria": 3,
       "especificacionesJSON": {
-          "chipset": "Intel B760",
-          "socket": "S-1700",
-          "factor_forma": "Micro-ATX",
-          "tipo_memoria": "DDR5",
-          "memoria_maxima": "192 GB",
-          "slots_PCIE": "1 x PCIe 5.0 x16", 
-          "puertos_USB": "2x USB 3.2 Gen 2x2, 4x USB 3.2 Gen 1"
+        "chipset": "Intel B760",
+        "socket": "S-1700",
+        "factor_forma": "Micro-ATX",
+        "tipo_memoria": "DDR5",
+        "memoria_maxima": 192,
+        "velocidad_RAM": 5600,
+        "slots_PCIE": "1 x PCIe 5.0 x16",
+        "puertos_USB": "2x USB 3.2 Gen 2x2, 4x USB 3.2 Gen 1"
       },
       "url_photo": [
-          "photos/Gigabyte_B760M_AORUS_ELITE_AX-1.jpg",
-          "photos/Gigabyte_B760M_AORUS_ELITE_AX-2.jpg",
-          "photos/Gigabyte_B760M_AORUS_ELITE_AX-3.jpg"]
-    },
+        "photos/Gigabyte_B760M_AORUS_ELITE_AX-1.jpg",
+        "photos/Gigabyte_B760M_AORUS_ELITE_AX-2.jpg",
+        "photos/Gigabyte_B760M_AORUS_ELITE_AX-3.jpg"
+      ]
+    },    
     {
       "nombre": "Cooler Master MWE GOLD 850 V2",
       "modelo": "MWE GOLD 850 V2",
