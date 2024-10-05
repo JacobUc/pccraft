@@ -21,6 +21,13 @@
                     <x-input-error :messages="$errors->get('name')" class="mt-2 text-red-500" />
                 </div>
 
+                <!-- Last Name (Apellidos) -->
+                <div class="mt-4">
+                    <x-input-label for="last_name" :value="__('Apellidos')" class="text-white" />
+                    <x-text-input id="last_name" class="block mt-1 w-full p-2 rounded-md" type="text" name="last_name" :value="old('last_name')" required />
+                    <x-input-error :messages="$errors->get('last_name')" class="mt-2 text-red-500" />
+                </div>
+
                 <!-- Email Address -->
                 <div class="mt-4">
                     <x-input-label for="email" :value="__('Email')" class="text-white" />
