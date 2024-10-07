@@ -53,6 +53,8 @@ Route::post('/logout', [CartController::class, 'logout'])->name('logout');
 Route::get('/shop', [ConfiguradorPCController::class, 'shop'])->name('shop');
 Route::post('/configuradorpc', [ConfiguradorPCController::class, 'index'])->name('configuradorpc.index');
 Route::get('/configuradorpc', [ConfiguradorPCController::class, 'index'])->name('configuradorpc.index');
+Route::post('/configuradorpc/seleccionarProcesador', [ConfiguradorPCController::class, 'seleccionarProcesador'])->name('configuradorpc.seleccionarProcesador');
+Route::post('/configuradorpc/seleccionar-procesador', [ConfiguradorPCController::class, 'seleccionarProcesador'])->name('configuradorpc.seleccionarProcesador');
 Route::post('/configuradorpc/add', [ConfiguradorPCController::class, 'add'])->name('configuradorpc.add');
 Route::post('/configuradorpc/remove', [ConfiguradorPCController::class, 'remove'])->name('configuradorpc.remove');
 Route::post('/configuradorpc/update', [ConfiguradorPCController::class, 'update'])->name('configuradorpc.update');
