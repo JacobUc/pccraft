@@ -67,12 +67,17 @@
                 <tbody>
                     @foreach($orden->productos as $productoOrden)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <td class="px-6 py-4"><img src="{{asset('storage/' . $productoOrden->producto->url_photo)}}" alt="Producto" class="rounded-lg max-w-[80px] max-h-[80px]"></td>
-                        <td class="px-6 py-4">{{ $productoOrden->producto->nombre }}</td>
-                        <td class="px-6 py-4">{{ $productoOrden->ID_Producto }}</td>
-                        <td class="px-6 py-4">{{ $productoOrden->producto->modelo }}</td>
-                        <td class="px-6 py-4">{{ $productoOrden->cantidad }}</td>
-                        <td class="px-6 py-4">${{ $productoOrden->producto->precio }}</td>
+                    <td class="px-6 py-4">
+    @if($productoOrden->url_photo)
+        <img src="{{ asset('storage/' . json_decode($productoOrden->url_photo, true)[0] ) }}" alt="Producto" class="rounded-lg max-w-[80px] max-h-[80px]">
+    @else
+        <span>No disponible</span>
+    @endif
+</td>                        <td class="px-6 py-4">{{ $productoOrden->nombre }}</td>
+                        <td class="px-6 py-4">{{ $productoOrden->pivot->ID_Producto }}</td>
+                        <td class="px-6 py-4">{{ $productoOrden->modelo }}</td>
+                        <td class="px-6 py-4">{{ $productoOrden->pivot->cantidad }}</td>
+                        <td class="px-6 py-4">${{ $productoOrden->pivot->precio }}</td>
                     </tr>
                     @endforeach
                 </tbody>

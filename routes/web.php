@@ -59,3 +59,9 @@ Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remov
 Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
 Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 Route::post('/logout', [CartController::class, 'logout'])->name('logout');
+
+//Rutas para los pagos
+Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout');
+Route::get('/checkout/success', [CartController::class, 'success'])->name('checkout.success');
+Route::get('/checkout/cancel', [CartController::class, 'cancel'])->name('checkout.cancel');
+

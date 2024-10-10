@@ -7,6 +7,12 @@ use Darryldecode\Cart\Facades\CartFacade as Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
+use Stripe\Stripe;
+use Stripe\Checkout\Session as StripeSession;
+use App\Models\Orden;
+use App\Models\Direccion;
+
+
 
 class CartController extends Controller
 {
@@ -179,13 +185,20 @@ class CartController extends Controller
     private function saveCartToDatabase()
     {
         $userId = Auth::id();
-        $cartContent = Cart::session($userId)->getContent()->toJson();
-
-        \DB::table('carts')->updateOrInsert(
-            ['user_id' => $userId],
-            ['content' => $cartContent, 'updated_at' => now()]
-        );
+        $cartContent = Cart::session($userId)->getContent();
+    
+        // Si el carrito está vacío, eliminar el registro de la base de datos
+        if ($cartContent->isEmpty()) {
+            \DB::table('carts')->where('user_id', $userId)->delete();
+        } else {
+            // Si el carrito no está vacío, guardar el contenido en la base de datos
+            \DB::table('carts')->updateOrInsert(
+                ['user_id' => $userId],
+                ['content' => $cartContent->toJson(), 'updated_at' => now()]
+            );
+        }
     }
+    
 
     // Método para cargar el carrito desde la base de datos
     private function loadCartFromDatabase()
@@ -204,5 +217,140 @@ class CartController extends Controller
             }
         }
     }
+
+    public function checkout(Request $request)
+    {
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+    
+        $cartContent = \Cart::session(auth()->id())->getContent();
+    
+        // Verificar productos en el carrito
+        if ($cartContent->isEmpty()) {
+            return redirect()->back()->with('error', 'Tu carrito está vacío.');
+        }
+    
+        // Crear los items para llamar a Stripe
+        $items = [];
+        foreach ($cartContent as $item) {
+            $items[] = [
+                'price_data' => [
+                    'currency' => 'mxn',
+                    'product_data' => [
+                        'name' => $item->name,
+                    ],
+                    'unit_amount' => intval($item->price * 100), // Conversion de stripe
+                ],
+                'quantity' => (int) $item->quantity,
+            ];
+        }
+    
+        if (empty($items)) {
+            return redirect()->back()->with('error', 'No hay productos válidos en el carrito.');
+        }
+    
+        try {
+            // Crear la sesión de Stripe Checkout
+            $checkout_session = StripeSession::create([
+                'payment_method_types' => ['card'],
+                'line_items' => $items,
+                'mode' => 'payment',
+                'success_url' => route('checkout.success'),
+                'cancel_url' => route('checkout.cancel'),
+            ]);
+    
+            // Redirigir al usuario a Stripe Checkout
+            return redirect($checkout_session->url);
+        } catch (\Exception $e) {
+            // Manejo de errores porque no sabia que estaba mal xd
+            \Log::error('Error creando la sesión de Stripe Checkout: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Hubo un problema creando el pago: ' . $e->getMessage());
+        }
+    }
+    
+    
+
+    public function success(Request $request)
+    {
+        $direccion = Direccion::where('ID_Usuario', Auth::id())
+                              ->where('ID_Direccion', 1)
+                              ->first();
+    
+        if (!$direccion) {
+            return redirect()->back()->with('error', 'Error: No se encontró la dirección para esta orden.');
+        }
+    
+        \DB::beginTransaction();
+    
+        try {
+            // Creando la orden
+            $order = new Orden();
+            $order->ID_Usuario = Auth::id();
+            $order->ID_Direccion = $direccion->ID_Direccion;
+            $order->total = \Cart::session(auth()->id())->getTotal();
+            $order->fecha = now();
+            $order->estado = 'pedido';
+            $order->save();
+    
+            if (!$order) {
+                throw new \Exception('Error al crear la orden en la base de datos.');
+            }
+    
+            $cartItems = \Cart::session(auth()->id())->getContent();
+    
+            if ($cartItems->isEmpty()) {
+                throw new \Exception('El carrito de compras está vacío.');
+            }
+    
+            foreach ($cartItems as $item) {
+                $producto = Product::find($item->id);
+    
+                if (!$producto) {
+                    throw new \Exception("El producto con ID {$item->id} no se encontró.");
+                }
+    
+                if ($producto->stock < $item->quantity) {
+                    throw new \Exception("Stock insuficiente para el producto: {$producto->nombre}. Cantidad solicitada: {$item->quantity}, Stock disponible: {$producto->stock}.");
+                }
+    
+                $precioFinal = $item->price;
+                $order->productos()->attach($item->id, [
+                    'cantidad' => $item->quantity,
+                    'precio' => $precioFinal,
+                ]);
+    
+                $producto->stock -= $item->quantity;
+                $producto->vendidos += $item->quantity;
+                $producto->save();
+            }
+    
+            // Limpia el carrito
+            \Cart::session(auth()->id())->clear();
+            \Log::info('Intentando limpiar el carrito de la base de datos para el usuario ' . auth()->id());
+
+            $result = \DB::table('carts')->where('user_id', auth()->id())->delete();
+            \Log::info('El carrito se ha limpiado correctamente para el usuario ' . auth()->id());
+            if ($result) {
+                \Log::info('El carrito se ha limpiado correctamente en la base de datos para el usuario ' . auth()->id());
+            } else {
+                \Log::warning('No se encontró un carrito para el usuario ' . auth()->id() . ' en la base de datos, por lo que no se realizó ninguna eliminación.');
+            }
+            // Confirmando la transacción
+            \DB::commit();
+    
+            return view('checkout.success');
+    
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            return redirect()->route('checkout.cancel')->with('error', 'Hubo un error procesando tu orden: ' . $e->getMessage());
+        }
+    }
+    
+    
+
+    public function cancel()
+    {
+        return view('checkout.cancel');
+    }
+
 }
 
