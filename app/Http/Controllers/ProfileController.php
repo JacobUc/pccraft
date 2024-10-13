@@ -25,6 +25,26 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function updateProfile(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'cellphone' => 'nullable|string|max:15',
+        ]);
+    
+        $user = $request->user();
+        $user->update([
+            'name' => $request->input('name'),
+            'last_name' => $request->input('last_name'),
+            'email' => $request->input('email'),
+            'cellphone' => $request->input('cellphone'),
+        ]);
+    
+        return Redirect::route('profile.update')->with('status', '¡Información del perfil actualizada correctamente!');
+    }    
+
     /**
      * Show the update form for the profile (including adding addresses).
      */
@@ -42,16 +62,15 @@ class ProfileController extends Controller
     public function updatePassword(Request $request)
     {
         $request->validate([
-            'password' => 'required|min:8|confirmed', // La validación de 'confirmed' requiere que exista un campo `password_confirmation`
+            'password' => 'required|min:8|confirmed', // Si las contraseñas no coinciden, Laravel arroja un error automáticamente.
         ]);
-
-        // Actualizar la contraseña del usuario
+    
         $user = $request->user();
         $user->password = bcrypt($request->password); // Encriptar la nueva contraseña
         $user->save();
-
-        return Redirect::route('profile.update')->with('status', 'password-updated');
-    }
+    
+        return Redirect::route('profile.update')->with('status', '¡Contraseña actualizada correctamente!');
+    }    
 
     /**
      * Add a new address for the user.
@@ -84,7 +103,7 @@ class ProfileController extends Controller
             'is_default' => false,  // Esta nueva dirección no será predeterminada
         ]);
 
-        return Redirect::route('profile.update')->with('status', 'address-added');
+        return Redirect::route('profile.update')->with('status', '¡Dirección agregada correctamente!');
     }
 
     /**
@@ -122,7 +141,7 @@ class ProfileController extends Controller
         // Actualizar la dirección
         $direccion->update($validatedData);
 
-        return Redirect::route('profile.update')->with('status', 'address-updated');
+        return Redirect::route('profile.update')->with('status', '¡Dirección actualizada correctamente!');
     }
 
     /**
@@ -143,7 +162,7 @@ class ProfileController extends Controller
         // Eliminar la dirección
         $direccion->delete();
 
-        return Redirect::route('profile.update')->with('status', 'address-deleted');
+        return Redirect::route('profile.update')->with('status', '¡La Dirección se ha eliminado correctamente!');
     }
 
     /**
@@ -162,7 +181,7 @@ class ProfileController extends Controller
         // Marcar la dirección seleccionada como predeterminada
         $direccion->update(['is_default' => true]);
     
-        return Redirect::route('profile.edit')->with('status', 'default-address-updated');
+        return Redirect::route('profile.edit')->with('status', '¡La Dirección Predetermianda actualizada correctamente!');
     }
 
     /**

@@ -9,6 +9,24 @@
     </h2>
 </x-slot>
 
+<!-- Mensajes de éxito o error -->
+@if (session('status'))
+    <div class="bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3" role="alert">
+        <p class="font-bold">{{ session('status') }}</p>
+    </div>
+@endif
+
+@if ($errors->any())
+    <div class="bg-red-100 border-t border-b border-red-500 text-red-700 px-4 py-3" role="alert">
+        <p class="font-bold">Hubo algunos problemas con tu entrada:</p>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <!-- Aumentar el ancho máximo del contenedor principal -->
 <div class="flex max-w-6xl w-full mx-auto px-6 lg:px-8 space-x-6">
     <!-- Sidebar (Fijo a la izquierda) -->
