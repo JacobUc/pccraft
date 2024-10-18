@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Ecommerce\BuscadorProductsController;
 use App\Http\Controllers\Ecommerce\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Ecommerce\Cart\CartController;
@@ -22,6 +23,10 @@ Route::get('/', function () {
     
 })->name('home');
 
+// Buscador productos
+Route::get('buscador', [BuscadorProductsController::class, 'index'])->name('productos.buscador');
+// Producto segun categorias
+Route::get('productos/categoria/{category}', [BuscadorProductsController::class, 'categorias'])->name('productos.categorias');
 
 // Mostrar los productos individualmente
 Route::get('/productos/{product}', [ProductController::class, 'index'] );

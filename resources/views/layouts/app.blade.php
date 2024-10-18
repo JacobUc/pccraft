@@ -25,19 +25,21 @@
 
                 {{-- Navbar --}}
                 <nav class="flex justify-between gap-16">
-                    <a href="#">Productos</a>
+                    <a href="{{ route('productos.buscador') }}">Productos</a>
                     <a href="#">Nosotros</a>
                     <a href="{{ route('faqs.index') }}">Soporte</a>
                 </nav>
 
                 <div class="flex justify-between">
                     {{-- Barra de Busqueda --}}
-                    <form action="" method="get">
+                    <form action="{{route('productos.buscador')}}" method="get">
                         <input type="text" 
-                            name="search-bar" 
+                            name="search" 
                             id="search-bar"
-                            placeholder="Buscar componente"
-                            class="w-80 h-10 rounded-lg text-sm placeholder:text-slate-400 placeholder:text-sm"
+                            placeholder="¿Qué producto estás buscando?"
+                            class="w-80 h-10 rounded-lg text-sm text-slate-600 placeholder:text-slate-400 placeholder:text-sm"
+                            value="{{ $productToSearch ?? '' }}"
+                            required
                         >
                         <button type="submit" class="ml-1 bg-azul rounded-xl shadow-lg">
                             <i class="fa-solid fa-magnifying-glass p-2 text-white"></i>
@@ -65,10 +67,10 @@
                     </button>
                     
                     <div id="auth-menu" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
-                    {{-- 
-<a href="{{ route('perfil') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Perfil</a>
-<a href="{{ route('pedidos') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Pedido</a>
---}}
+                 
+                        <a href="{{ route('perfil') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Perfil</a>
+                        <a href="{{ route('pedidos') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Pedido</a>
+
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit" class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Salir</button>
