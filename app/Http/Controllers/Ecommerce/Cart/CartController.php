@@ -11,6 +11,8 @@ use Stripe\Stripe;
 use Stripe\Checkout\Session as StripeSession;
 use App\Models\Orden;
 use App\Models\Direccion;
+use App\Mail\OrderConfirmationMail;
+use Illuminate\Support\Facades\Mail;
 
 
 
@@ -272,7 +274,7 @@ class CartController extends Controller
     public function success(Request $request)
     {
         $direccion = Direccion::where('ID_Usuario', Auth::id())
-                              ->where('ID_Direccion', 1)
+                              ->where('ID_Direccion', 6)
                               ->first();
     
         if (!$direccion) {
@@ -336,7 +338,7 @@ class CartController extends Controller
             }
             // Confirmando la transacción
             \DB::commit();
-    
+            Mail::to(Auth::user()->email)->send(new OrderConfirmationMail($order, $cartItems));
             return view('checkout.success');
     
         } catch (\Exception $e) {
