@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use Stripe\Stripe;
+use Stripe\Customer;
 use Stripe\Checkout\Session as StripeSession;
 use App\Models\Orden;
 use App\Models\Direccion;
@@ -222,8 +223,15 @@ class CartController extends Controller
 
     public function checkout(Request $request)
     {
-        Stripe::setApiKey(env('STRIPE_SECRET'));
-    
+        $stripeKey = env('STRIPE_SECRET');  // Aquí se carga la clave secreta
+
+    if (!$stripeKey) {
+        \Log::error('Stripe key is missing');
+        dd($stripeKey); // Esto mostrará si la clave está siendo obtenida o si es null
+    }
+
+    Stripe::setApiKey($stripeKey);
+
         $cartContent = \Cart::session(auth()->id())->getContent();
     
         // Verificar productos en el carrito
@@ -249,14 +257,14 @@ class CartController extends Controller
         if (empty($items)) {
             return redirect()->back()->with('error', 'No hay productos válidos en el carrito.');
         }
-    
+        
         try {
             // Crear la sesión de Stripe Checkout
             $checkout_session = StripeSession::create([
                 'payment_method_types' => ['card'],
                 'line_items' => $items,
                 'mode' => 'payment',
-                'success_url' => route('checkout.success'),
+                'success_url' => route('checkout.success') . '?session_id={CHECKOUT_SESSION_ID}',
                 'cancel_url' => route('checkout.cancel'),
             ]);
     
@@ -273,6 +281,24 @@ class CartController extends Controller
 
     public function success(Request $request)
     {
+        $stripeKey = env('STRIPE_SECRET');
+        Stripe::setApiKey($stripeKey);  // Establecer la clave secreta
+
+        $sessionId = $request->get('session_id');
+
+        if (!$sessionId) {
+            return redirect()->route('checkout.cancel')->with('error', 'No se pudo obtener el ID de la sesión de Stripe.');
+        }
+
+        // Recuperar la sesión de Stripe
+        $checkout_session = StripeSession::retrieve($sessionId);
+
+        // Obtener el Payment Intent ID
+        $paymentIntentId = $checkout_session->payment_intent;
+
+        if (!$paymentIntentId) {
+            return redirect()->route('checkout.cancel')->with('error', 'No se pudo obtener el ID del pago de Stripe.');
+        }
         $direccion = Direccion::where('ID_Usuario', Auth::id())
                               ->where('ID_Direccion', 6)
                               ->first();
@@ -280,10 +306,11 @@ class CartController extends Controller
         if (!$direccion) {
             return redirect()->back()->with('error', 'Error: No se encontró la dirección para esta orden.');
         }
-    
+       
         \DB::beginTransaction();
     
         try {
+           
             // Creando la orden
             $order = new Orden();
             $order->ID_Usuario = Auth::id();
@@ -291,6 +318,7 @@ class CartController extends Controller
             $order->total = \Cart::session(auth()->id())->getTotal();
             $order->fecha = now();
             $order->estado = 'pedido';
+            $order->stripe_id = $paymentIntentId;
             $order->save();
     
             if (!$order) {

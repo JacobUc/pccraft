@@ -18,7 +18,8 @@ class Orden extends Model
         'fecha',
         'total',
         'estado',
-        'agregada'
+        'agregada',
+        'stripe_id' 
     ];
 
     public $timestamps = false;
