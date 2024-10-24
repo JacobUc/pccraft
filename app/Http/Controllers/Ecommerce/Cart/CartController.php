@@ -300,11 +300,11 @@ class CartController extends Controller
             return redirect()->route('checkout.cancel')->with('error', 'No se pudo obtener el ID del pago de Stripe.');
         }
         $direccion = Direccion::where('ID_Usuario', Auth::id())
-                              ->where('ID_Direccion', 6)
-                              ->first();
-    
+        ->where('is_default', 1)
+        ->first();
+
         if (!$direccion) {
-            return redirect()->back()->with('error', 'Error: No se encontró la dirección para esta orden.');
+        return redirect()->back()->with('error', 'Error: No se encontró una dirección por defecto para esta orden.');
         }
        
         \DB::beginTransaction();
