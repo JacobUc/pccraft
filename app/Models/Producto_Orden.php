@@ -13,7 +13,9 @@ class Producto_Orden extends Model
     protected $fillable = [
         'ID_Producto',
         'ID_Orden',
+        'ID_Review',
         'cantidad',
+        'precio',
         'calificacion',
         'resena',
         'agregado'
@@ -22,8 +24,15 @@ class Producto_Orden extends Model
     {
         return $this->belongsTo(Product::class, 'ID_Producto', 'ID_Producto');
     }
+
     public function orden()
     {
         return $this->belongsTo(Orden::class, 'ID_Orden', 'ID_Orden');
     }
+
+    public function review()
+    {
+        return $this->belongsTo(Review::class, 'ID_Review');
+    }
+
 }

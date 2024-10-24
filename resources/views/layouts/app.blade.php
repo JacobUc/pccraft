@@ -19,11 +19,11 @@
 
         <header class="p-5 border-b bg-white shadow">
             <div class="max-w-screen-lg container mx-auto flex justify-between items-center font-['roboto'] font-medium text-sm">
-                <a href=" {{ route('home') }} ">
+                <a href="{{ route('home') }}">
                     <img class="w-16" src="{{ asset('img/logo.png') }}" alt="Imagen Logo">
                 </a>
 
-                {{-- navbvar --}}
+                {{-- Navbar --}}
                 <nav class="flex justify-between gap-16">
                     <a href="#">Productos</a>
                     <a href="#">Nosotros</a>
@@ -39,62 +39,50 @@
                             placeholder="Buscar componente"
                             class="w-80 h-10 rounded-lg text-sm placeholder:text-slate-400 placeholder:text-sm"
                         >
-                        <button type="submit" class="ml-1 bg-azul rounded-xl shadow-lg"> {{-- !Cambiar color  --}}
+                        <button type="submit" class="ml-1 bg-azul rounded-xl shadow-lg">
                             <i class="fa-solid fa-magnifying-glass p-2 text-white"></i>
                         </button>
                     </form>
                 </div>
 
-                <div class="">
-                    <a href="#"> 
-                        <i class="fa-lg fa-regular fa-user cursor-pointer"></i> 
-                    </a>
-                </div>
+                {{-- Menú de usuario --}}
+                <div class="relative">
+                    @guest
+                    {{-- Menú para usuarios no autenticados --}}
+                    <button id="user-menu-button" class="flex items-center text-gray-700 hover:text-gray-900 focus:outline-none">
+                        <i class="fa-lg fa-regular fa-user cursor-pointer"></i>
+                    </button>
+                    <div id="user-menu" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
+                        <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Iniciar Sesión</a>
+                        <a href="{{ route('register') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Registrarse</a>
+                    </div>
+                    @endguest
 
-                {{-- Revisa si un usuario esta autenticado --}}
-                {{-- @auth
-                    <nav class="flex gap-2 items-center">
-                        <a 
-                        class="flex items-center gap-2 bg-white border p-2 text-gray-600 rounded text-sm uppercase font-bold " 
-                        href="{{ route('pedidos') }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
-                            </svg>
-                              
-                            Crear
-                        </a>
-                        <a 
-                        class="font-bold text-gray-600 text-sm" 
-                        href="{{ route('posts.index', auth()->user()->name ) }}">
-                            Hola:
-                            <span class="font-normal">
-                                {{ auth()->user()->username }}
-                            </span>
-                        </a>
-                        <form method="POST" action="{{ route('pedidos') }}">
+                    @auth
+                    {{-- Menú para usuarios autenticados --}}
+                    <button id="auth-menu-button" class="flex items-center text-gray-700 hover:text-gray-900 focus:outline-none">
+                        <i class="fa-lg fa-regular fa-user cursor-pointer"></i>
+                    </button>
+                    
+                    <div id="auth-menu" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
+                        
+                    <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Perfil</a>
+{{-- 
+<a href="{{ route('pedidos') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Pedido</a>
+--}}
+                        <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="font-bold uppercase text-gray-600 text-sm">
-                                Cerrar Sesion
-                            </button>
+                            <button type="submit" class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Salir</button>
                         </form>
-                    </nav>
-                @endauth --}}
-
-                {{-- @guest
-                    <nav class="flex gap-2 items-center">
-                        <a class="font-bold uppercase text-gray-600 text-sm" href="{{ route('pedidos') }}">Login</a>
-                        <a class="font-bold uppercase text-gray-600 text-sm" href="{{ route('pedidos') }}">Crear Cuenta</a>
-                        <a href="">Caquita</a>
-                    </nav>
-                @endguest --}}
+                    </div>
+                    @endauth
+                </div>
 
                 <div class="">
                     <a href="#"> 
                         <i class="fa-solid fa-cart-shopping fa-lg cursor-pointer"></i>
                     </a>
                 </div>
-
             </div>
         </header>
 
@@ -105,13 +93,13 @@
         <footer class="bg-negro text-center p-7 pb-10 text-xs text-white font-['poppins']">
              
             <div class="flex justify-center ">
-                <img src="{{asset('img/logo-sf.png')}}" 
+                <img src="{{ asset('img/logo-sf.png') }}" 
                     alt="Imagen Logo"
                     class="w-24 mt-2 mb-9"
                 >
             </div>
             
-            {{-- 3 columnas Redes y datos--}}
+            {{-- 3 columnas Redes y datos --}}
             <div class="flex flex-row justify-center text-left gap-10">
                 <ul class="list-disc w-40">
                     {{-- !Actualizar links --}}
@@ -147,5 +135,28 @@
         </footer>
 
         <script src="https://kit.fontawesome.com/5a52c5581a.js" crossorigin="anonymous"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Desplegar menú para usuarios no autenticados
+                const userMenuButton = document.getElementById('user-menu-button');
+                const userMenu = document.getElementById('user-menu');
+
+                if (userMenuButton) {
+                    userMenuButton.addEventListener('click', function () {
+                        userMenu.classList.toggle('hidden');
+                    });
+                }
+
+                // Desplegar menú para usuarios autenticados
+                const authMenuButton = document.getElementById('auth-menu-button');
+                const authMenu = document.getElementById('auth-menu');
+
+                if (authMenuButton) {
+                    authMenuButton.addEventListener('click', function () {
+                        authMenu.classList.toggle('hidden');
+                    });
+                }
+            });
+        </script>
     </body>
 </html>
