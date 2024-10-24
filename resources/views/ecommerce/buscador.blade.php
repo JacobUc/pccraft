@@ -11,7 +11,7 @@
                 {{-- Formulario Filtros --}}
                 <div class="mt-2">
                     <h2 class="text-2xl text-azul font-semibold">Filtros</h2>
-                    <form method="GET" id="filterForm">
+                    <form id="filterForm" method="GET">
                         {{-- Ordenar --}}
                         <div class="mt-1.5 flex flex-col gap-2">
                             <label for="order-by" class="text-lg font-medium">Ordenar por</label>
@@ -41,6 +41,13 @@
                                 <label for="max-price">Precio Máximo</label>
                                 <input class="mt-0.5 py-2 text-xs rounded" type="number" name="max-price" id="max-price" min="0" value="{{ $maxPrice }}">
                             </div>
+                            {{-- Alerta --}}
+                            <div id="alerta-precioMin-incorrecto" class="hidden duration-500 mt-3 flex items-center p-3 border border-red-200 text-red-800 rounded-lg bg-red-50 text-sm hover:bg-red-400 hover:text-white" role="alert">
+                                <span class="sr-only">Info</span>
+                                <div class="ms-3 text-xs">
+                                    El valor del precio mínimo debe ser <span class="font-semibold">menor</span> que el valor del precio máximo.
+                                </div>
+                            </div>
                         </div>
 
                         {{--  !Campo de búsqueda por nombre/modelo --}}
@@ -48,7 +55,7 @@
                         
                         {{-- Boton Aplicar filtros y Reset Filtros--}}
                         <div class="mt-4 flex flex-col justify-center gap-3">
-                            <button type="submit" class="py-2 px-4 bg-white text-sm border border-azul rounded-lg text-azul shadow hover:shadow-xl duration-500 hover:bg-azul hover:text-white">
+                            <button type="submit" id="btn-submit-filterForm" class="py-2 px-4 bg-white text-sm border border-azul rounded-lg text-azul shadow hover:shadow-xl duration-500 hover:bg-azul hover:text-white">
                                 <i class="fa-solid fa-filter"></i>
                                 <span>Aplicar Filtros</span>
                             </button>
@@ -210,3 +217,56 @@
         </div>
     </div>
 @endsection
+
+{{-- Validacion Filtrado Precio --}}
+<script>
+    document.addEventListener('DOMContentLoaded', (e) => {
+        validarCampoPrecio();
+    });
+
+    function validarCampoPrecio(){
+        const precioMin = document.getElementById('min-price');
+        const precioMax = document.getElementById('max-price');
+
+        precioMin.addEventListener('input', function(e){
+            const precioMinimo = parseFloat(e.target.value);
+            const precioMaximo = parseFloat(precioMax.value);
+            const btnEnviar = document.getElementById('btn-submit-filterForm');
+            const alerta = document.getElementById('alerta-precioMin-incorrecto'); 
+
+            if( precioMinimo > precioMaximo || isNaN(precioMinimo) || isNaN(precioMaximo) ){
+                // Mostrar la alerta y Deshabilitar el btn enviar
+                alerta.classList.remove('hidden');
+                btnEnviar.setAttribute("disabled", true);
+                btnEnviar.classList.remove('hover:bg-azul');
+                btnEnviar.classList.add('bg-gray-400', 'border-gray-800', 'text-neutral-500', 'hover:bg-gray-600');
+            }else{
+                // Habilitar botón y restaurar los estilos originales cuando la validación es correcta
+                alerta.classList.add('hidden');
+                btnEnviar.removeAttribute("disabled");
+                btnEnviar.classList.remove('bg-gray-400', 'border-gray-800', 'text-neutral-500', 'hover:bg-gray-600');
+                btnEnviar.classList.add('hover:bg-azul');
+            }
+        });
+
+        precioMax.addEventListener('input', function(e){
+            const precioMinimo = parseFloat(precioMin.value);
+            const precioMaximo = parseFloat(e.target.value);
+            const btnEnviar = document.getElementById('btn-submit-filterForm');
+            const alerta = document.getElementById('alerta-precioMin-incorrecto');
+
+            if( precioMinimo > precioMaximo || isNaN(precioMinimo) || isNaN(precioMaximo) ){
+                alerta.classList.remove('hidden');
+                btnEnviar.setAttribute("disabled", true);
+                btnEnviar.classList.remove('hover:bg-azul');
+                btnEnviar.classList.add('bg-gray-400', 'border-gray-800', 'text-neutral-500', 'hover:bg-gray-600');
+            }else{
+                // Habilitar botón y restaurar los estilos originales cuando la validación es correcta
+                alerta.classList.add('hidden');
+                btnEnviar.removeAttribute("disabled");
+                btnEnviar.classList.remove('bg-gray-400', 'border-gray-800', 'text-neutral-500', 'hover:bg-gray-600');
+                btnEnviar.classList.add('hover:bg-azul');
+            }
+        });
+    }
+</script>
