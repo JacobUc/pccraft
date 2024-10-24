@@ -9,6 +9,10 @@ use App\Models\Producto_Orden;
 use App\Models\Direccion;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Mail\OrderShippedMail;
+use App\Mail\OrderDeliveredMail;
+use App\Mail\OrderCancelledMail;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -101,9 +105,36 @@ class OrderController extends Controller
 
         // Actualizar el estado de la orden
         $orden = Orden::findOrFail($id);
-        $orden->estado = $request->estado;
-        $orden->save();
+        //evitar que toquen el front y engañar
+        if (in_array($orden->estado, ['entregado', 'cancelado'])) {
+            return redirect()->route('pedidos.index')->with('error', 'No puedes cambiar un pedido que ya ha sido entregado o cancelado.');
+        }
 
+        $orden->estado = $request->estado;
+        // se pudo unir el switch, si. pero primero guardar los datos en la bd para luego mandar correos no?
+        switch ($request->estado) {
+            case 'enviado':
+                $orden->fecha_enviado = now();
+                break;
+            case 'entregado':
+                $orden->fecha_entregado = now();
+                break;
+            case 'cancelado':
+                $orden->fecha_cancelado = now();
+                break;
+        }
+        $orden->save();
+        switch ($orden->estado) {
+            case 'enviado':
+                Mail::to($orden->usuario->email)->send(new OrderShippedMail($orden));
+                break;
+            case 'entregado':
+                Mail::to($orden->usuario->email)->send(new OrderDeliveredMail($orden));
+                break;
+            case 'cancelado':
+                Mail::to($orden->usuario->email)->send(new OrderCancelledMail($orden));
+                break;
+        }
         return redirect()->route('pedidos.index')->with('success', '¡Estado del Pedido Actualizado Exitosamente!');
     }
 

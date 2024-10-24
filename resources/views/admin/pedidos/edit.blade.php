@@ -22,6 +22,7 @@
                         <th scope="col" class="px-6 py-3">Dirección</th>
                         <th scope="col" class="px-6 py-3">Total a pagar</th>
                         <th scope="col" class="px-6 py-3">Estado</th>
+                        <th scope="col" class="px-6 py-3">Stripe ID</th> <!-- REFERENCIA STRIPE -->
                     </tr>
                 </thead>
                 <tbody>
@@ -34,16 +35,34 @@
                             <form action="{{ route('pedidos.update', $orden->ID_Orden) }}" method="POST" class="flex flex-col">
                                 @csrf
                                 @method('PATCH')
-                                <!-- Se aplica la misma clase de ancho al select y al botón -->
-                                <select name="estado" class="form-control text-center w-40 px-3 py-2 border rounded-lg">
-                                    <option class="text-center" value="pedido" {{ $orden->estado == 'pedido' ? 'selected' : '' }}>Pedido</option>
-                                    <option class="text-center" value="enviado" {{ $orden->estado == 'enviado' ? 'selected' : '' }}>Enviado</option>
-                                    <option class="text-center" value="entregado" {{ $orden->estado == 'entregado' ? 'selected' : '' }}>Entregado</option>
-                                    <option class="text-center" value="cancelado" {{ $orden->estado == 'cancelado' ? 'selected' : '' }}>Cancelado</option>
+
+                                <!-- Si el estado es 'entregado' o 'cancelado', deshabilitar la selección -->
+                                <select name="estado" class="form-control text-center w-40 px-3 py-2 border rounded-lg"
+                                    @if($orden->estado == 'entregado' || $orden->estado == 'cancelado') disabled @endif>
+                                    
+                                    <!-- Estado pedido solo disponible si el estado actual es 'pedido' -->
+                                    @if($orden->estado == 'pedido')
+                                        <option value="pedido" {{ $orden->estado == 'pedido' ? 'selected' : '' }}>Pedido</option>
+                                        <option value="enviado">Enviado</option>
+                                        <option value="cancelado">Cancelado</option>
+                                    @elseif($orden->estado == 'enviado')
+                                        <!-- Estado enviado no permite volver a 'pedido', pero sí a 'entregado' o 'cancelado' -->
+                                        <option value="enviado" {{ $orden->estado == 'enviado' ? 'selected' : '' }}>Enviado</option>
+                                        <option value="entregado">Entregado</option>
+                                        <option value="cancelado">Cancelado</option>
+                                    @else
+                                        <!-- Si ya está en 'entregado' o 'cancelado', no se puede cambiar -->
+                                        <option value="{{ $orden->estado }}" selected>{{ ucfirst($orden->estado) }}</option>
+                                    @endif
                                 </select>
-                                <button type="submit" class="btn btn-primary mt-2 w-40 text-center px-3 py-2 border rounded-lg">Actualizar</button>
+
+                                <!-- Ocultar el botón "Actualizar" si el estado es 'entregado' o 'cancelado' -->
+                                @if($orden->estado != 'entregado' && $orden->estado != 'cancelado')
+                                    <button type="submit" class="btn btn-primary mt-2 w-40 text-center px-3 py-2 border rounded-lg">Actualizar</button>
+                                @endif
                             </form>
-                        </td>                        
+                        </td>
+                        <td class="px-6 py-4">{{ $orden->stripe_id ?? 'No disponible' }}</td> <!-- REFERENCIA DONDE ESTÁ STRIPE -->                       
                     </tr>
                 </tbody>
             </table>
