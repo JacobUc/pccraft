@@ -15,6 +15,12 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function productos()
+{
+    return $this->belongsToMany(Product::class, 'producto__ordens')
+                ->withPivot('cantidad', 'precio');
+}
+
     public function index(Request $request)
     {
         $query = Orden::query();
@@ -34,19 +40,10 @@ class OrderController extends Controller
             $query->where('estado', $request->estado);
         }
 
-        // Buscar por id orden
+        // Buscar por ID de orden
         if ($request->filled('search')) {
             $query->where('ID_Orden', $request->search);
-        }      
-
-        /*
-        if ($request->filled('search')) {
-            // Realiza la búsqueda en la relación con la tabla de usuarios
-            $query->whereHas('usuario', function($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->input('search') . '%');
-            });
         }
-        */
 
         // Obtener los resultados con paginación
         $ordenes = $query->paginate(10);
@@ -59,7 +56,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        // Lógica para crear un nuevo pedido si es necesario
     }
 
     /**
@@ -67,15 +64,18 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Aquí se puede implementar la lógica de creación de una nueva orden
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
+        // Mostrar detalles de la orden y los productos relacionados
+        $orden = Orden::with('productos')->findOrFail($id);
 
+        return view('admin.pedidos.show', compact('orden'));
     }
 
     /**
@@ -83,6 +83,7 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
+        // Mostrar formulario para editar la orden
         $orden = Orden::findOrFail($id);
 
         return view('admin.pedidos.edit', compact('orden'));
@@ -93,22 +94,28 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Validar el estado que será actualizado
         $request->validate([
             'estado' => 'required|in:pedido,enviado,entregado,cancelado',
         ]);
-    
+
+        // Actualizar el estado de la orden
         $orden = Orden::findOrFail($id);
         $orden->estado = $request->estado;
-        $orden->save();  // Cambia esto
-    
+        $orden->save();
+
         return redirect()->route('pedidos.index')->with('success', '¡Estado del Pedido Actualizado Exitosamente!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        // Eliminar la orden de forma segura
+        $orden = Orden::findOrFail($id);
+        $orden->delete();
+
+        return redirect()->route('pedidos.index')->with('success', '¡Orden eliminada correctamente!');
     }
 }
