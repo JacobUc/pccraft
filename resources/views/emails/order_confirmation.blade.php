@@ -17,20 +17,21 @@
     @foreach ($cartItems as $item)
                 <tr>
                     <!-- Producto y detalles -->
-                    <td style="padding: 8px; border: 1px solid #dddddd;">
+                    <li>
                         <div style="display: flex; align-items: center;">
-                            @if ($item->photo)
-                                <img src="{{ asset('storage/' . $item->photo) }}" alt="Producto" style="width: 80px; height: 80px; margin-right: 10px;">
-                            @else
-                                <p>No hay imagen disponible</p>
-                            @endif
+                        @if ($item->photo_cid)
+                    <!-- Utilizar el CID para incrustar la imagen en el correo -->
+                    <img src="cid:{{ $item->photo_cid }}" alt="Producto" style="width: 80px; height: 80px; margin-right: 10px;">
+                @else
+                    <p>No hay imagen disponible</p>
+                @endif
                             <div>
                                 <b>{{ $item->name }}</b><br>
                                 Modelo: {{ $item->attributes->model }}<br>
                                 Fabricante: {{ $item->attributes->manufacturer }}
                             </div>
                         </div>
-                    </td>
+                    </li>
 
                     <!-- Precio del producto -->
                     <td style="padding: 8px; border: 1px solid #dddddd;">

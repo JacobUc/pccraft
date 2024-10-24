@@ -352,7 +352,8 @@ class CartController extends Controller
                 $producto->vendidos += $item->quantity;
                 $producto->save();
             }
-    
+            Mail::to(Auth::user()->email)->send(new OrderConfirmationMail($order, $cartItems));
+
             // Limpia el carrito
             \Cart::session(auth()->id())->clear();
             \Log::info('Intentando limpiar el carrito de la base de datos para el usuario ' . auth()->id());
@@ -366,7 +367,6 @@ class CartController extends Controller
             }
             // Confirmando la transacción
             \DB::commit();
-            Mail::to(Auth::user()->email)->send(new OrderConfirmationMail($order, $cartItems));
             return view('checkout.success');
     
         } catch (\Exception $e) {
