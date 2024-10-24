@@ -18,15 +18,18 @@ class Direccion extends Model
         'cruzamientos',
         'numero_exterior',
         'numero_interior',
-        'detalles'
+        'detalles',
+        'is_default',
     ];
 
     public function usuario()
     {
-        return $this->belongsTo(User::class, 'ID_Usuario');
+        return $this->belongsTo(User::class, 'ID_Usuario', 'id');
     }
     public function ordenes()
     {
         return $this->hasMany(Order::class, 'ID_Direccion');
     }
+
+    public $timestamps = false;  // Si tu tabla de direcciones no tiene columnas created_at/updated_at
 }
