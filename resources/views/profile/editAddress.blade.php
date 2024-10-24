@@ -18,6 +18,7 @@
             </li>
         </ul>
     </div>
+    
 
     <!-- Formulario de edición de dirección -->
     <div class="bg-white shadow sm:rounded-lg p-6 flex-grow">
