@@ -70,17 +70,25 @@
                 <h2 class="text-2xl font-medium">{{ $product->nombre }}</h2>
                 <p class="mt-1.5 text-zinc-400">MODELO: {{ $product->modelo }}</p>
                 <a href="#detalles-comentarios" class="mt-2 flex items-center">
-                    <span class="text-xs text-amber-500">
-                        @if ($product->avgRaiting)
-                            @for ($i = round($product->avgRaiting); $i < $count; $i++)
-                                <i class="fa-solid fa-star"></i>
-                            @endfor
-                            <span class="text-sm text-black font-medium">{{$product->avgRaiting}}</span>
-                            <p class="ml-2 font-['roboto'] font-bold text-xs text-zinc-500 hover:text-azul">{{$product->total_comentarios}} calificaciones</p>
-                        @else
-                            <span class="text-sm text-black font-medium">0 calificaciones</span>
-                        @endif
-                    </span>
+                <span class="text-xs text-amber-500">
+                    @if ($product->avgRaiting)
+                        @php
+                            $count = round($product->avgRaiting); // Define $count basado en la calificación promedio
+                        @endphp
+
+                        @for ($i = 0; $i < $count; $i++)
+                            <i class="fa-solid fa-star"></i>
+                        @endfor
+
+                        <span class="text-sm text-black font-medium">{{$product->avgRaiting}}</span>
+                        <p class="ml-2 font-['roboto'] font-bold text-xs text-zinc-500 hover:text-azul">
+                            {{$product->total_comentarios}} calificaciones
+                        </p>
+                    @else
+                        <span class="text-sm text-black font-medium">0 calificaciones</span>
+                    @endif
+                </span>
+
                 </a>
                 <p class="mt-5 font-['roboto'] text-2xl font-medium">
                     <span>${{ $product->precio_final }} MXN</span>

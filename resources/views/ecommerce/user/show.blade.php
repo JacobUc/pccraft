@@ -74,6 +74,7 @@
                         <th class="px-6 py-3">Cantidad</th>
                         <th class="px-6 py-3">Precio Unitario</th>
                         <th class="px-6 py-3">Subtotal</th>
+                        <th class="px-6 py-3">Acciones</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white">
@@ -90,11 +91,36 @@
                         <td class="px-6 py-4">{{ $producto->pivot->cantidad }}</td>
                         <td class="px-6 py-4">{{ number_format($producto->pivot->precio, 2) }} MXN</td>
                         <td class="px-6 py-4">{{ number_format($producto->pivot->cantidad * $producto->pivot->precio, 2) }} MXN</td>
+
+                        <!-- Columna de Acciones -->
+                        <td class="px-6 py-4">
+                        @if ($order->estado == 'entregado')
+                            <!-- Si no tiene reseña (ID_Review está vacío) -->
+                            @if (is_null($producto->pivot->ID_Review))
+                                <a href="{{ route('comment.index', ['orderId' => $order->ID_Orden, 'productId' => $producto->pivot->ID_Producto]) }}" class="text-blue-500 hover:underline">Reseñar</a>
+                            @else
+                                <!-- Verificar si la reseña tiene menos de un día -->
+                                @php
+                                    $review = \App\Models\Review::find($producto->pivot->ID_Review);
+                                    $canEdit = $review && \Carbon\Carbon::parse($review->created_at)->diffInDays(now()) < 1;
+                                @endphp
+
+                                @if ($canEdit)
+                                    <a href="{{ route('comment.index', ['orderId' => $order->ID_Orden, 'productId' => $producto->pivot->ID_Producto]) }}" class="text-blue-500 hover:underline">Editar Reseña</a>
+                                @else
+                                    <span class="text-gray-500">Reseña enviada</span>
+                                @endif
+                            @endif
+                        @else
+                            <span class="text-gray-500">Acción no disponible</span>
+                        @endif
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
+
     </div>
     <div class="container">
         <h3>Datos del Usuario</h3>

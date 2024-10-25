@@ -43,7 +43,7 @@ Route::get('/soporte', function () {
 Route::get('/comentario', function () {
     return view('ecommerce/comment');
 })->name('comment.index');
-
+Route::match(['get', 'post'], '/orden/{orderId}/producto/{productId}/reseña', [UserOrderController::class, 'reviewForm'])->name('comment.index');
 
 // Sesiones de usuario
 Route::middleware('auth')->group(function () {

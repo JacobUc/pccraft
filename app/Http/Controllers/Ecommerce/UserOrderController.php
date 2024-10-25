@@ -3,6 +3,8 @@ namespace App\Http\Controllers\Ecommerce;
 
 use App\Http\Controllers\Controller;
 use App\Models\Orden;
+use App\Models\Producto;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon; 
 use App\Mail\OrderCancelledMail; 
@@ -51,7 +53,49 @@ class UserOrderController extends Controller
         // Retorna la vista de detalle de la orden
         return view('ecommerce.user.show', compact('order'));
     }
+    
+    public function reviewForm(Request $request, $orderId, $productId)
+    {
+        // Obtener la orden del usuario autenticado
+        $order = Orden::where('ID_Usuario', auth()->id())->findOrFail($orderId);
 
+        // Obtener el producto de la orden
+        $producto = $order->productos->find($productId);
+
+        // Si es una solicitud GET, mostramos el formulario
+        if ($request->isMethod('get')) {
+            // Verificar si ya existe una reseña
+            $review = Review::where('ID_Review', $producto->pivot->ID_Review)->first();
+            return view('ecommerce.comment', compact('order', 'producto', 'review'));
+        }
+
+        // Si es una solicitud POST, validamos y guardamos la reseña
+        if ($request->isMethod('post')) {
+            // Validar los datos del formulario
+            $validated = $request->validate([
+                'title' => 'nullable|string|max:255',
+                'rating' => 'required|integer|min:1|max:5',
+                'review' => 'required|string|max:1000',
+            ]);
+
+            // Crear una nueva reseña o actualizar la existente
+            $review = $producto->pivot->ID_Review ? Review::find($producto->pivot->ID_Review) : new Review();
+            $review->titulo = $validated['title'];
+            $review->comentario = $validated['review'];
+            $review->calificacion = $validated['rating'];
+            $review->fecha = now();
+            $review->save();
+
+            // Asociar la reseña al producto en la tabla pivote si es una nueva reseña
+            if (is_null($producto->pivot->ID_Review)) {
+                $producto->pivot->ID_Review = $review->ID_Review;
+                $producto->pivot->save();
+            }
+
+            return redirect()->route('user.orders.show', $orderId)->with('success', 'Reseña publicada con éxito.');
+        }
+    }
+    
     // Método para actualizar el estado de una orden
     public function update(Request $request, $id)
     {

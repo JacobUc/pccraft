@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container mx-auto p-6">
-    <!-- Título del producto -->
-    <h1 class="text-3xl font-bold mb-4 titulo-producto">ZOTAC GAMING NVIDIA GEFORCE RTX 4060</h1>
+    <!-- Título del producto dinámico -->
+    <h1 class="text-3xl font-bold mb-4 titulo-producto">{{ $producto->nombre }}</h1>
     
     <!-- Contenedor para el título de detalles de la orden -->
     <div class="bg-blue-50 border border-blue-200 p-4 rounded-lg mb-4 w-1/4">
@@ -17,27 +17,31 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Primera columna: Título "Fecha", seguido de Fecha, Pagado y Envío -->
                 <div class="w-full text-justify p-4">
-                    <p class="mb-6 w-full text-lg fecha-producto"><strong>Fecha:</strong> 12/03/2024</p>
-                    <p class="mb-6 w-full text-lg estado-producto"><strong>Pagado:</strong> 12/03/2024</p>
-                    <p class="w-full text-lg entregado-producto"><strong>Envío:</strong> Entregado</p>
+                    <p class="mb-6 w-full text-lg fecha-producto"><strong>Fecha:</strong> {{ \Carbon\Carbon::parse($order->agregada)->format('d/m/Y') }}</p>
+                    <p class="mb-6 w-full text-lg estado-producto"><strong>Pagado:</strong> {{ \Carbon\Carbon::parse($order->pagado)->format('d/m/Y') }}</p>
+                    <p class="w-full text-lg entregado-producto"><strong>Envío:</strong> {{ ucfirst($order->estado) }}</p>
                 </div>
                 
                 <!-- Segunda columna: "Orden" grande y negritas, "ID del producto" más pequeño y en gris -->
                 <div class="w-full text-left p-4">
-                    <p class="text-3xl font-bold mb-4 orden-producto">Orden: #04563087981</p>
-                    <p class="text-gray-500 text-sm id-producto"><strong>ID del producto:</strong> 123456</p>
+                    <p class="text-3xl font-bold mb-4 orden-producto">Orden: #{{ $order->ID_Orden }}</p>
+                    <p class="text-gray-500 text-sm id-producto"><strong>ID del producto:</strong> {{ $producto->pivot->ID_Producto }}</p>
                 </div>
             </div>
         </div>
 
-        <!-- Contenedor para la imagen -->
+        <!-- Contenedor para la imagen del producto dinámico -->
         <div class="w-1/3 flex justify-center items-center">
-            <img src="{{ asset('img/ASUS_PRIME_Z790-A_WIFI-3.jpg') }}" alt="ASUS PRIME Z790-A WIFI" class="w-72 h-72 object-cover image-producto">
+            @if($producto->url_photo)
+                <img src="{{ asset('storage/' . json_decode($producto->url_photo, true)[0] ) }}" alt="{{ $producto->nombre }}" class="w-72 h-72 object-cover image-producto">
+            @else
+                <span>No disponible</span>
+            @endif
         </div>
     </div>
 
     <!-- Formulario de reseña -->
-    <form action="#" method="POST">
+    <form action="{{ route('comment.index', ['orderId' => $order->ID_Orden, 'productId' => $producto->pivot->ID_Producto]) }}" method="POST">
         @csrf
         <div class="mb-6">
             <label for="title" class="block text-lg font-medium text-gray-700 titulo-comentario">Título</label>
@@ -47,20 +51,10 @@
         <div class="mb-6">
             <label for="rating" class="block text-lg font-medium text-gray-700 calificacion-comentario">Calificación *</label>
             <div class="flex items-center">
-                <input type="radio" name="rating" value="1" id="rating1" class="hidden rating-star" />
-                <label for="rating1" class="cursor-pointer text-4xl text-gray-400 hover:text-blue-500">&#9733;</label>
-
-                <input type="radio" name="rating" value="2" id="rating2" class="hidden rating-star" />
-                <label for="rating2" class="cursor-pointer text-4xl text-gray-400 hover:text-blue-500">&#9733;</label>
-
-                <input type="radio" name="rating" value="3" id="rating3" class="hidden rating-star" />
-                <label for="rating3" class="cursor-pointer text-4xl text-gray-400 hover:text-blue-500">&#9733;</label>
-
-                <input type="radio" name="rating" value="4" id="rating4" class="hidden rating-star" />
-                <label for="rating4" class="cursor-pointer text-4xl text-gray-400 hover:text-blue-500">&#9733;</label>
-
-                <input type="radio" name="rating" value="5" id="rating5" class="hidden rating-star" />
-                <label for="rating5" class="cursor-pointer text-4xl text-gray-400 hover:text-blue-500">&#9733;</label>
+                @for ($i = 1; $i <= 5; $i++)
+                    <input type="radio" name="rating" value="{{ $i }}" id="rating{{ $i }}" class="hidden rating-star" />
+                    <label for="rating{{ $i }}" class="cursor-pointer text-4xl text-gray-400 hover:text-blue-500">&#9733;</label>
+                @endfor
             </div>
         </div>
 
