@@ -5,6 +5,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Ecommerce\Cart\CartController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Ecommerce\UserOrderController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +72,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile/edit-address/{direccion}', [ProfileController::class, 'updateAddress'])->name('profile.updateAddress');
 });
 require __DIR__.'/auth.php';
+// Rutas para el usuario ordenes
+Route::middleware('auth')->prefix('user')->name('user.')->group(function () {
+    Route::get('/orders', [App\Http\Controllers\Ecommerce\UserOrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{id}', [App\Http\Controllers\Ecommerce\UserOrderController::class, 'show'])->name('orders.show');
+    Route::put('/orders/{id}', [App\Http\Controllers\Ecommerce\UserOrderController::class, 'update'])->name('orders.update');
+});
 
 // Rutas para el carrito de compras
 Route::get('/shop', [CartController::class, 'shop'])->name('shop');

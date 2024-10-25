@@ -352,6 +352,10 @@ class CartController extends Controller
                 $producto->vendidos += $item->quantity;
                 $producto->save();
             }
+            \Log::info('Datos de la orden que se envían en el correo:', [
+                'order' => $order,
+                'cartItems' => $cartItems
+            ]);
             Mail::to(Auth::user()->email)->send(new OrderConfirmationMail($order, $cartItems));
 
             // Limpia el carrito

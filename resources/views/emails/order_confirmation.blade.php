@@ -2,6 +2,21 @@
 <html>
 <head>
     <title>Confirmación de tu compra</title>
+    <style>
+        .cart-photo {
+            margin-right: 15px;
+        }
+        .img-thumbnail {
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            display: block;
+        }
+        /* Limitar el ancho de la columna del producto */
+        .product-details {
+            max-width: 250px; /* Ajusta este valor según sea necesario */
+            word-wrap: break-word;
+        }
+    </style>
 </head>
 <body>
     <h1>¡Gracias por tu compra, {{ $order->usuario->nombre }}!</h1>
@@ -13,40 +28,44 @@
     </ul>
 
     <h3>Productos comprados:</h3>
-    <ul>
-    @foreach ($cartItems as $item)
-                <tr>
-                    <!-- Producto y detalles -->
-                    <li>
-                        <div style="display: flex; align-items: center;">
-                        @if ($item->photo_cid)
-                    <!-- Utilizar el CID para incrustar la imagen en el correo -->
-                    <img src="cid:{{ $item->photo_cid }}" alt="Producto" style="width: 80px; height: 80px; margin-right: 10px;">
-                @else
-                    <p>No hay imagen disponible</p>
-                @endif
-                            <div>
-                                <b>{{ $item->name }}</b><br>
-                                Modelo: {{ $item->attributes->model }}<br>
-                                Fabricante: {{ $item->attributes->manufacturer }}
-                            </div>
+
+    <table style="width:100%; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <!-- Especificar el ancho de la columna Producto -->
+                <th style="border: 1px solid #dddddd; padding: 8px; width: 200px;">Producto</th>
+                <th style="border: 1px solid #dddddd; padding: 8px; width: 150px;">Precio</th>
+                <th style="border: 1px solid #dddddd; padding: 8px; width: 100px;">Cantidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($cartItems as $item)
+            <tr>
+                <td style="border: 1px solid #dddddd; padding: 8px; width: 200px;">
+                    <div style="display: flex; align-items: center;">
+                    @if (!empty($item->attributes['image']))
+                        <img src="{{ $message->embed(public_path('storage/' . $item->attributes['image'])) }}" style="width: 80px; height: 80px; object-fit: cover; border: 1px solid #ddd; border-radius: 5px;" alt="{{ $item->name }}">
+                     @else
+                        <p>Este producto no tiene imagen.</p>
+                    @endif
+                        <div class="product-details" style="margin-left: 10px; max-width: 250px;">
+                            <b>{{ $item->name }}</b><br>
+                            Modelo: {{ $item->attributes['model'] ?? $item->attributes->model }}<br>
+                            Fabricante: {{ $item->attributes['manufacturer'] ?? $item->attributes->manufacturer }}
                         </div>
-                    </li>
-
-                    <!-- Precio del producto -->
-                    <td style="padding: 8px; border: 1px solid #dddddd;">
-                        ${{ number_format($item->price, 2, '.', ',') }} MXN
-                    </td>
-
-                    <!-- Cantidad -->
-                    <td style="padding: 8px; border: 1px solid #dddddd;">
-                        {{ $item->quantity }}
-                    </td>
-                </tr>
+                    </div>
+                </td>
+                <td style="border: 1px solid #dddddd; padding: 8px; width: 150px;">
+                    ${{ number_format($item->price, 2, '.', ',') }} MXN
+                </td>
+                <td style="border: 1px solid #dddddd; padding: 8px; width: 100px;">
+                    {{ $item->quantity }}
+                </td>
+            </tr>
             @endforeach
-    </ul>
-
-
-
+        </tbody>
+    </table>
 
     <p>Nos pondremos en contacto contigo para más detalles.</p>
+</body>
+</html>

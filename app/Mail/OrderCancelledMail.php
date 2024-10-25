@@ -5,6 +5,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\Models\Orden;
 
 class OrderCancelledMail extends Mailable
 {
@@ -19,8 +20,10 @@ class OrderCancelledMail extends Mailable
 
     public function build()
     {
-        return $this->subject('Tu pedido ha sido cancelado')
-                    ->view('emails.cancelled')
-                    ->with(['order' => $this->order]);
+        return $this->view('emails.canceled') // Cambia esto a emails.canceled
+                    ->subject('Tu pedido ha sido cancelado')
+                    ->with([
+                        'order' => $this->order,
+                    ]);
     }
 }

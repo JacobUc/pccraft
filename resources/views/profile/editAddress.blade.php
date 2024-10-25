@@ -12,12 +12,19 @@
 <div class="flex max-w-6xl w-full mx-auto px-6 lg:px-8 space-x-6">
     <!-- Sidebar (Fijo a la izquierda) -->
     <div class="bg-white shadow sm:rounded-lg p-6 w-1/4">
-        <ul class="space-y-4">
-            <li>
-                <a href="{{ route('profile.update') }}" class="text-gray-700 hover:underline">Volver a direcciones</a>
-            </li>
-        </ul>
-    </div>
+    <ul class="space-y-4">
+        <li>
+            <a href="{{ route('profile.update') }}" class="flex items-center text-gray-700 hover:underline">
+                <!-- Ícono de "flecha hacia la izquierda" (Heroicon) -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                </svg>
+                <!-- Texto del enlace -->
+                <span class="ml-3">Volver a direcciones</span>
+            </a>
+        </li>
+    </ul>
+</div>
     
 
     <!-- Formulario de edición de dirección -->
