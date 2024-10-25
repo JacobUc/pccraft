@@ -9,9 +9,9 @@
     </h2>
 </x-slot>
 
-<div class="flex max-w-6xl w-full mx-auto px-6 lg:px-8 space-x-6">
+<div class="flex max-w-6xl w-full space-x-20">
     <!-- Sidebar (Fijo a la izquierda) -->
-    <div class="bg-white shadow sm:rounded-lg p-6 w-1/4">
+    <div class="bg-gray-50 shadow sm:rounded-lg p-6" style="flex: 0 0 450px;">
     <ul class="space-y-4">
         <li>
             <a href="{{ route('profile.update') }}" class="flex items-center text-gray-700 hover:underline">
@@ -28,7 +28,7 @@
     
 
     <!-- Formulario de edición de dirección -->
-    <div class="bg-white shadow sm:rounded-lg p-6 flex-grow">
+    <div class="bg-white shadow sm:rounded-lg p-6 justify-center w-3/4" style="flex: 0 0 800px;">
         <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Editar Dirección</h3>
 
         <form method="POST" action="{{ route('profile.updateAddress', $direccion->ID_Direccion) }}">

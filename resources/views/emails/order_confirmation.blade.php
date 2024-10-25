@@ -19,7 +19,7 @@
     </style>
 </head>
 <body>
-    <h1>¡Gracias por tu compra, {{ $order->usuario->nombre }}!</h1>
+    <h1>¡Gracias por tu compra, {{ $order->usuario->name }}!</h1>
     <p>Detalles de tu orden:</p>
     <ul>
         <li><strong>ID de la orden:</strong> {{ $order->ID_Orden }}</li>

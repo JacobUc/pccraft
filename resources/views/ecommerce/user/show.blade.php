@@ -21,7 +21,19 @@
                 <tbody class="bg-white">
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td class="px-6 py-4">{{ $order->ID_Orden }}</td>
-                        <td class="px-6 py-4">{{ \Carbon\Carbon::parse($order->fecha)->format('d/m/Y') }}</td>
+                        <td class="px-6 py-4">
+                            @if ($order->estado == 'pedido')
+                                {{ \Carbon\Carbon::parse($order->agregada)->format('d/m/Y') }}
+                            @elseif ($order->estado == 'enviado')
+                                {{ $order->fecha_enviado ? \Carbon\Carbon::parse($order->fecha_enviado)->format('d/m/Y') : 'Sin fecha' }}
+                            @elseif ($order->estado == 'cancelado')
+                                {{ $order->fecha_cancelado ? \Carbon\Carbon::parse($order->fecha_cancelado)->format('d/m/Y') : 'Sin fecha' }}
+                            @elseif ($order->estado == 'entregado')
+                                {{ $order->fecha_entregado ? \Carbon\Carbon::parse($order->fecha_entregado)->format('d/m/Y') : 'Sin fecha' }}
+                            @else
+                                {{ 'Sin estado definido' }}
+                            @endif
+                        </td>
                         <td class="px-6 py-4">
                             <!-- Mostrar el formulario si el estado es pendiente o enviado -->
                             @if($order->estado == 'pedido' || $order->estado == 'enviado')
@@ -57,6 +69,7 @@
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 border-collapse">
                 <thead class="bg-gray-200 text-xs text-gray-900 uppercase dark:bg-gray-700 dark:text-gray-200">
                     <tr>
+                        <th class="px-6 py-3">Imagen</th>
                         <th class="px-6 py-3">Producto</th>
                         <th class="px-6 py-3">Cantidad</th>
                         <th class="px-6 py-3">Precio Unitario</th>
@@ -66,6 +79,13 @@
                 <tbody class="bg-white">
                     @foreach($order->productos as $producto)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="px-6 py-4">
+                            @if($producto->url_photo)
+                                <img src="{{ asset('storage/' . json_decode($producto->url_photo, true)[0] ) }}" alt="Producto" class="rounded-lg max-w-[80px] max-h-[80px]">
+                            @else
+                                <span>No disponible</span>
+                            @endif
+                        </td>   
                         <td class="px-6 py-4">{{ $producto->nombre }}</td>
                         <td class="px-6 py-4">{{ $producto->pivot->cantidad }}</td>
                         <td class="px-6 py-4">{{ number_format($producto->pivot->precio, 2) }} MXN</td>
@@ -75,6 +95,38 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="container">
+        <h3>Datos del Usuario</h3>
+        <div class="relative overflow-x-auto overflow-hidden rounded-lg shadow-md">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 border-collapse">
+                <thead class="text-xs text-gray-900 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-200">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">Nombre</th>
+                        <th scope="col" class="px-6 py-3">Dirección</th>
+                        <th scope="col" class="px-6 py-3">Teléfono</th>
+                        <th scope="col" class="px-6 py-3">Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="px-6 py-4">{{ $order->usuario->name ?? 'No disponible'}}</td>
+                        <td class="px-6 py-4">{{ $order->direccion->calle_principal }}, {{ $order->direccion->ciudad }}</td>
+                        <td class="px-6 py-4">{{ $order->usuario->telefono ?? 'No disponible' }}</td>
+                        <td class="px-6 py-4">{{ $order->usuario->email ?? 'No disponible'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="container mt-6 text-right">
+        <a href="{{ route('user.orders.index')}}"" class="inline-flex items-center w-min px-4 py-2 bg-blue-500 text-white font-semibold text-sm rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Regresar
+        </a>
     </div>
 </div>
 @endsection

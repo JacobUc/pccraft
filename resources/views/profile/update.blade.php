@@ -28,8 +28,9 @@
 @endif
 
 <!-- Aumentar el ancho máximo del contenedor principal -->
-<div class="flex max-w-6xl w-full mx-auto px-6 lg:px-8 space-x-6">
-<div class="bg-gray-50 shadow sm:rounded-lg p-6 w-1/4">
+<div class="flex max-w-6xl w-full space-x-20">
+    <!-- Sidebar (Fijo a la izquierda) -->
+    <div class="bg-gray-50 shadow sm:rounded-lg p-6" style="flex: 0 0 450px;">
         <ul class="space-y-20">
             <li>
                 <a href="{{ route('profile.update') }}" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
@@ -65,7 +66,7 @@
     </div>
 
     <!-- Formulario de edición de perfil -->
-    <div class="bg-white shadow sm:rounded-lg p-6 flex-grow">
+    <div class="bg-white shadow sm:rounded-lg p-6 justify-center w-3/4" style="flex: 0 0 800px;">
     <div class="flex justify-between items-center mb-4">
         <h3 class="text-lg font-medium leading-6 text-gray-900">Editar Información Básica</h3>
         <a href="{{ route('profile.edit') }}" class="inline-flex items-center px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-md hover:bg-blue-600">
