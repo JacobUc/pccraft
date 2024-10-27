@@ -161,7 +161,7 @@
             <div class="flex justify-start mt-6">
                 <form action="{{ route('cart.clear') }}" method="POST">
                     {{ csrf_field() }}
-                    <button class="btn bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-500"">Vaciar Carrito</button>
+                    <button class="btn bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-500">Vaciar Carrito</button>
                 </form>
             </div>
             @endif
