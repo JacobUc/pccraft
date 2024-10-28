@@ -17,9 +17,9 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Primera columna: Título "Fecha", seguido de Fecha, Pagado y Envío -->
                 <div class="w-full text-justify p-4">
-                    <p class="mb-6 w-full text-lg fecha-producto"><strong>Fecha:</strong> {{ \Carbon\Carbon::parse($order->agregada)->format('d/m/Y') }}</p>
-                    <p class="mb-6 w-full text-lg estado-producto"><strong>Pagado:</strong> {{ \Carbon\Carbon::parse($order->pagado)->format('d/m/Y') }}</p>
-                    <p class="w-full text-lg entregado-producto"><strong>Envío:</strong> {{ ucfirst($order->estado) }}</p>
+                    <p class="mb-6 w-full text-lg fecha-producto"><strong>Pedido:</strong> {{ \Carbon\Carbon::parse($order->agregada)->format('d/m/Y') }}</p>
+                    <p class="mb-6 w-full text-lg estado-producto"><strong>Enviado:</strong> {{ \Carbon\Carbon::parse($order->fecha_enviado)->format('d/m/Y H:i') }}</p>
+                    <p class="w-full text-lg entregado-producto"><strong>Entregado:</strong> {{ \Carbon\Carbon::parse($order->fecha_entregado)->format('d/m/Y H:i') }}</p>
                 </div>
                 
                 <!-- Segunda columna: "Orden" grande y negritas, "ID del producto" más pequeño y en gris -->
@@ -45,22 +45,23 @@
         @csrf
         <div class="mb-6">
             <label for="title" class="block text-lg font-medium text-gray-700 titulo-comentario">Título</label>
-            <input type="text" name="title" id="title" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="Opcional: introduce un título">
+            <input type="text" name="title" id="title" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="Opcional: introduce un título" value="{{ old('title', $review->titulo ?? '') }}">
         </div>
 
         <div class="mb-6">
             <label for="rating" class="block text-lg font-medium text-gray-700 calificacion-comentario">Calificación *</label>
             <div class="flex items-center">
                 @for ($i = 1; $i <= 5; $i++)
-                    <input type="radio" name="rating" value="{{ $i }}" id="rating{{ $i }}" class="hidden rating-star" />
-                    <label for="rating{{ $i }}" class="cursor-pointer text-4xl text-gray-400 hover:text-blue-500">&#9733;</label>
+                    <input type="radio" name="rating" value="{{ $i }}" id="rating{{ $i }}" class="hidden rating-star" {{ (isset($review) && $review->calificacion == $i) ? 'checked' : '' }} />
+                    <label for="rating{{ $i }}" class="cursor-pointer text-4xl {{ (isset($review) && $review->calificacion >= $i) ? 'text-blue-500' : 'text-gray-400' }} hover:text-blue-500">&#9733;</label>
                 @endfor
             </div>
         </div>
 
+
         <div class="mb-6">
             <label for="review" class="block text-lg font-medium text-gray-700">¿Qué te pareció? *</label>
-            <textarea name="review" id="review" rows="4" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="Opcional: ¿Puedes describir la razón de tu calificación?"></textarea>
+            <textarea name="review" id="review" rows="4" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="Opcional: ¿Puedes describir la razón de tu calificación?">{{ old('review', $review->comentario ?? '') }}</textarea>
         </div>
 
         <div class="mb-4 text-sm text-red-500 text-center">

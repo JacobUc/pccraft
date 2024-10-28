@@ -34,7 +34,7 @@ class Orden extends Model
     public function productos()
     {
         return $this->belongsToMany(Product::class, 'producto__ordens', 'ID_Orden', 'ID_Producto')
-                    ->withPivot('cantidad', 'precio'); // Añade los campos adicionales de la tabla pivote
+                    ->withPivot('ID_Review','cantidad', 'precio'); // Añade los campos adicionales de la tabla pivote
     }
 
     // Relación con dirección (cada orden tiene una dirección)
