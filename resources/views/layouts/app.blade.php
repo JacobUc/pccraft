@@ -13,6 +13,24 @@
 
         @vite('resources/css/app.css')
         @vite('resources/js/app.js') {{-- Para Flowbite --}}
+        <style>
+        .relative {
+            position: relative;
+        }
+
+        span.absolute {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #3B82F6;
+            color: white;
+            border-radius: 50%;
+            padding: 4px 6px;
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 1;
+        }
+    </style>
     </head>
 
     <body class="bg-white">
@@ -54,9 +72,9 @@
                     <button id="user-menu-button" class="flex items-center text-gray-700 hover:text-gray-900 focus:outline-none">
                         <i class="fa-lg fa-regular fa-user cursor-pointer"></i>
                     </button>
-                    <div id="user-menu" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
-                        <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Log In</a>
-                        <a href="{{ route('register') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Register</a>
+                    <div id="user-menu" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50">
+                        <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Iniciar Sesión</a>
+                        <a href="{{ route('register') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Registrarse</a>
                     </div>
                     @endguest
 
@@ -65,12 +83,6 @@
                     <button id="auth-menu-button" class="flex items-center text-gray-700 hover:text-gray-900 focus:outline-none">
                         <i class="fa-lg fa-regular fa-user cursor-pointer"></i>
                     </button>
-                    
-                    <div id="auth-menu" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
-                 
-                        {{-- <a href="{{ route('perfil') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Perfil</a>
-                        <a href="{{ route('pedidos') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Pedido</a> --}}
-
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit" class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Salir</button>
@@ -79,11 +91,27 @@
                     @endauth
                 </div>
 
-                <div class="">
-                    <a href="#"> 
-                        <i class="fa-solid fa-cart-shopping fa-lg cursor-pointer"></i>
-                    </a>
-                </div>
+                @auth
+                    <div class="relative">
+                        <a href="{{ route('cart.index') }}"> 
+                            <i class="fa-solid fa-cart-shopping fa-lg cursor-pointer"></i>
+
+                            @if(Cart::session(auth()->id())->getTotalQuantity() > 0)
+                                <span class="absolute top-0 right-0 inline-block w-4 h-4 text-xs font-bold text-white bg-blue-500 rounded-full">
+                                    {{ Cart::session(auth()->id())->getTotalQuantity() }}
+                                </span>
+                            @endif
+                        </a>
+                    </div>
+                @endauth
+
+                @guest
+                    <div class="relative">
+                        <a href="{{ route('login') }}"> 
+                            <i class="fa-solid fa-cart-shopping fa-lg cursor-pointer"></i>
+                        </a>
+                    </div>
+                @endguest
             </div>
         </header>
 

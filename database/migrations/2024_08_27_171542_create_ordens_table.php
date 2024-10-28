@@ -19,6 +19,7 @@ return new class extends Migration
         $table->decimal('total', 10, 2);
         $table->string('estado');
         $table->timestamp('agregada')->useCurrent();
+        $table->string('stripe_id')->nullable();
 
         $table->foreign('ID_Usuario')->references('id')->on('users')->onDelete('cascade');  
         $table->foreign('ID_Direccion')->references('ID_Direccion')->on('direccions')->onDelete('cascade');
