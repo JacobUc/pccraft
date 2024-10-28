@@ -7,8 +7,7 @@ use App\Http\Controllers\Ecommerce\Cart\CartController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Ecommerce\UserOrderController;
-
-
+use App\Http\Controllers\Ecommerce\ConfiguradorPCController;
 
 /*
 |--------------------------------------------------------------------------
@@ -98,3 +97,11 @@ Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout');
 Route::get('/checkout/success', [CartController::class, 'success'])->name('checkout.success');
 Route::get('/checkout/cancel', [CartController::class, 'cancel'])->name('checkout.cancel');
 
+// Rutas para el Configurador PC
+Route::get('/shop', [ConfiguradorPCController::class, 'shop'])->name('shop');
+Route::get('/configuradorpc', [ConfiguradorPCController::class, 'index'])->name('configuradorpc.index');
+Route::post('/configuradorpc/add', [ConfiguradorPCController::class, 'add'])->name('configuradorpc.add');
+Route::post('/configuradorpc/addAll', [ConfiguradorPCController::class, 'addAll'])->name('configuradorpc.addAll');
+Route::post('/configuradorpc/remove', [ConfiguradorPCController::class, 'remove'])->name('configuradorpc.remove');
+Route::post('/configuradorpc/removeAll', [ConfiguradorPCController::class, 'removeAll'])->name('configuradorpc.removeAll');
+Route::post('/logout', [ConfiguradorPCController::class, 'logout'])->name('logout');
