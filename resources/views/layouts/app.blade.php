@@ -43,8 +43,8 @@
 
                 {{-- Navbar --}}
                 <nav class="flex justify-between gap-16">
-                    <a href="#">Productos</a>
-                    <a href="#">Nosotros</a>
+                    <a href="{{ route('productos.buscador') }}">Productos</a>
+                    <a href="{{ route('ecommerce.configuradorpc') }}">Configurar PC</a>
                     <a href="{{ route('faqs.index') }}">Soporte</a>
                 </nav>
 
@@ -139,8 +139,8 @@
             <div class="flex flex-row justify-center text-left gap-10">
                 <ul class="list-disc w-40">
                     {{-- !Actualizar links --}}
-                    <li class="mb-2"> <a href="#">Configurar PC</a> </li> 
-                    <li class="mb-2"> <a href="#">Productos</a> </li>
+                    <li class="mb-2"> <a href="{{ route('ecommerce.configuradorpc') }}">Configurar PC</a> </li> 
+                    <li class="mb-2"> <a href="{{ route('productos.buscador') }}">Productos</a> </li>
                     <li class="mb-2"> <a href="#">Nosotros</a> </li>
                     <li class="mb-2"> <a href="{{ route('faqs.index') }}">Soporte</a> </li>
                 </ul>
