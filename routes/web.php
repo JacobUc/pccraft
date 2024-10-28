@@ -104,4 +104,4 @@ Route::post('/configuradorpc/add', [ConfiguradorPCController::class, 'add'])->na
 Route::post('/configuradorpc/addAll', [ConfiguradorPCController::class, 'addAll'])->name('configuradorpc.addAll');
 Route::post('/configuradorpc/remove', [ConfiguradorPCController::class, 'remove'])->name('configuradorpc.remove');
 Route::post('/configuradorpc/removeAll', [ConfiguradorPCController::class, 'removeAll'])->name('configuradorpc.removeAll');
-Route::post('/logout', [ConfiguradorPCController::class, 'logout'])->name('logout');
+//Route::post('/logout', [ConfiguradorPCController::class, 'logout'])->name('logout');
