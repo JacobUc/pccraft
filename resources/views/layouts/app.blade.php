@@ -43,7 +43,7 @@
 
                 {{-- Navbar --}}
                 <nav class="flex justify-between gap-16">
-                    <a href="{{ route('productos.buscador') }}">Productos</a>
+                    <a href="#">Productos</a>
                     <a href="#">Nosotros</a>
                     <a href="{{ route('faqs.index') }}">Soporte</a>
                 </nav>
@@ -83,6 +83,13 @@
                     <button id="auth-menu-button" class="flex items-center text-gray-700 hover:text-gray-900 focus:outline-none">
                         <i class="fa-lg fa-regular fa-user cursor-pointer"></i>
                     </button>
+                    
+                    <div id="auth-menu" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50">
+                        
+                    <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Perfil</a>
+{{-- 
+<a href="{{ route('pedidos') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Pedido</a>
+--}}
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit" class="w-full text-left block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Salir</button>
