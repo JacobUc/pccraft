@@ -70,17 +70,33 @@
                 <h2 class="text-2xl font-medium">{{ $product->nombre }}</h2>
                 <p class="mt-1.5 text-zinc-400">MODELO: {{ $product->modelo }}</p>
                 <a href="#detalles-comentarios" class="mt-2 flex items-center">
-                    <span class="text-xs text-amber-500">
-                        @if ($product->avgRaiting)
-                            @for ($i = round($product->avgRaiting); $i < $count; $i++)
-                                <i class="fa-solid fa-star"></i>
-                            @endfor
-                            <span class="text-sm text-black font-medium">{{$product->avgRaiting}}</span>
-                            <p class="ml-2 font-['roboto'] font-bold text-xs text-zinc-500 hover:text-azul">{{$product->total_comentarios}} calificaciones</p>
-                        @else
-                            <span class="text-sm text-black font-medium">0 calificaciones</span>
-                        @endif
-                    </span>
+                <span class="text-xs text-amber-500">
+                {{-- MODIFICADO --}}
+                @if ($product->avgRaiting > 0)
+                    @php
+                        $count = round($product->avgRaiting); // Redondea la calificación promedio para mostrar estrellas completas
+                    @endphp
+
+                    <div class="flex items-center">
+                        <!-- Estrellas llenas -->
+                        @for ($i = 0; $i < $count; $i++)
+                            <i class="fa-solid fa-star text-azul"></i>
+                        @endfor
+                        <!-- Estrellas vacías hasta completar 5 -->
+                        @for ($i = $count; $i < 5; $i++)
+                            <i class="fa-regular fa-star text-azul"></i>
+                        @endfor
+
+                        <span class="ml-2 text-sm text-black font-medium">{{ number_format($product->avgRaiting, 1) }}</span>
+                        <p class="ml-2 font-['roboto'] font-bold text-xs text-zinc-500 hover:text-azul">
+                            {{ $product->comentarios->count() }} calificaciones
+                        </p>
+                    </div>
+                @else
+                    <span class="text-sm text-black font-medium">0 calificaciones</span>
+                @endif
+                </span>
+
                 </a>
                 <p class="mt-5 font-['roboto'] text-2xl font-medium">
                     <span>${{ $product->precio_final }} MXN</span>
@@ -132,10 +148,15 @@
                             <div class="text-red-500">{{ $message }}</div>
                         @enderror
 
-                        <button type="submit" class="py-2 text-base px-3.5 bg-azul border border-azul rounded-lg text-white shadow hover:shadow-xl">
-                            <span class="mr-2"><i class="fa-solid fa-cart-shopping"></i></span>
-                            Agregar al carrito
-                        </button>
+                        {{-- Verificar si el stock es mayor a 0 para mostrar el botón --}}
+                        @if($product->stock > 0)
+                            <button type="submit" class="py-2 text-base px-3.5 bg-azul border border-azul rounded-lg text-white shadow hover:shadow-xl">
+                                <span class="mr-2"><i class="fa-solid fa-cart-shopping"></i></span>
+                                Agregar al carrito
+                            </button>
+                        @else
+                            <p class="text-red-500 mt-4">Producto agotado</p>
+                        @endif
                     </form>
                 </div>
             </div>
@@ -188,17 +209,19 @@
                     {{-- Tab Comentarios --}}
                     <div class="flex flex-col justify-center items-center" id="comentarios" role="tabpanel" aria-labelledby="comentarios-tab">
                         <div class="w-10/12">
-                            {{-- Filtros Comentarios --}}
-                            <div class="mt-5 mx-1 px-6 flex justify-between justify-center items-center text-lg">
-                                <h4>Todos los comentarios <span class="text-sm text-zinc-400"> ({{$product->total_comentarios}})</span></h4>
-                                <form action="#">
-                                    <select name="filtro" id="" class="text-sm">
-                                        <option value="mayor-menor">Mas recientes</option>
-                                        <option value="mayor-menor">Menos recientes</option>
-                                    </select>
-                                </form>
-                            </div>
-                
+                            {{-- Filtros Comentarios --}} {{-- MODIFICADO --}}
+                            <div class="mt-5 mx-1 px-6 flex justify-between items-center text-lg">
+                                <h4>Todos los comentarios <span class="text-sm text-zinc-400">({{ $product->comentarios->count() }})</span></h4>
+                                {{-- Formulario de filtro, no me funcionó saludos--}}
+                                <form id="filtro-form" action="{{ url('/productos/' . $product->ID_producto) }}" method="GET">
+                                        <label for="filtro" class="text-sm">Ordenar por:</label>
+                                        <select name="filtro" id="filtro" class="text-sm">
+                                            <option value="mas-recientes" {{ request('filtro') == 'mas-recientes' ? 'selected' : '' }}>Más recientes</option>
+                                            <option value="menos-recientes" {{ request('filtro') == 'menos-recientes' ? 'selected' : '' }}>Menos recientes</option>
+                                        </select>
+                                    </form>
+
+                            </div>         
                             {{-- Agregar nuevo comentario --}}
                             <div class="mt-5 mx-7">
                                 @guest
@@ -206,48 +229,31 @@
                                         Por favor, inicia sesión para escribir un comentario
                                     </a>
                                 @endguest
-                
+
                                 @auth
-                                    {{-- !Debe ser un enlace --}}
-                                    {{-- <form action="#" method="POST">
-                                        @csrf
-                                        <div class="flex flex-col">
-                                            <label for="comentario">Ingresa un nuevo comentario</label>
-                                            <textarea 
-                                                name="comentario" 
-                                                id="comentario" 
-                                                cols="30" 
-                                                rows="3"
-                                                class="mt-2 rounded-lg"
-                                            ></textarea>
-                                        </div>
-                                        <input type="button"
-                                            value="Enviar"
-                                            class="mt-2 py-1.5 px-4 bg-azul border border-azul rounded-lg text-white shadow hover:shadow-xl"
-                                        >
-                                    </form> --}}
-                                    {{-- !Si el usuario no lo ha comprado --}}
+                                    {{-- Si el usuario no ha comprado el producto --}}
                                     @if (!$product->comprado)
                                         <p class="my-10 text-red-700">¡Para comentar sobre este producto, debe comprarlo!</p>
                                     @endif
 
-                                    {{-- !Si el usuario ya ha comentado --}}
+                                    {{-- Si el usuario ha comentado en todas sus compras del producto --}}
                                     @if ($product->resenado)
-                                        <p class="my-10 text-red-700">¡Ya ha comentado sobre este producto!</p>
+                                        <p class="my-10 text-red-700">¡Ya ha comentado sobre todas sus compras de este producto!</p>
                                     @endif
 
-                                    {{-- Si el usuario ha comprado y no ha comentado --}}
-                                    @if ( $product->comprado &&  !$product->resenado)
-                                        <a href="#" class="py-2 text-base px-3.5 bg-azul border border-azul rounded-lg text-white shadow hover:shadow-xl">
+                                    {{-- Si el usuario ha comprado y tiene una compra sin reseña --}}
+                                    @if ($product->comprado && !$product->resenado && $product->ultimaOrdenEntregada)
+                                        <a href="{{ route('comment.index', ['orderId' => $product->ultimaOrdenEntregada->ID_Orden, 'productId' => $product->ID_producto]) }}" 
+                                        class="py-2 text-base px-3.5 bg-azul border border-azul rounded-lg text-white shadow hover:shadow-xl">
                                             Agregar un nuevo comentario
                                         </a>
                                     @endif
-                                
                                 @endauth
                             </div>
+
                 
                             {{-- Container Comentarios --}}
-                            <div class="mt-6 mb-5 px-7 flex flex-col gap-4">
+                            <div id="comentarios-container" class="mt-6 mb-5 px-7 flex flex-col gap-4">
 
                                 {{-- Si aun no hay comentarios --}}
                                 @if ( count($product->comentarios) == 0 )
@@ -405,3 +411,24 @@
     }
 
 </script>
+
+<script>
+    document.getElementById('filtro').addEventListener('change', function() {
+        let form = document.getElementById('filtro-form');
+        let url = form.action;
+        let formData = new FormData(form);
+
+        fetch(url + '?' + new URLSearchParams(formData), {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.text())
+        .then(html => {
+            // Reemplaza el contenido del contenedor de comentarios
+            document.getElementById('comentarios-container').innerHTML = html;
+        })
+        .catch(error => console.warn(error));
+    });
+</script>
+
