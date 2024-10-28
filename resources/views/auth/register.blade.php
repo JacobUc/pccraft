@@ -1,74 +1,73 @@
 @extends('layouts.app')
 
-@section('title', 'Home')
+@section('title', 'Registro')
 
 @section('content')
 
-<x-guest-layout>
-        <!-- Formulario con fondo azul y diseño deseado -->
-        <div class="relative p-8 max-w-md w-full">
-            <!-- Background shapes: Cubriendo todo el formulario -->
-            <div class="absolute inset-0 bg-blue-400 w-full h-full rounded transform rotate-12 z-0"></div>
-            <div class="absolute inset-0 bg-blue-500 w-full h-full rounded transform -rotate-6 z-0"></div>
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md relative">
+        
+        <h2 class="text-2xl font-bold text-center text-blue-700 mb-6">Crea tu Cuenta</h2>
 
-            <form method="POST" action="{{ route('register') }}" class="relative z-10 bg-blue-600 p-8 rounded-lg shadow-lg">
-                @csrf
+        <form method="POST" action="{{ route('register') }}" class="space-y-5">
+            @csrf
 
-                <!-- Name -->
-                <div>
-                    <x-input-label for="name" :value="__('Nombre')" class="text-white" />
-                    <x-text-input id="name" class="block mt-1 w-full p-2 rounded-md" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-                    <x-input-error :messages="$errors->get('name')" class="mt-2 text-red-500" />
-                </div>
+            <!-- Nombre -->
+            <div>
+                <x-input-label for="name" :value="__('Nombre')" class="text-gray-700" />
+                <x-text-input id="name" class="block mt-1 w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" 
+                              type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                <x-input-error :messages="$errors->get('name')" class="mt-2 text-red-500" />
+            </div>
 
-                <!-- Last Name (Apellidos) -->
-                <div class="mt-4">
-                    <x-input-label for="last_name" :value="__('Apellidos')" class="text-white" />
-                    <x-text-input id="last_name" class="block mt-1 w-full p-2 rounded-md" type="text" name="last_name" :value="old('last_name')" required />
-                    <x-input-error :messages="$errors->get('last_name')" class="mt-2 text-red-500" />
-                </div>
+            <!-- Apellidos -->
+            <div>
+                <x-input-label for="last_name" :value="__('Apellidos')" class="text-gray-700" />
+                <x-text-input id="last_name" class="block mt-1 w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" 
+                              type="text" name="last_name" :value="old('last_name')" required autocomplete="family-name" />
+                <x-input-error :messages="$errors->get('last_name')" class="mt-2 text-red-500" />
+            </div>
 
-                <!-- Email Address -->
-                <div class="mt-4">
-                    <x-input-label for="email" :value="__('Email')" class="text-white" />
-                    <x-text-input id="email" class="block mt-1 w-full p-2 rounded-md" type="email" name="email" :value="old('email')" required autocomplete="username"
-                        pattern="^[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com|alumnos\.uady\.mx)$" title="Por favor, ingrese un correo válido (gmail.com, hotmail.com, alumnos.uady.mx)" />
-                    <x-input-error :messages="$errors->get('email')" class="mt-2 text-red-500" />
-                </div>
+            <!-- Correo Electrónico -->
+            <div>
+                <x-input-label for="email" :value="__('Correo Electrónico')" class="text-gray-700" />
+                <x-text-input id="email" class="block mt-1 w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" 
+                              type="email" name="email" :value="old('email')" required autocomplete="username"
+                              pattern="^[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com|alumnos\.uady\.mx)$" 
+                              title="Por favor, ingrese un correo válido (gmail.com, hotmail.com, alumnos.uady.mx)" />
+                <x-input-error :messages="$errors->get('email')" class="mt-2 text-red-500" />
+            </div>
 
-                <!-- Password -->
-                <div class="mt-4">
-                    <x-input-label for="password" :value="__('Contraseña')" class="text-white" />
-                    <x-text-input id="password" class="block mt-1 w-full p-2 rounded-md"
-                                  type="password"
-                                  name="password"
-                                  required autocomplete="new-password"
-                                  minlength="8" maxlength="16" title="La contraseña debe tener entre 8 y 16 caracteres." />
-                    <x-input-error :messages="$errors->get('password')" class="mt-2 text-red-500" />
-                </div>
+            <!-- Contraseña -->
+            <div>
+                <x-input-label for="password" :value="__('Contraseña')" class="text-gray-700" />
+                <x-text-input id="password" class="block mt-1 w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" 
+                              type="password" name="password" required autocomplete="new-password" 
+                              minlength="8" maxlength="16" title="La contraseña debe tener entre 8 y 16 caracteres." />
+                <x-input-error :messages="$errors->get('password')" class="mt-2 text-red-500" />
+            </div>
 
-                <!-- Confirm Password -->
-                <div class="mt-4">
-                    <x-input-label for="password_confirmation" :value="__('Confirmar Contraseña')" class="text-white" />
-                    <x-text-input id="password_confirmation" class="block mt-1 w-full p-2 rounded-md"
-                                  type="password"
-                                  name="password_confirmation" required autocomplete="new-password"
-                                  minlength="8" maxlength="16" />
-                    <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2 text-red-500" />
-                </div>
+            <!-- Confirmar Contraseña -->
+            <div>
+                <x-input-label for="password_confirmation" :value="__('Confirmar Contraseña')" class="text-gray-700" />
+                <x-text-input id="password_confirmation" class="block mt-1 w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" 
+                              type="password" name="password_confirmation" required autocomplete="new-password" 
+                              minlength="8" maxlength="16" />
+                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2 text-red-500" />
+            </div>
 
-                <!-- Action Buttons -->
-                <div class="flex items-center justify-between mt-6">
-                    <a class="underline text-sm text-gray-200 hover:text-white rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white" href="{{ route('login') }}">
-                        {{ __('¿Ya está registrado?') }}
-                    </a>
+            <!-- Action Buttons -->
+            <div class="flex items-center justify-between mt-6">
+                <a class="text-sm text-blue-600 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500" href="{{ route('login') }}">
+                    {{ __('¿Ya tienes cuenta? Inicia sesión') }}
+                </a>
 
-                    <x-primary-button class="bg-blue-800 hover:bg-blue-900 text-white px-4 py-2 rounded-md">
-                        {{ __('Registrar') }}
-                    </x-primary-button>
-                </div>
-            </form>
-        </div>
-</x-guest-layout>
+                <button type="submit" class="w-full py-3 mt-3 bg-blue-700 hover:bg-blue-800 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                    {{ __('Registrarse') }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 
 @endsection
