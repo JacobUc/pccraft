@@ -13,6 +13,24 @@
 
         @vite('resources/css/app.css')
         @vite('resources/js/app.js') {{-- Para Flowbite --}}
+        <style>
+        .relative {
+            position: relative;
+        }
+
+        span.absolute {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #3B82F6;
+            color: white;
+            border-radius: 50%;
+            padding: 4px 6px;
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 1;
+        }
+    </style>
     </head>
 
     <body class="bg-white">
@@ -25,19 +43,21 @@
 
                 {{-- Navbar --}}
                 <nav class="flex justify-between gap-16">
-                    <a href="#">Productos</a>
-                    <a href="#">Nosotros</a>
+                    <a href="{{ route('productos.buscador') }}">Productos</a>
+                    <a href="{{ route('configuradorpc.index') }}">Configurar PC</a>
                     <a href="{{ route('faqs.index') }}">Soporte</a>
                 </nav>
 
                 <div class="flex justify-between">
                     {{-- Barra de Busqueda --}}
-                    <form action="" method="get">
+                    <form action="{{route('productos.buscador')}}" method="get">
                         <input type="text" 
-                            name="search-bar" 
+                            name="search" 
                             id="search-bar"
-                            placeholder="Buscar componente"
-                            class="w-80 h-10 rounded-lg text-sm placeholder:text-slate-400 placeholder:text-sm"
+                            placeholder="¿Qué producto estás buscando?"
+                            class="w-80 h-10 rounded-lg text-sm text-slate-600 placeholder:text-slate-400 placeholder:text-sm"
+                            value="{{ $productToSearch ?? '' }}"
+                            required
                         >
                         <button type="submit" class="ml-1 bg-azul rounded-xl shadow-lg">
                             <i class="fa-solid fa-magnifying-glass p-2 text-white"></i>
@@ -52,9 +72,9 @@
                     <button id="user-menu-button" class="flex items-center text-gray-700 hover:text-gray-900 focus:outline-none">
                         <i class="fa-lg fa-regular fa-user cursor-pointer"></i>
                     </button>
-                    <div id="user-menu" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
-                        <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Log In</a>
-                        <a href="{{ route('register') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Register</a>
+                    <div id="user-menu" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50">
+                        <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Iniciar Sesión</a>
+                        <a href="{{ route('register') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Registrarse</a>
                     </div>
                     @endguest
 
@@ -64,9 +84,10 @@
                         <i class="fa-lg fa-regular fa-user cursor-pointer"></i>
                     </button>
                     
-                    <div id="auth-menu" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
-                    {{-- 
-<a href="{{ route('perfil') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Perfil</a>
+                    <div id="auth-menu" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50">
+                        
+                    <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Perfil</a>
+{{-- 
 <a href="{{ route('pedidos') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Pedido</a>
 --}}
                         <form method="POST" action="{{ route('logout') }}">
@@ -77,11 +98,27 @@
                     @endauth
                 </div>
 
-                <div class="">
-                    <a href="#"> 
-                        <i class="fa-solid fa-cart-shopping fa-lg cursor-pointer"></i>
-                    </a>
-                </div>
+                @auth
+                    <div class="relative">
+                        <a href="{{ route('cart.index') }}"> 
+                            <i class="fa-solid fa-cart-shopping fa-lg cursor-pointer"></i>
+
+                            @if(Cart::session(auth()->id())->getTotalQuantity() > 0)
+                                <span class="absolute top-0 right-0 inline-block w-4 h-4 text-xs font-bold text-white bg-blue-500 rounded-full">
+                                    {{ Cart::session(auth()->id())->getTotalQuantity() }}
+                                </span>
+                            @endif
+                        </a>
+                    </div>
+                @endauth
+
+                @guest
+                    <div class="relative">
+                        <a href="{{ route('login') }}"> 
+                            <i class="fa-solid fa-cart-shopping fa-lg cursor-pointer"></i>
+                        </a>
+                    </div>
+                @endguest
             </div>
         </header>
 
@@ -102,8 +139,8 @@
             <div class="flex flex-row justify-center text-left gap-10">
                 <ul class="list-disc w-40">
                     {{-- !Actualizar links --}}
-                    <li class="mb-2"> <a href="#">Configurar PC</a> </li> 
-                    <li class="mb-2"> <a href="#">Productos</a> </li>
+                    <li class="mb-2"> <a href="{{ route('configuradorpc.index') }}">Configurar PC</a> </li> 
+                    <li class="mb-2"> <a href="{{ route('productos.buscador') }}">Productos</a> </li>
                     <li class="mb-2"> <a href="#">Nosotros</a> </li>
                     <li class="mb-2"> <a href="{{ route('faqs.index') }}">Soporte</a> </li>
                 </ul>

@@ -6,10 +6,12 @@ use App\Models\Producto_Orden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
+
 class Review extends Model
 {
     use HasFactory;
-
+    public $timestamps = true;
     protected $primaryKey = 'ID_Review';
     protected $fillable = [
         'titulo',

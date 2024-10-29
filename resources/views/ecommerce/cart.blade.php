@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Carrito')
+
 @section('content')
     <!-- Contenedor principal -->
     <div class="container mx-auto mt-6 mb-6 w-full lg:w-2/3">
@@ -210,13 +212,39 @@
                 </div>
             @endif
 
-            <!-- Aqui se redirige a pago -->
-            <div class="flex justify-end mt-6 space-y-4">
-                <div class="text-right">
-                    <div class="text-xl font-bold mb-4">Total a pagar: ${{ number_format(Cart::getTotal(), 2, '.', ',') }} MXN</div>
-                    <a href="/" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 mt-4 mb-4">Ir a
-                        Pagar</a>
-                </div>
+<!-- Aqui se redirige a pago -->
+<div class="flex justify-end mt-6 space-y-4">
+    <div class="text-right">
+        <div class="text-xl font-bold mb-4">
+            Total a pagar: ${{ number_format(Cart::getTotal(), 2, '.', ',') }} MXN
+        </div>
+        
+        <!-- Formulario para procesar el pago con Stripe -->
+        <form action="{{ route('checkout') }}" method="POST">
+            @csrf
+            <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 mt-4 mb-4">
+                Ir a pagar
+            </button>
+        </form>
+
+        <!-- Mostrar mensajes de error -->
+        @if (session('error'))
+            <div class="mt-4 p-4 bg-red-100 text-red-700 rounded">
+                {{ session('error') }}
+            </div>
+        @endif
+
+    </div>
+</div>
+
+
+
+
+
+
+
+</form>
+
             </div>
     </div>
 @else
@@ -227,3 +255,5 @@
     </section>
 
 @endsection
+
+

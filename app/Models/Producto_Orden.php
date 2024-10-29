@@ -15,6 +15,7 @@ class Producto_Orden extends Model
         'ID_Orden',
         'ID_Review',
         'cantidad',
+        'precio',
         'calificacion',
         'resena',
         'agregado'

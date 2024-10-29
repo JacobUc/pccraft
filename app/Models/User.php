@@ -20,9 +20,17 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'last_name',
+        'cellphone',
         'email',
         'password',
     ];
+
+    // Relación uno a muchos con Direccion
+    public function direcciones()
+    {
+        return $this->hasMany(Direccion::class, 'ID_Usuario', 'id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
