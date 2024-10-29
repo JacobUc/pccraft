@@ -33,7 +33,7 @@
     </div>
         <!-- Contenedor para la imagen -->
         <div class="w-1/3 flex justify-center items-center">
-            <img src="{{ asset('img/ASUS_PRIME_Z790-A_WIFI-3.jpg') }} image-producto" alt="ASUS PRIME Z790-A WIFI" class="w-72 h-72 object-cover">
+            <img src="{{ asset('img/ASUS_PRIME_Z790-A_WIFI-3.jpg') }}" image-producto" alt="ASUS PRIME Z790-A WIFI" class="w-72 h-72 object-cover">
         </div>
     </div>
 
