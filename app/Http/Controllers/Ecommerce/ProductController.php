@@ -83,7 +83,9 @@ class ProductController extends Controller
         }
     }
 
-    return view('ecommerce.product', compact('product'));
+    $productosRecomendados = ProductRecommendationController::getProducts();
+
+    return view('ecommerce.product', compact('product', 'productosRecomendados'));
 }
 
 public function show($id)

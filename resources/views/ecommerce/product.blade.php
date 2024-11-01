@@ -338,6 +338,11 @@
             </div>
         </div> --}}
 
+        {{-- Productos Recomendados --}}
+        <section class="w-full">
+            <x-ecommerce.productos-recomendados :productosRecomendados="$productosRecomendados" />
+        </section>
+
         
 @endsection
 
