@@ -339,7 +339,7 @@
         </div> --}}
 
         {{-- Productos Recomendados --}}
-        <section class="w-full">
+        <section class="w-full mt-20 mb-6">
             <x-ecommerce.productos-recomendados :productosRecomendados="$productosRecomendados" />
         </section>
 

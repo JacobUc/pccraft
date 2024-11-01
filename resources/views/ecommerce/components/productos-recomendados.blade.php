@@ -1,4 +1,4 @@
-<div class="mt-4 px-6 pt-14 pb-8">
+<div class="px-6">
     <div class="mb-6 text-center">
         <h3 class="text-3xl font-semibold">Productos Destacados</h3>
         <p class="mt-5 font-medium text-neutral-800">Los productos más vendidos del último mes</p>

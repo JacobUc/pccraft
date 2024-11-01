@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Ecommerce\HomeController;
 use App\Http\Controllers\Ecommerce\BuscadorProductsController;
 use App\Http\Controllers\Ecommerce\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -21,10 +22,7 @@ use App\Http\Controllers\Ecommerce\ConfiguradorPCController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-    
-})->name('home');
+Route::get('/', [HomeController::class, 'index'] )->name('home');
 
 // Sistema de Recomendaciones
 Route::get('/recomendaciones', [RecomendacionController::class, 'index']);
