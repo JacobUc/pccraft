@@ -66,20 +66,20 @@
     </div>
 
     {{-- La mejor seleccion de componentes --}}
-    <div class="mt-16 mb-20 flex justify-center items-center w-full">
-        <div class="flex flex-row w-[48rem] gap-2 items-center">
-            <div class="w-1/2">
+    <div class="w-full my-12 flex justify-center items-center">
+        <div class="mt-1 flex flex-row w-[60rem] gap-2 items-center">
+            <div class="w-1/2 text-center">
                 <h3 class="font-medium text-3xl">La mejor selección de componentes de PC</h3>
             </div>
-            <div class="w-1/2">
-                <p class="text-sm leading-5 font-['montserrat'] text-justify">
+            <div class="w-1/2 py-4">
+                <p class="text-[0.94rem] leading-6 text-justify  font-['montserrat']">
                     Encuentra todo lo que necesitas para armar tu computadora perfecta, realizar compras en línea y administrar tu cuenta de manera fácil y segura.
                 </p>
-                <div class="flex justify-center items-center gap-4 mt-4 font-['roboto'] font-medium">
-                    <a href="#" class="w-40 py-1.5 border border-blue-700 rounded-lg text-center text-azul shadow-md shadow-gray-400 duration-300 hover:bg-azul hover:text-white">
+                <div class="pt-1.5 flex justify-center items-center gap-7 mt-4 font-['roboto'] font-medium">
+                    <a href="{{ route('productos.buscador') }}" class="w-40 py-1.5 border border-blue-700 rounded-md bg-azul text-center text-white shadow-md shadow-gray-400 duration-300 hover:scale-105">
                         Explorar
                     </a>
-                    <a href="#" class="w-40 py-1.5 border border-black rounded-lg text-center shadow-md shadow-gray-400 duration-300 hover:bg-negro hover:text-white">
+                    <a href="{{ route('register') }}" class="w-40 py-1.5 border border-black rounded-lg bg-neutral-800 text-center text-white shadow-md shadow-gray-400 duration-300 hover:scale-105">
                         Registrarse
                     </a>
                 </div>
@@ -88,30 +88,32 @@
     </div>
 
     {{-- Productos Destacados --}}
-    <section class="w-full mt-20 mb-20 mx-auto">
+    <section class="w-full my-24 mx-auto">
         <x-ecommerce.productos-recomendados :productosRecomendados="$productosRecomendados" />
     </section>
     
 
     {{-- Configurador (La mejor experiencia de compra...) --}}
-    <div class="mt-16 mb-16 bg-negro text-white flex flex-col text-center">
-        <div class="mt-10">
-            <h3 class="text-2xl font-bold">La mejor experiencia de compra en componentes de computadoras</h3>
-        </div>
-        {{-- Carrusel --}}
-        <div class="mt-10 flex justify-center">
-            <img src="{{ asset('img/sec_conf.png') }}" alt="Imagen Computadora Configurada" class="w-96">
-        </div>
-        <div class="mt-6 pb-8 flex justify-center items-center w-full">
-            <div class="flex flex-row w-7/12">
-                <div class="w-3/4 items-center font-bold">
-                    <p class="text-left text-4xl text-azul">Selecciona, compra y gestiona</p>
-                    <p class="text-left text-4xl">tus componentes para armar tu computadora perfecta</p>
-                </div>
-                <div class="w-1/4 flex justify-center items-center">
-                    <a href="#" class="py-2 px-5 bg-azul border border-azul rounded-lg text-white shadow-white hover:shadow-xl">
-                        Configura tu PC
-                    </a>
+    <div class="mt-16 mb-16 flex justify-center text-center bg-negro text-white">
+        <div class="w-[65rem] py-4">
+            <div class="mt-12">
+                <h3 class="text-3xl leading-relaxed font-bold font-montserrat">La mejor experiencia de compra en componentes de computadoras</h3>
+            </div>
+            <div class="mt-14 flex justify-center">
+                <a href="{{route('configuradorpc.index')}}" class="p-4 duration-500 hover:scale-110">
+                    <img src="{{ asset('img/sec_conf.png') }}" alt="Imagen Computadora Configurada" class="w-[27rem]">
+                </a>
+            </div>
+            <div class="w-full mt-14 mb-12 flex justify-center items-center">
+                <div class="flex flex-row">
+                    <div class="w-3/4 items-center font-bold">
+                        <p class="text-left text-4xl text-azul leading-normal">Selecciona, compra y gestiona <br><span class="text-white">tus componentes para armar tu computadora perfecta</span></p>
+                    </div>
+                    <div class="w-1/4 flex justify-end items-center">
+                        <a href=" {{route('configuradorpc.index')}} " class="py-2 px-5 bg-azul border border-azul rounded-lg text-white duration-300 hover:scale-105">
+                            Configura tu PC
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -119,14 +121,14 @@
 
 
     {{-- Testimonios --}}
-    <div class="mt-3 mb-20 flex flex-col justify-center items-center text-center">
+    <div class="mt-24 mb-24 flex flex-col justify-center items-center text-center">
         <div>
-            <h2 class="text-4xl font-medium">Testimonios</h2>
-            <p class="mt-4 text-slate-600">Algunas palabras de nuestros clientes</p>
+            <h2 class="text-4xl font-semibold">Testimonios</h2>
+            <p class="mt-5 font-medium text-slate-600">Algunas palabras de nuestros clientes</p>
         </div>
         {{-- Tarjetas Testimonios --}}
-        <div class="mt-8 flex flex-row w-7/12 text-center gap-4">
-            <div class="w-1/3 border border-gray-200 rounded-lg pt-2 pb-5 px-3 font-medium shadow-lg">
+        <div class="w-8/12 px-12     mt-10 mb-2 flex text-center gap-6">
+            <div class="w-1/3 border border-gray-200 rounded-lg pt-2 pb-5 px-4 font-medium shadow-md shadow-neutral-300 duration-300 hover:shadow-lg hover:shadow-neutral-400">
                 {{-- Imagen y Estrellas--}}
                 <div class="mt-3 flex flex-col items-center">
                     <img src="{{ asset('img/testimonio1.jpg') }}" 
@@ -147,7 +149,7 @@
                 </div>
             </div>
 
-            <div class="w-1/3 border border-gray-200 rounded-lg pt-2 pb-5 px-3 font-medium shadow-lg">
+            <div class="w-1/3 border border-gray-200 rounded-lg pt-2 pb-5 px-5 font-medium shadow-md shadow-neutral-300 duration-300 hover:shadow-lg hover:shadow-neutral-400">
                 {{-- Imagen y Estrellas --}}
                 <div class="mt-3 flex flex-col items-center">
                     <img src="{{ asset('img/testimonio2.jpeg') }}" 
@@ -168,7 +170,7 @@
                 </div>
             </div>
 
-            <div class="w-1/3 border border-gray-200 rounded-lg pt-2 pb-5 px-3 font-medium shadow-lg">
+            <div class="w-1/3 border border-gray-200 rounded-lg pt-2 pb-5 px-5 font-medium shadow-md shadow-neutral-300 duration-300 hover:shadow-lg hover:shadow-neutral-400">
                 {{-- Imagen y Estrellas --}}
                 <div class="mt-3 flex flex-col items-center">
                     <img src="{{ asset('img/testimonio3.png') }}" 
