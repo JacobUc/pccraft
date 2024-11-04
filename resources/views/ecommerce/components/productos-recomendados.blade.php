@@ -1,7 +1,7 @@
 <div class="px-6">
     <div class="mb-6 text-center">
-        <h3 class="text-3xl font-semibold">Productos Destacados</h3>
-        <p class="mt-5 font-medium text-neutral-800">Los productos más vendidos del último mes</p>
+        <h3 class="text-4xl font-semibold text-azul">Productos Destacados</h3>
+        <p class="mt-5 font-medium text-neutral-700">Los productos más vendidos del último mes</p>
     </div>
 
     {{-- Wrapper Btns y Carrusel Productos --}}
@@ -19,43 +19,44 @@
                 @foreach ($productosRecomendados as $product)
                     {{-- Card Producto --}}
                     <div class="swiper-slide">
-                        <div class="flex flex-col h-[25rem] py-2 pb-3 px-3 border bg-white rounded-md text-center font-medium shadow-md shadow-neutral-400 duration-300 transform transition-transform hover:scale-105">
+
+                        {{--! Cambiar el tamano para probar si afecta o no al espacio del btn y de la card  --}}
+                        <div class="flex flex-col h-[26rem] py-2 pb-3 px-3 border bg-white rounded-md text-center font-medium shadow-md shadow-neutral-400 duration-300 transform transition-transform hover:scale-105">
+
+                            {{-- Imagen --}}
+                            <div class="mt-2 flex align-items items-center  border-black">
+                                <a href="{{ '/productos/' . $product->product->ID_producto }}" class="w-full h-[10.5rem] py-2">
+                                    <img src="{{ asset('storage/' . json_decode($product->product->url_photo, true)[0] ) }}"
+                                        class="w-full h-full object-contain  rounded-xl"
+                                        alt="Imagen Producto">
+                                </a>
+                            </div>
 
                             {{-- Contenedor superior con imagen y detalles del producto --}}
-                            <div class="grow">
-                                {{-- Imagen --}}
-                                <div class="mt-3 flex align-items items-center">
-                                    <a href="{{ '/productos/' . $product->product->ID_producto }}" class="w-full h-[10.5rem] py-2">
-                                        {{-- !Formatear imagen --}}
-                                        <img src="{{ asset('storage/' . json_decode($product->product->url_photo, true)[0] ) }}"
-                                            class="w-full h-full object-contain  rounded-xl"
-                                            alt="Imagen Producto">
-                                    </a>
-                                </div>
-    
-                                {{-- Info Producto --}}
-                                <div>
-                                    <h2 class="mt-3 mb-1">
+                            {{--! Info Producto --}}
+                            <div class="grow flex flex-col">
+                                {{-- Nombre y Categoria --}}
+                                <div class="grow flex flex-col justify-evenly ">
+                                    <h2 class="mt-1">
                                         <a href="{{ '/productos/' . $product->product->ID_producto }}">
                                             <span class="duration-300 hover:text-azul">{{$product->product->nombre}}</span>
                                         </a>
                                     </h2>
-                                    <p class="mb-2.5 text-sm text-verde font-normal">{{ $product->product->category->nombre_categoria }}</p>
-                                    {{-- !Formatear precio --}}
-                                    <div class="mb-3 flex flex-col justify-center">
-                                        <p class="mb-0.5 font-['roboto'] text-sm text-base text-azul">
-                                            ${{ number_format($product->precioFinal, 2, '.', ',') }}
+                                    <p class="justify-center text-sm text-verde font-medium">{{ $product->product->category->nombre_categoria }}</p>
+                                </div>
+                                {{-- Precio y Descuento --}}
+                                <div class="mt-1 mb-3 flex flex-col justify-center">
+                                    <p class="mb-0.5 font-['roboto'] text-md text-base text-azul">
+                                        ${{ number_format($product->precioFinal, 2, '.', ',') }}
+                                    </p>
+                                    @if ($product->product->descuento > 0)
+                                        <p class="font-['roboto'] text-sm text-slate-400">
+                                            <span class="line-through">${{ number_format($product->product->precio, 2, '.', ',') }}</span>
+                                            <span class="py-0.5 px-1.5 font-['roboto'] text-xs text-red-600 bg-red-200 rounded-lg">
+                                                -{{ $product->product->descuento }}%
+                                            </span>
                                         </p>
-                                        @if ($product->product->descuento > 0)
-                                            <p class="font-['roboto'] text-sm text-slate-400">
-                                                <span class="line-through">${{ number_format($product->product->precio, 2, '.', ',') }}</span>
-                                            
-                                                <span class="py-0.5 px-1.5 font-['roboto'] text-xs text-red-600 bg-red-200 rounded-lg">
-                                                    -{{ $product->product->descuento }}%
-                                                </span>
-                                            </p>
-                                        @endif
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
 
@@ -96,10 +97,12 @@
                                     <div class="text-red-500">{{ $message }}</div>
                                 @enderror
         
-                                <button type="submit" class="w-40 mb-4 py-2 bg-white text-xs text-base font-normal border border-azul rounded-md text-azul shadow-md shadow-neutral-400 duration-500 hover:bg-azul hover:text-white hover:shadow-md hover:shadow-neutral-500">
-                                    <span class="mr-2"><i class="fa-solid fa-cart-shopping"></i></span>
-                                    Agregar al carrito
-                                </button>
+                                <div class="px-4">
+                                    <button type="submit" class="w-full mb-3 py-2 bg-white text-[0.85rem] font-normal border border-azul rounded-md text-azul shadow-md shadow-neutral-400 duration-500 hover:bg-azul hover:text-white hover:shadow-md hover:shadow-neutral-500">
+                                        <span class="mr-2"><i class="fa-solid fa-cart-shopping"></i></span>
+                                        Agregar al carrito
+                                    </button>
+                                </div>
                             </form>
                         </div>
                     </div>

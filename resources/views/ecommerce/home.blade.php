@@ -101,7 +101,7 @@
             </div>
             <div class="mt-14 flex justify-center">
                 <a href="{{route('configuradorpc.index')}}" class="p-4 duration-500 hover:scale-110">
-                    <img src="{{ asset('img/sec_conf.png') }}" alt="Imagen Computadora Configurada" class="w-[27rem]">
+                    <img id="img-configurar-pc" src="{{ asset('img/sec_conf.png') }}" alt="Imagen Computadora Configurada" class="w-[27rem]">
                 </a>
             </div>
             <div class="w-full mt-14 mb-12 flex justify-center items-center">
@@ -194,3 +194,21 @@
     </div>
     
 @endsection
+
+
+@push('styles')
+    <style>
+        #img-configurar-pc{
+            filter: drop-shadow(
+                0 0 10px rgba(255, 255, 255, 0.1)
+            );
+            transition: 500ms
+        }
+
+        #img-configurar-pc:hover{
+            filter: drop-shadow(
+                0 0 10px rgba(255, 255, 255, 0.7)
+            )
+        }
+    </style>
+@endpush

@@ -4,6 +4,9 @@
     {{-- <h1>Recomendaciones del Mes</h1> --}}
 
     {{-- <h2>Fecha: {{$fechaActual}}</h2> --}}
+    <section class="w-full my-24 mx-auto">
+        <x-ecommerce.productos-recomendados :productosRecomendados="$productosRecomendados" />
+    </section>
 
     {{-- !Mostrar los productos mas vendidos del mes --}}
     {{-- <table class="w-full mt-10 border text-center">
