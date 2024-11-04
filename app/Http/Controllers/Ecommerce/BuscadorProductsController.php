@@ -19,7 +19,7 @@ class BuscadorProductsController extends Controller
         $maxPrice = null;
         
         // Inicializar la consulta de productos con el cálculo de precio final
-        $products = Product::select('*', DB::raw('precio - (precio * (descuento / 100)) as precioFinal'));
+        $products = Product::select('*', DB::raw('precio - (precio * (descuento / 100)) as precioFinal'))->where('stock',  '>', '0'); // Productos solamente con stock
 
         // Verificar si hay Busqueda por Nombre/Modelo
         if($request->has('search') && $request->search != ''){

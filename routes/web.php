@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Ecommerce\HomeController;
 use App\Http\Controllers\Ecommerce\BuscadorProductsController;
 use App\Http\Controllers\Ecommerce\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Ecommerce\Cart\CartController;
+use App\Http\Controllers\RecomendacionController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Ecommerce\UserOrderController;
@@ -20,10 +22,10 @@ use App\Http\Controllers\Ecommerce\ConfiguradorPCController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-    
-})->name('home');
+Route::get('/', [HomeController::class, 'index'] )->name('home');
+
+// Sistema de Recomendaciones
+Route::get('/recomendaciones', [RecomendacionController::class, 'index']);
 
 // Buscador productos
 Route::get('buscador', [BuscadorProductsController::class, 'index'])->name('productos.buscador');

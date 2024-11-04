@@ -119,26 +119,32 @@
                     <div class="w-full py-6 px-8 grid grid-cols-4 gap-6 bg-white border-2 border-gray-200 rounded-lg shadow-lg">
                         {{-- Mostrar los productos --}}
                         @foreach ($products as $product)
-                            <div class="w-[17rem] pt-2 pb-5 px-3 border border-neutral-200 rounded-lg text-center font-medium shadow duration-300 hover:shadow-lg hover:shadow-neutral-300">
+                            <div class="flex flex-col px-3 border border-neutral-200 bg-white rounded-md text-center font-medium shadow-md shadow-neutral-300 duration-300 hover:shadow-neutral-400">
+
                                 {{-- Imagen --}}
                                 <div class="px-1 flex align-items items-center">
-                                    <a href="{{ '/productos/' . $product->ID_producto }}" class="w-full h-[13rem]">
+                                    <a href="{{ '/productos/' . $product->ID_producto }}" class="w-full h-[13rem] py-3">
                                         {{-- !Formatear imagen --}}
                                         <img src="{{ asset('storage/' . json_decode($product->url_photo, true)[0] ) }}"
                                             class="w-full h-full object-contain  rounded-xl"
                                             alt="Imagen Producto">
                                     </a>
                                 </div>
-                                {{-- Info Producto --}}
-                                <div>
-                                    <h2 class="mt-3 mb-1 leading-relaxed">
-                                        <a href="{{ '/productos/' . $product->ID_producto }}">
-                                            <span class="duration-300 hover:text-azul">{{$product->nombre}}</span>
-                                        </a>
-                                    </h2>
-                                    <p class="mb-1.5 text-verde font-normal">{{ $product->category->nombre_categoria }}</p>
-                                    {{-- !Formatear precio --}}
-                                    <div class="mb-3">
+
+                                {{-- Contenedor Nombre, Categoria y Precio --}}
+                                <div class="grow flex flex-col">
+                                    {{-- Nombre y Categoria --}}
+                                    <div class="grow flex flex-col justify-evenly">
+                                        <h2 class="mt-3">
+                                            <a href="{{ '/productos/' . $product->ID_producto }}">
+                                                <span class="duration-300 hover:text-azul">{{$product->nombre}}</span>
+                                            </a>
+                                        </h2>
+                                        <p class="mb-1.5 text-verde font-medium">{{ $product->category->nombre_categoria }}</p>
+                                    </div>
+
+                                    {{-- Precio y Descuento --}}
+                                    <div class="mt-1 mb-3 flex flex-col justify-center text-sm">
                                         <p class="mb-0.5 font-['roboto'] text-base text-azul">
                                             ${{ number_format($product->precioFinal, 2, '.', ',') }}
                                         </p>
@@ -155,7 +161,7 @@
                                 </div>
 
                                 {{-- Agregar al Carrito --}}
-                                <form action="{{ route('cart.add') }}" method="POST">
+                                <form action="{{ route('cart.add') }}" method="POST" class="mb-0">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $product->ID_producto }}">
                                     <input type="hidden" name="nombre" value="{{ $product->nombre }}">
@@ -166,7 +172,6 @@
                                     <input type="hidden" name="cantidad" value="1"> 
                                     <input type="hidden" name="url_photo[]" value="{{ $product->url_photo }}">
                                     
-                                    {{-- Mostrar errores de validación --}}
                                     @error('id')
                                         <div class="text-red-500">{{ $message }}</div>
                                     @enderror
@@ -191,11 +196,13 @@
                                     @error('url_photo')
                                         <div class="text-red-500">{{ $message }}</div>
                                     @enderror
-
-                                    <button type="submit" class="w-48 py-2.5 bg-white text-sm text-base font-normal border border-azul rounded-lg text-azul shadow-md shadow-neutral-400 duration-500 hover:bg-azul hover:text-white hover:shadow-md hover:shadow-neutral-500">
-                                        <span class="mr-2"><i class="fa-solid fa-cart-shopping"></i></span>
-                                        Agregar al carrito
-                                    </button>
+            
+                                    <div class="px-4">
+                                        <button type="submit" class="w-full mb-5 py-2 bg-white text-[0.85rem] font-normal border border-azul rounded-md text-azul shadow-md shadow-neutral-400 duration-500 hover:bg-azul hover:text-white hover:shadow-md hover:shadow-neutral-500">
+                                            <span class="mr-2"><i class="fa-solid fa-cart-shopping"></i></span>
+                                            Agregar al carrito
+                                        </button>
+                                    </div>
                                 </form>
                             </div>
                         @endforeach

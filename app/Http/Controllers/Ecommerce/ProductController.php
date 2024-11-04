@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Ecommerce;
 
 use DateTime;
+use App\Models\User;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Ecommerce\ProductRecommendationController;
 
 class ProductController extends Controller
 {
@@ -82,7 +83,9 @@ class ProductController extends Controller
         }
     }
 
-    return view('ecommerce.product')->with('product', $product);
+    $productosRecomendados = ProductRecommendationController::getProducts();
+
+    return view('ecommerce.product', compact('product', 'productosRecomendados'));
 }
 
 public function show($id)

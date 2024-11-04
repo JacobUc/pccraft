@@ -13,6 +13,7 @@ use App\Mail\OrderShippedMail;
 use App\Mail\OrderDeliveredMail;
 use App\Mail\OrderCancelledMail;
 use Illuminate\Support\Facades\Mail;
+use App\Events\OrderStatusChanged;
 
 class OrderController extends Controller
 {
@@ -124,6 +125,10 @@ class OrderController extends Controller
                 break;
         }
         $orden->save();
+        
+        // Disparar Evento para actualizar los productos recomendados != 'cancelado'
+        event(new OrderStatusChanged($orden));
+        
         switch ($orden->estado) {
             case 'enviado':
                 Mail::to($orden->usuario->email)->send(new OrderShippedMail($orden));

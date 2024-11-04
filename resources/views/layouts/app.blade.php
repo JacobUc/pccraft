@@ -13,6 +13,11 @@
 
         @vite('resources/css/app.css')
         @vite('resources/js/app.js') {{-- Para Flowbite --}}
+
+        {{-- !Carrusel productos recomendados --}}
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
         <style>
         .relative {
             position: relative;
@@ -194,5 +199,7 @@
                 }
             });
         </script>
+        
+        @stack('scripts')
     </body>
 </html>
