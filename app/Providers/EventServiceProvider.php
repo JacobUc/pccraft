@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\OrderStatusChanged;
+use App\Listeners\UpdateProductRecommendationsOnOrderStatusChange;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +20,10 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        // Actualizar productos recomendados cuando cambie el estado de una orden
+        OrderStatusChanged::class => [
+            UpdateProductRecommendationsOnOrderStatusChange::class
+        ]
     ];
 
     /**
