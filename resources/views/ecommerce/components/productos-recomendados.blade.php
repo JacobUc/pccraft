@@ -17,14 +17,12 @@
             <div class="swiper-wrapper py-4 pl-2.5">
 
                 @foreach ($productosRecomendados as $product)
-                    {{-- Card Producto --}}
-                    <div class="swiper-slide">
-
-                        {{--! Cambiar el tamano para probar si afecta o no al espacio del btn y de la card  --}}
+                <div class="swiper-slide">
+                        {{-- Card Producto --}}
                         <div class="flex flex-col h-[26rem] py-2 pb-3 px-3 border bg-white rounded-md text-center font-medium shadow-md shadow-neutral-400 duration-300 transform transition-transform hover:scale-105">
 
                             {{-- Imagen --}}
-                            <div class="mt-2 flex align-items items-center  border-black">
+                            <div class="mt-2 flex align-items items-center">
                                 <a href="{{ '/productos/' . $product->product->ID_producto }}" class="w-full h-[10.5rem] py-2">
                                     <img src="{{ asset('storage/' . json_decode($product->product->url_photo, true)[0] ) }}"
                                         class="w-full h-full object-contain  rounded-xl"
@@ -32,11 +30,10 @@
                                 </a>
                             </div>
 
-                            {{-- Contenedor superior con imagen y detalles del producto --}}
-                            {{--! Info Producto --}}
+                            {{-- Contenedor Nombre, Categoria y Precio --}}
                             <div class="grow flex flex-col">
                                 {{-- Nombre y Categoria --}}
-                                <div class="grow flex flex-col justify-evenly ">
+                                <div class="grow flex flex-col justify-evenly">
                                     <h2 class="mt-1">
                                         <a href="{{ '/productos/' . $product->product->ID_producto }}">
                                             <span class="duration-300 hover:text-azul">{{$product->product->nombre}}</span>
@@ -44,9 +41,10 @@
                                     </h2>
                                     <p class="justify-center text-sm text-verde font-medium">{{ $product->product->category->nombre_categoria }}</p>
                                 </div>
+                                
                                 {{-- Precio y Descuento --}}
                                 <div class="mt-1 mb-3 flex flex-col justify-center">
-                                    <p class="mb-0.5 font-['roboto'] text-md text-base text-azul">
+                                    <p class="mb-0.5 font-['roboto'] text-base text-azul">
                                         ${{ number_format($product->precioFinal, 2, '.', ',') }}
                                     </p>
                                     @if ($product->product->descuento > 0)
