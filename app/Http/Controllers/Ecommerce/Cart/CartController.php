@@ -264,6 +264,7 @@ class CartController extends Controller
                 'payment_method_types' => ['card'],
                 'line_items' => $items,
                 'mode' => 'payment',
+                'customer_email' => Auth::user()->email,
                 'success_url' => route('checkout.success') . '?session_id={CHECKOUT_SESSION_ID}',
                 'cancel_url' => route('checkout.cancel'),
             ]);
