@@ -87,7 +87,11 @@
                                 <span>No disponible</span>
                             @endif
                         </td>   
-                        <td class="px-6 py-4">{{ $producto->nombre }}</td>
+                        <td class="px-6 py-4">
+                            <a href="/productos/{{ $producto->pivot->ID_Producto }}" class="text-blue-500 hover:underline">
+                                {{ $producto->nombre }}
+                            </a>
+                        </td>
                         <td class="px-6 py-4">{{ $producto->pivot->cantidad }}</td>
                         <td class="px-6 py-4">{{ number_format($producto->pivot->precio, 2) }} MXN</td>
                         <td class="px-6 py-4">{{ number_format($producto->pivot->cantidad * $producto->pivot->precio, 2) }} MXN</td>

@@ -122,6 +122,11 @@ class OrderController extends Controller
                 break;
             case 'cancelado':
                 $orden->fecha_cancelado = now();
+                foreach ($orden->productos as $producto) {
+                    $cantidadPedida = $producto->pivot->cantidad; // Cantidad en la orden
+                    $producto->stock += $cantidadPedida; // Incrementa el stock
+                    $producto->save(); // Guarda el cambio en la base de datos
+                }
                 break;
         }
         $orden->save();
