@@ -110,6 +110,11 @@ class UserOrderController extends Controller
             if ($validatedData['estado'] == 'cancelado') {
                 $order->fecha_cancelado = Carbon::now();
                 Mail::to($order->usuario->email)->send(new OrderCancelledMail($order));
+                foreach ($order->productos as $producto) {
+                    $cantidadPedida = $producto->pivot->cantidad; // Cantidad en la orden
+                    $producto->stock += $cantidadPedida; // Incrementa el stock
+                    $producto->save(); // Guarda el cambio en la base de datos
+                }
             }
 
             $order->estado = $validatedData['estado'];

@@ -213,13 +213,6 @@
                             <div class="mt-5 mx-1 px-6 flex justify-between items-center text-lg">
                                 <h4>Todos los comentarios <span class="text-sm text-zinc-400">({{ $product->comentarios->count() }})</span></h4>
                                 {{-- Formulario de filtro, no me funcionó saludos--}}
-                                <form id="filtro-form" action="{{ url('/productos/' . $product->ID_producto) }}" method="GET">
-                                        <label for="filtro" class="text-sm">Ordenar por:</label>
-                                        <select name="filtro" id="filtro" class="text-sm">
-                                            <option value="mas-recientes" {{ request('filtro') == 'mas-recientes' ? 'selected' : '' }}>Más recientes</option>
-                                            <option value="menos-recientes" {{ request('filtro') == 'menos-recientes' ? 'selected' : '' }}>Menos recientes</option>
-                                        </select>
-                                    </form>
 
                             </div>         
                             {{-- Agregar nuevo comentario --}}
