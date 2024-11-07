@@ -456,6 +456,28 @@
             ]
         },
         {
+            "nombre": "ROG Hyperion GR701 BTF Edition",
+            "modelo": "GR701 BTF",
+            "fabricante": "ASUS",
+            "descripcion": "Chasis ATX de gama alta con diseño innovador para optimizar el flujo de aire y espacio para tarjetas gráficas grandes",
+            "precio": 6500,
+            "descuento": 50,
+            "stock": 10,
+            "ID_categoria": 6,
+            "especificacionesJSON": {
+                "tipo": "Full Tower",
+                "factor_forma": "ATX",
+                "compatibilidad_tarjeta_madre": "E-ATX, ATX, Micro-ATX, Mini-ITX",
+                "dimensiones": "268mm x 639mm x 659mm",
+                "peso": "20.8 kg"
+            },
+            "url_photo": [
+                "photos/ROG_Hyperion_GR701_BTF-1.png",
+                "photos/ROG_Hyperion_GR701_BTF-2.png",
+                "photos/ROG_Hyperion_GR701_BTF-3.png"
+            ]
+        },        
+        {
             "nombre": "MSI Micro-ATX B450M-A PRO MAX II",
             "modelo": "B450M-A PRO MAX II",
             "fabricante": "MSI",
@@ -764,6 +786,50 @@
             ]
         },
         {
+            "nombre": "GIGABYTE Tarjeta de Video GeForce RTX4060 OC",
+            "modelo": "GeForce RTX4060 OC",
+            "fabricante": "GIGABYTE",
+            "descripcion": "La tarjeta de video GeForce RTX4060 OC de GIGABYTE ofrece un rendimiento gráfico excepcional, con tecnología de triple ventilador y bajo perfil, ideal para entusiastas de los gráficos y juegos.",
+            "precio": 8500,
+            "descuento": 0,
+            "stock": 15,
+            "ID_categoria": 2,
+            "especificacionesJSON": {
+                "chipset": "NVIDIA GeForce RTX 4060",
+                "memoria_VRAM": "8 GB GDDR6",
+                "frecuencia_base": "1830 MHz",
+                "frecuencia_boost": "2460 MHz",
+                "interfaces": "PCIe 4.0 x8"
+            },
+            "url_photo": [
+                "photos/GIGABYTE_GeForce_RTX4060_OC-1.jpg",
+                "photos/GIGABYTE_GeForce_RTX4060_OC-2.jpg",
+                "photos/GIGABYTE_GeForce_RTX4060_OC-3.jpg"
+            ]
+        },
+        {
+            "nombre": "GIGABYTE Tarjeta de Video Eagle GeForce RTX4060TI",
+            "modelo": "GeForce RTX4060TI Eagle",
+            "fabricante": "GIGABYTE",
+            "descripcion": "La tarjeta de video GeForce RTX4060TI Eagle de GIGABYTE incluye tecnología de triple ventilador y está diseñada para un rendimiento gráfico superior en juegos y aplicaciones gráficas exigentes.",
+            "precio": 10500,
+            "descuento": 0,
+            "stock": 10,
+            "ID_categoria": 2,
+            "especificacionesJSON": {
+                "chipset": "NVIDIA GeForce RTX 4060TI",
+                "memoria_VRAM": "8 GB GDDR6",
+                "frecuencia_base": "2310 MHz",
+                "frecuencia_boost": "2580 MHz",
+                "interfaces": "PCIe 4.0 x8"
+            },
+            "url_photo": [
+                "photos/GIGABYTE_GeForce_RTX4060TI_Eagle-1.jpg",
+                "photos/GIGABYTE_GeForce_RTX4060TI_Eagle-2.jpg",
+                "photos/GIGABYTE_GeForce_RTX4060TI_Eagle-3.jpg"
+            ]
+        },
+        {
             "nombre": "Thermalright Frozen Prism240 Black ARGB",
             "modelo": "Prism240 Black ARGB",
             "fabricante": "Thermalright",
@@ -891,6 +957,58 @@
                 "photos/Acer_V226HQL-2.jpg",
                 "photos/Acer_V226HQL-3.jpg"
             ]
+        },
+        {
+            "nombre": "ASUS ROG Swift 27”1440P OLED DSC Gaming Monitor",
+            "modelo": "PG27AQDM",
+            "fabricante": "ASUS",
+            "descripcion": "El monitor ASUS ROG Swift PG27AQDM de 27 pulgadas ofrece una experiencia de juego superior con resolución QHD, alta frecuencia de actualización de 240Hz y compatibilidad con G-SYNC. Su recubrimiento antirreflejo y precisión de color del 99% DCI-P3 lo convierten en una excelente opción para gamers y profesionales.",
+            "precio": 25000,
+            "descuento": 0,
+            "stock": 8,
+            "ID_categoria": 7,
+            "especificacionesJSON": {
+                "tamano_pantalla": "27 pulgadas",
+                "resolucion": "2560 x 1440 (QHD)",
+                "panel": "OLED",
+                "tasa_refresco": "240 Hz",
+                "tiempo_respuesta": "0.03 ms",
+                "conectividad": "DisplayPort, HDMI",
+                "curvatura": "Plano",
+                "tecnologias_adicionales": "G-SYNC Compatible, Anti-Glare Micro-Texture Coating, 99% DCI-P3, True 10-bit"
+            },
+            "url_photo": [
+                "photos/ASUS_ROG_Swift_PG27AQDM-1.jpg",
+                "photos/ASUS_ROG_Swift_PG27AQDM-2.jpg",
+                "photos/ASUS_ROG_Swift_PG27AQDM-3.jpg"
+            ]
+        },
+        {
+            "nombre": "MSI Optix MEG381CQR Plus",
+            "modelo": "MEG381CQR Plus",
+            "fabricante": "MSI",
+            "descripcion": "El monitor MSI Optix MEG381CQR Plus de 38 pulgadas cuenta con una resolución UWQHD+, ideal para gaming inmersivo y productividad. Con una frecuencia de actualización de 175 Hz y soporte para NVIDIA G-SYNC, ofrece una experiencia de visualización fluida y detallada.",
+            "precio": 30000,
+            "descuento": 0,
+            "stock": 5,
+            "ID_categoria": 7,
+            "especificacionesJSON": {
+                "tamano_pantalla": "38 pulgadas",
+                "resolucion": "3840 x 1600 (UWQHD+)",
+                "panel": "IPS",
+                "tasa_refresco": "175 Hz",
+                "tiempo_respuesta": "1 ms",
+                "conectividad": "HDMI, DisplayPort, USB-C",
+                "curvatura": "2300R",
+                "tecnologias_adicionales": "NVIDIA G-SYNC, RGB Mystic Light"
+            },
+            "url_photo": [
+                "photos/MSI_Optix_MEG381CQR_Plus-1.png",
+                "photos/MSI_Optix_MEG381CQR_Plus-2.png",
+                "photos/MSI_Optix_MEG381CQR_Plus-3.png"
+            ]
         }
+        
+
     ]
 }
