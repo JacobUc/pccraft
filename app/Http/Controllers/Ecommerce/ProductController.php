@@ -24,12 +24,12 @@ class ProductController extends Controller
     // Parse JSON Especificaciones
     $product->especificaciones = json_decode($product->especificacionJSON, true);
 
-    $filtro = request('filtro', 'mas-recientes'); // Por defecto 'mas-recientes'
+    $filtro = request('filtro', 'mas-recientes');
 
     // Obtener comentarios ordenados según el filtro
     $comentarios = $product->reviews()
     ->with('productoOrdens.orden.usuario')
-    ->orderBy('fecha', 'desc') // Siempre ordenado de más reciente a menos reciente
+    ->orderBy('fecha', 'desc')
     //->orderBy('updated_at', 'desc')
     ->get();
         
@@ -89,12 +89,12 @@ public function show($id)
     $product = Producto::findOrFail($id);
 
     // Obtener el valor del filtro de la solicitud
-    $filtro = request('filtro', 'mas-recientes'); // Por defecto 'mas-recientes'
+    $filtro = request('filtro', 'mas-recientes');
 
     // Obtener comentarios ordenados según el filtro
     $comentarios = $product->reviews()
     ->with('productoOrdens.orden.usuario')
-    ->orderBy('fecha', 'desc') // Siempre ordenado de más reciente a menos reciente
+    ->orderBy('fecha', 'desc')
     //->orderBy('updated_at', 'desc')
     ->get();
 
