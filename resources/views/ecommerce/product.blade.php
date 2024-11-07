@@ -257,7 +257,8 @@
 
                                 {{-- Mostrar los comentarios --}}
                                 @foreach ($product->comentarios as $comentario)
-                                    <div class="p-5 border border-gray-200 rounded-lg shadow">
+                                    <div class="p-5 border border-gray-200 rounded-lg shadow comentario
+                                    {{ $loop->index >= 2 ? 'hidden' : '' }}">
                                         {{-- Estrellas --}}
                                         <p class="text-azul">
                                             {{-- Dependiendo de la calificacion, mostrar el num de estrellas --}}
@@ -277,7 +278,12 @@
                                         <p class="mt-2.5 text-sm text-zinc-400">Publicado el {{ $comentario->fecha }}</p>
                                     </div>
                                 @endforeach
-
+                                {{-- Paginacion --}}
+                            {{-- @if ( count($product->comentarios) > 2 )
+                                <div class="text-center mt-4">
+                                <button id="ver-mas-btn" class="py-2 px-4 bg-azul border border-azul rounded-lg text-white shadow hover:shadow-xl" style="z-index: 10;">Ver más opiniones</button>
+                                </div>  
+                            @endif --}}
                                 {{-- !Probando las ordenes --}}
                                 {{-- @foreach ($product->ordenes as $orden)
                                     <div>
@@ -298,14 +304,14 @@
                                     <p class="mt-1.5 px-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui in delectus consectetur consequuntur pariatur ipsa fugiat eligendi reiciendis illo, quod consequatur velit perferendis? Quo nisi omnis ullam aliquid quasi impedit?
                                     Nihil fugit eligendi repudiandae nam natus porro earum rem dignissimos, accusantium mollitia, doloribus amet exercitationem, ipsam cum reprehenderit.</p>
                                     <p class="mt-2.5 text-sm text-zinc-400">Publicado el 20/10/22</p>
-                                </div> --}}
+                                </div> 
 
                             {{-- Paginacion --}}
-                            {{-- @if ( count($product->comentarios) > 2 )
-                                <div class="text-center">
-                                    <button class="py-2 px-4 bg-azul border border-azul rounded-lg text-white shadow hover:shadow-xl">Ver más opiniones</button>
+                            @if ( count($product->comentarios) > 2 )
+                                <div class="text-center mt-4">
+                                <button id="ver-mas-btn" class="py-2 px-4 bg-azul border border-azul rounded-lg text-white shadow hover:shadow-xl" style="z-index: 10;">Ver más opiniones</button>
                                 </div>  
-                            @endif --}}
+                            @endif 
                             
                         </div>
 
@@ -340,6 +346,15 @@
 @endsection
 
 <style>
+    #ver-mas-btn {
+    z-index: 9999; /* Mayor valor para asegurarte de que esté al frente */
+    position: relative; /* Asegura que el z-index tenga efecto */
+    display: block; /* Asegúrate de que esté visible */
+}
+.comentario {
+    transition: all 0.3s ease;
+}
+
     :root {
         /* --image: url('https://www.punchtechnology.co.uk/wp-content/uploads/2024/02/vida2-1.jpg'); */
         --image: url("{{asset('storage/' . json_decode($product->url_photo, true)[0] )}}" );
@@ -430,3 +445,19 @@
     });
 </script>
 
+{{-- Script para mostrar más comentarios --}}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const verMasBtn = document.getElementById('ver-mas-btn');
+        if (verMasBtn) {
+            verMasBtn.addEventListener('click', function() {
+                // Muestra todos los comentarios ocultos
+                document.querySelectorAll('.comentario.hidden').forEach(comentario => {
+                    comentario.classList.remove('hidden');
+                });
+                // Oculta el botón una vez que se muestran los comentarios
+                this.style.display = 'none';
+            });
+        }
+    });
+</script>

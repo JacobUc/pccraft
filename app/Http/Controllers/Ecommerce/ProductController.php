@@ -28,14 +28,10 @@ class ProductController extends Controller
 
     // Obtener comentarios ordenados según el filtro
     $comentarios = $product->reviews()
-        ->with('productoOrdens.orden.usuario')
-        ->when($filtro == 'mas-recientes', function ($query) {
-            $query->orderBy('fecha', 'desc'); // Ordenar de más reciente a menos reciente
-        })
-        ->when($filtro == 'menos-recientes', function ($query) {
-            $query->orderBy('fecha', 'asc'); // Ordenar de menos reciente a más reciente
-        })
-        ->get();
+    ->with('productoOrdens.orden.usuario')
+    ->orderBy('fecha', 'desc') // Siempre ordenado de más reciente a menos reciente
+    //->orderBy('updated_at', 'desc')
+    ->get();
         
 
     $product->comentarios = $comentarios;
@@ -97,14 +93,10 @@ public function show($id)
 
     // Obtener comentarios ordenados según el filtro
     $comentarios = $product->reviews()
-        ->with('productoOrdens.orden.usuario')
-        ->when($filtro == 'mas-recientes', function ($query) {
-            $query->orderBy('fecha', 'desc'); // Ordenar de más reciente a menos reciente
-        })
-        ->when($filtro == 'menos-recientes', function ($query) {
-            $query->orderBy('fecha', 'asc'); // Ordenar de menos reciente a más reciente
-        })
-        ->get();
+    ->with('productoOrdens.orden.usuario')
+    ->orderBy('fecha', 'desc') // Siempre ordenado de más reciente a menos reciente
+    //->orderBy('updated_at', 'desc')
+    ->get();
 
     $product->comentarios = $comentarios;
 
