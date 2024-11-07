@@ -278,12 +278,6 @@
                                         <p class="mt-2.5 text-sm text-zinc-400">Publicado el {{ $comentario->fecha }}</p>
                                     </div>
                                 @endforeach
-                                {{-- Paginacion --}}
-                            {{-- @if ( count($product->comentarios) > 2 )
-                                <div class="text-center mt-4">
-                                <button id="ver-mas-btn" class="py-2 px-4 bg-azul border border-azul rounded-lg text-white shadow hover:shadow-xl" style="z-index: 10;">Ver más opiniones</button>
-                                </div>  
-                            @endif --}}
                                 {{-- !Probando las ordenes --}}
                                 {{-- @foreach ($product->ordenes as $orden)
                                     <div>
@@ -304,7 +298,7 @@
                                     <p class="mt-1.5 px-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui in delectus consectetur consequuntur pariatur ipsa fugiat eligendi reiciendis illo, quod consequatur velit perferendis? Quo nisi omnis ullam aliquid quasi impedit?
                                     Nihil fugit eligendi repudiandae nam natus porro earum rem dignissimos, accusantium mollitia, doloribus amet exercitationem, ipsam cum reprehenderit.</p>
                                     <p class="mt-2.5 text-sm text-zinc-400">Publicado el 20/10/22</p>
-                                </div> 
+                                </div> --}}
 
                             {{-- Paginacion --}}
                             @if ( count($product->comentarios) > 2 )
