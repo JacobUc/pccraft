@@ -122,7 +122,7 @@
                         <td class="px-6 py-4">{{ $orden->ID_Usuario }}</td>
                         <td class="px-6 py-4">{{ $orden->usuario->name ?? 'No disponible'}}</td>
                         <td class="px-6 py-4">{{ $orden->direccion->calle_principal }}, {{ $orden->direccion->ciudad }}</td>
-                        <td class="px-6 py-4">{{ $orden->usuario->telefono ?? 'No disponible' }}</td>
+                        <td class="px-6 py-4">{{ $orden->usuario->cellphone ?? 'No disponible' }}</td>
                         <td class="px-6 py-4">{{ $orden->usuario->email ?? 'No disponible'}}</td>
                     </tr>
                 </tbody>
