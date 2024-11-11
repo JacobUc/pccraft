@@ -3,13 +3,14 @@
 @section('title', 'Home')
 
 @section('content')
-
-<x-guest-layout>
-    <!-- Formulario con fondo azul y diseño deseado -->
-    <div class="relative p-8 max-w-md w-full">
-        <!-- Background shapes: Cubriendo todo el formulario -->
-        <div class="absolute inset-0 bg-blue-400 w-full h-full rounded transform rotate-12 z-0"></div>
-        <div class="absolute inset-0 bg-blue-500 w-full h-full rounded transform -rotate-6 z-0"></div>
+<div class="bg-white min-h-screen flex justify-center items-center relative">
+    <!-- Contenedor de dos columnas con tamaño reducido -->
+    <div class="flex w-full max-w-3xl mx-auto relative z-10">
+        
+        <!-- Sección de Imagen (60%) -->
+        <div class="w-3/5 flex items-center justify-center rounded-l-lg">
+            <img src="{{ asset('img/logo.png') }}" alt="Logo" class="max-w-full max-h-full object-contain rounded-l-lg">
+        </div>
 
         <!-- Formulario de Login -->
         <form method="POST" action="{{ route('login') }}" class="relative z-10 bg-blue-600 p-8 rounded-lg shadow-lg max-w-md w-full">
@@ -65,7 +66,8 @@
             </div>
 
         </form>
-    </div>
-</x-guest-layout>
 
+        
+    </div>
+</div>
 @endsection

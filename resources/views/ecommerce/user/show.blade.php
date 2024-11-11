@@ -142,7 +142,7 @@
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td class="px-6 py-4">{{ $order->usuario->name ?? 'No disponible'}}</td>
                         <td class="px-6 py-4">{{ $order->direccion->calle_principal }}, {{ $order->direccion->ciudad }}</td>
-                        <td class="px-6 py-4">{{ $order->usuario->telefono ?? 'No disponible' }}</td>
+                        <td class="px-6 py-4">{{ $order->usuario->cellphone ?? 'No disponible' }}</td>
                         <td class="px-6 py-4">{{ $order->usuario->email ?? 'No disponible'}}</td>
                     </tr>
                 </tbody>

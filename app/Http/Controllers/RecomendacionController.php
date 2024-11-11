@@ -33,15 +33,15 @@ class RecomendacionController extends Controller
 
         // dd( count($productosMasVendidos) );
         // Actualizar los productos en una tabla de recomendaciones.
-        // DB::table('recomendaciones')->truncate(); // Limpia la tabla de recomendaciones
-        // foreach ($productosMasVendidos as $producto) {
-        //     DB::table('recomendaciones')->insert([
-        //         'ID_producto' => $producto->ID_producto,
-        //         'total_vendidos' => $producto->total_vendidos,
-        //         'created_at' => now(),
-        //         'updated_at' => now(),
-        //     ]);
-        // }
+        DB::table('recomendaciones')->truncate(); // Limpia la tabla de recomendaciones
+        foreach ($productosMasVendidos as $producto) {
+            DB::table('recomendaciones')->insert([
+                'ID_producto' => $producto->ID_producto,
+                'total_vendidos' => $producto->total_vendidos,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
         // Retornar los productos a la vista o en formato JSON
         return view('ecommerce/recomendaciones', compact('productosMasVendidos', 'fechaActual', 'productosRecomendados'));
     }
