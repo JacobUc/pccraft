@@ -58,6 +58,27 @@
             </div>
         @endif
 
+        @if (session()->has('info_msg'))
+            <div id="alert-4"
+                class="flex items-center px-4 py-3 mb-6 text-yellow-800 rounded-lg bg-yellow-200 dark:bg-gray-800 dark:text-yellow-400"
+                role="alert">
+                <span class="sr-only">Información</span>
+                <div class="ms-3 text-sm font-medium">
+                    <strong>{{ session('info_msg') }}</strong>
+                </div>
+                <button type="button"
+                    class="ms-auto -mx-1.5 -my-1.5 bg-yellow-100 text-yellow-500 rounded-lg focus:ring-2 focus:ring-yellow-400 p-1.5 hover:bg-yellow-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-yellow-400 dark:hover:bg-gray-700"
+                    data-dismiss-target="#alert-4" aria-label="Close">
+                    <span class="sr-only">Close</span>
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                </button>
+            </div>
+         @endif
+
         @if (session()->has('alert_msg'))
             <div class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative">
                 {{ session()->get('alert_msg') }}

@@ -25,31 +25,32 @@ class ConfiguradorPCController extends Controller
         
         $procesadores = Product::whereHas('category', function ($query) {
             $query->where('ID_Categoria', 1); // Filtrar por categoría "Procesador"
-        })->get();
+        })->where('stock', '>', 0)->get();        
         $this->componentesQuery['procesadores'] = $procesadores;
+        //dd($this->componentesQuery['procesadores']);
     
         // Obtener todas las tarjetas madre
         $tarjetaMadres = Product::whereHas('category', function ($query) {
             $query->where('ID_Categoria', 3); // Filtrar por categoría "Tarjeta Madre"
-        })->get();
+        })->where('stock', '>', 0)->get(); 
         $this->componentesQuery['tarjetaMadres'] = $tarjetaMadres;
     
         // Obtener todas las memorias RAM
         $memoriasRAM = Product::whereHas('category', function ($query) {
             $query->where('ID_Categoria', 4); // Filtrar por categoría "Memorias RAM"
-        })->get();
+        })->where('stock', '>', 0)->get(); 
         $this->componentesQuery['memoriasRAM'] = $memoriasRAM;
     
         // Obtener todas las tarjetas de video
         $tarjetasDeVideo = Product::whereHas('category', function ($query) {
             $query->where('ID_Categoria', 2); // Filtrar por categoría "Tarjeta de Video"
-        })->get();
+        })->where('stock', '>', 0)->get(); 
         $this->componentesQuery['tarjetasDeVideo'] = $tarjetasDeVideo;
     
         // Obtener todos los discos duros de almacenamiento principal
         $almacenamientoPrincipal = Product::whereHas('category', function ($query) {
             $query->where('ID_Categoria', 5); // Filtrar por categoría "Discos Duros"
-        })->get();
+        })->where('stock', '>', 0)->get(); 
         $this->componentesQuery['almacenamientoPrincipal'] = $almacenamientoPrincipal;
 
         /*
@@ -63,19 +64,19 @@ class ConfiguradorPCController extends Controller
         // Obtener todos los gabinetes
         $gabinetes = Product::whereHas('category', function ($query) {
             $query->where('ID_Categoria', 6); // Filtrar por categoría "Gabinetes"
-        })->get();
+        })->where('stock', '>', 0)->get(); 
         $this->componentesQuery['gabinetes'] = $gabinetes;
     
         // Obtener todas las fuentes de poder
         $fuentesDePoder = Product::whereHas('category', function ($query) {
             $query->where('ID_Categoria', 8); // Filtrar por categoría "Fuentes de Poder"
-        })->get();
+        })->where('stock', '>', 0)->get(); 
         $this->componentesQuery['fuentesDePoder'] = $fuentesDePoder;
     
         // Obtener todos los sistemas de enfriamiento
         $enfriamientos = Product::whereHas('category', function ($query) {
             $query->where('ID_Categoria', 9); // Filtrar por categoría "Enfriamientos"
-        })->get();
+        })->where('stock', '>', 0)->get(); 
         $this->componentesQuery['enfriamientos'] = $enfriamientos;
 
         // Guardar en la sesión el array de componentesQuery
@@ -128,6 +129,7 @@ class ConfiguradorPCController extends Controller
                 // Actualizar las tarjetas madre compatibles basadas en el socket del procesador
                 $procesadoresCompatibles = Product::where('especificacionJSON', 'LIKE', '%"'.$socket.'"%')
                                         ->where('ID_Categoria', 1) // Categoría de tarjetas madre
+                                        ->where('stock', '>', 0)
                                         ->get();
                 //dd($procesadoresCompatibles);
                 $this->componentesQuery['procesadores'] = $procesadoresCompatibles;
@@ -139,6 +141,7 @@ class ConfiguradorPCController extends Controller
                 // Actualizar las tarjetas madre compatibles basadas en el socket del procesador
                 $tarjetasMadreCompatibles = Product::where('especificacionJSON', 'LIKE', '%"'.$socket.'"%')
                                         ->where('ID_Categoria', 3) // Categoría de tarjetas madre
+                                        ->where('stock', '>', 0)
                                         ->get();
                 //dd($tarjetasMadreCompatibles);
                 $this->componentesQuery['tarjetaMadres'] = $tarjetasMadreCompatibles;
@@ -149,6 +152,7 @@ class ConfiguradorPCController extends Controller
                 $tipo_memoria = $especificacion['tipo_RAM'];
                 $ramCompatibles = Product::where('especificacionJSON', 'LIKE', '%"'.$tipo_memoria.'"%')
                                         ->where('ID_Categoria', 4) // Categoría de memorias RAM
+                                        ->where('stock', '>', 0)
                                         ->get();
                 // Actualizamos el array de componentes query con los componentes compatibles con tipo_RAM 
                 //dd($ramCompatibles);
@@ -169,6 +173,7 @@ class ConfiguradorPCController extends Controller
                 // Actualizar las tarjetas madre compatibles basadas en el socket del procesador
                 $tarjetasMadreCompatibles = Product::where('especificacionJSON', 'LIKE', '%"'.$socket.'"%')
                                         ->where('ID_Categoria', 3) // Categoría de tarjetas madre
+                                        ->where('stock', '>', 0)
                                         ->get();
                 //dd($tarjetasMadreCompatibles);
                 $this->componentesQuery['tarjetaMadres'] = $tarjetasMadreCompatibles;
@@ -180,6 +185,7 @@ class ConfiguradorPCController extends Controller
                 // Actualizar las tarjetas madre compatibles basadas en el socket del procesador
                 $ProcesadoresCompatibles = Product::where('especificacionJSON', 'LIKE', '%"'.$socket.'"%')
                                         ->where('ID_Categoria', 1) // Categoría de tarjetas madre
+                                        ->where('stock', '>', 0)
                                         ->get();
                 //dd($tarjetasMadreCompatibles);
                 $this->componentesQuery['procesadores'] = $ProcesadoresCompatibles;
@@ -190,6 +196,7 @@ class ConfiguradorPCController extends Controller
                 $tipo_memoria = $especificacion['tipo_RAM'];
                 $ramCompatibles = Product::where('especificacionJSON', 'LIKE', '%"'.$tipo_memoria.'"%')
                                         ->where('ID_Categoria', 4) // Categoría de memorias RAM
+                                        ->where('stock', '>', 0)
                                         ->get();
                 // Actualizamos el array de componentes query con los componentes compatibles con tipo_RAM 
                 //dd($ramCompatibles);
@@ -200,6 +207,7 @@ class ConfiguradorPCController extends Controller
                 $factor_forma = $especificacion['factor_forma'];
                 $gabinetes = Product::where('especificacionJSON', 'LIKE', '%' . $factor_forma . '%')
                     ->where('ID_Categoria', 6) // Asegúrate de que esta categoría sea la correcta para gabinetes
+                    ->where('stock', '>', 0)
                     ->get();
                 $this->componentesQuery['gabinetes'] = $gabinetes;
             } 
@@ -218,6 +226,7 @@ class ConfiguradorPCController extends Controller
                 // Actualizar las tarjetas madre compatibles basadas en el socket del procesador
                 $ProcesadoresCompatibles = Product::where('especificacionJSON', 'LIKE', '%"'.$tipo_ram.'"%')
                                         ->where('ID_Categoria', 3) // Categoría de tarjetas madre
+                                        ->where('stock', '>', 0)
                                         ->get();
                 //dd($tarjetasMadreCompatibles);
                 $this->componentesQuery['Memoría RAM'] = $ProcesadoresCompatibles;
@@ -228,6 +237,7 @@ class ConfiguradorPCController extends Controller
                 $tipo_memoria = $especificacion['tipo_RAM'];
                 $ramCompatibles = Product::where('especificacionJSON', 'LIKE', '%"tipo_RAM":"'.$tipo_memoria.'"%')
                                         ->where('ID_Categoria', 3) // Categoría de memorias RAM
+                                        ->where('stock', '>', 0)
                                         ->get();
                 // Actualizamos el array de componentes query con los componentes compatibles con tipo_RAM 
                 //dd($ramCompatibles);
@@ -239,7 +249,7 @@ class ConfiguradorPCController extends Controller
                 // Obtener todos los gabinetes
                 $gabinetes = Product::whereHas('category', function ($query) {
                     $query->where('ID_Categoria', 6); // Filtrar por categoría "Gabinetes"
-                })->get();
+                })->get(); 
                 $this->componentesQuery['gabinetes'] = $gabinetes;
             }
             // Guardar los arrays actualizados en la sesión
@@ -254,6 +264,7 @@ class ConfiguradorPCController extends Controller
                 $factor_forma = $especificacion['factor_forma'];
                 $gabinetes = Product::where('especificacionJSON', 'LIKE', '%' . $factor_forma . '%')
                     ->where('ID_Categoria', 3) // Asegúrate de que esta categoría sea la correcta para gabinetes
+                    ->where('stock', '>', 0)
                     ->get();
                 $this->componentesQuery['gabinetes'] = $gabinetes;
             } 
