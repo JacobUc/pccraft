@@ -38,6 +38,13 @@ class CartController extends Controller
         // Obtener el contenido del carrito desde la sesión actual del usuario
         $cartCollection = Cart::session(auth()->id())->getContent();
         $products = Product::all();
+
+        $emptyProducts = $this->removeEmptyStockProducts();
+        if($emptyProducts!=''){
+            return redirect()->back()->with('info_msg', 'Han ocurrido algunos cambios en el stock de los siguinetes productos: 
+            ' . $emptyProducts);
+        }
+
         return view('ecommerce.cart', compact('cartCollection', 'products'))->withTitle('E-COMMERCE STORE | CART');
     }
 
@@ -238,7 +245,13 @@ class CartController extends Controller
         if ($cartContent->isEmpty()) {
             return redirect()->back()->with('error', 'Tu carrito está vacío.');
         }
-    
+        //Verifica que no existan productos sin stock y devuelve a la vista del carrito con un mensaje indicando los productos removidos
+        $emptyProducts = $this->removeEmptyStockProducts();
+        if($emptyProducts!=''){
+            return redirect()->back()->with('info_msg', 'Han ocurrido algunos cambios en el stock de los siguinetes productos: 
+            ' . $emptyProducts);
+        }
+
         // Crear los items para llamar a Stripe
         $items = [];
         foreach ($cartContent as $item) {
@@ -379,6 +392,56 @@ class CartController extends Controller
             return redirect()->route('checkout.cancel')->with('error', 'Hubo un error procesando tu orden: ' . $e->getMessage());
         }
     }
+
+    public function removeEmptyStockProducts()
+    {
+        // Obtener el contenido actual del carrito
+        $cartCollection = Cart::session(auth()->id())->getContent();
+        $outOfStock = false;
+        $removedProducts = '';
+        $adjustedProducts = '';
+    
+        // Recorrer cada producto en el carrito
+        foreach ($cartCollection as $item) {
+            $producto = Product::find($item->id);
+    
+            if (!$producto) {
+                continue; // Si el producto no existe, pasa al siguiente
+            }
+    
+            // Verificar si el stock es insuficiente o el producto está sin stock
+            if ($producto->stock <= 0) {
+                $removedProducts .= $producto->nombre . ', ';
+                Cart::session(auth()->id())->remove($item->id);
+                $outOfStock = true;
+            } elseif ($producto->stock < $item->quantity) {
+                // Si el stock es menor que la cantidad en el carrito, ajustar la cantidad
+                $adjustedProducts .= $producto->nombre . ' (stock reducido a ' . $producto->stock . '), ';
+                Cart::session(auth()->id())->update($item->id, [
+                    'quantity' => ['relative' => false, 'value' => $producto->stock]
+                ]);
+            }
+        }
+    
+        // Guardar el carrito actualizado en la base de datos
+        $this->saveCartToDatabase();
+    
+        // Formatear las listas de productos removidos y ajustados
+        $removedProducts = rtrim($removedProducts, ', ');
+        $adjustedProducts = rtrim($adjustedProducts, ', ');
+    
+        // Combinar mensajes de productos removidos y ajustados
+        $message = '';
+        if ($removedProducts) {
+            $message .= 'Producto sin stock: ' . $removedProducts . '. ';
+        }
+        if ($adjustedProducts) {
+            $message .= 'Producto con stock ajustado: ' . $adjustedProducts . '.';
+        }
+    
+        return $message;
+    }
+
     
     
 
