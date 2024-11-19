@@ -7,5 +7,5 @@
 @endsection
 
 @section('content')
-  <p>Bienvenido, <span class="text-azul">{{ Auth::user()->name }}</span>. </p>
+  <p>Bienvenido, <span class="text-azul">{{ Auth::user()->name }}</span> 👋.</p>
 @endsection
