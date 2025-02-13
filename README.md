@@ -7,6 +7,18 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Proyecto desarrollado en Administración de Proyectos 2
+
+Este proyecto fue desarrollado como parte de la materia **Administración de Proyectos 2** en el semestre **Agosto - Diciembre 2024** por el siguiente equipo:
+
+
+- [**Andrés Mena Salazar**](https://github.com/sajeme)
+- [**Raymundo Mora Hernández**](https://github.com/Jhonix05)
+- [**Esteban Pacheco Serralta**](https://github.com/Este538)
+- [**Alexis Rosaldo Pacheco**](https://github.com/Aler011)
+- [**Jacob Uc Cob**](https://github.com/JacobUc)
+
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
