@@ -7,6 +7,5 @@
 @endsection
 
 @section('content')
-  <p>Bienvenido, [name]</p>
-  <p>Aqui deben de ir graficas y algo mas...😴🤔😔💭</p>
+  <p>Bienvenido, <span class="text-azul">{{ Auth::user()->name }}</span> 👋.</p>
 @endsection

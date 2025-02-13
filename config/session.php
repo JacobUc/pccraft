@@ -197,5 +197,11 @@ return [
     */
 
     'same_site' => 'lax',
+    
+    'driver' => env('SESSION_DRIVER', 'file'),
+    'lifetime' => 120,
+    'expire_on_close' => false,
+    'encrypt' => false,
+    'files' => storage_path('framework/sessions'),
 
 ];

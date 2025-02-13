@@ -328,29 +328,32 @@ return [
         //     'label_color' => 'success',
         // ],
 
-        ['header' => 'ALGÚN TITULO'],
+        ['header' => 'INVENTARIO Y PEDIDOS'],
         [
             'text' => 'Productos',
             'url' => 'admin/productos',
-            'icon' => 'fas fa-fw fa-store', //fa-box-open
+            'icon' => 'fas fa-fw fa-microchip', //fa-box-open
         ],
         [
             'text' => 'Pedidos',
             'url' => 'admin/pedidos',
-            'icon' => 'fas fa-fw fa-shopping-bag',
+            'icon' => 'fas fa-solid fa-bag-shopping',
+        ],
+        [
+            'text' => 'Ver Tienda',
+            'url' => '/',
+            // 'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-solid fa-shop',
+            // <i class="fa-solid fa-bag-shopping"></i>
+            // <i class="fa-sharp-duotone fa-solid fa-shop"></i>
         ],
 
-        ['header' => 'CONFIGURACION DE CUENTA'],
-        [
-            'text' => 'Perfil',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'Cerrar sesión',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-fw fa-sign-out-alt',
-        ]
+        // ['header' => 'CONFIGURACION DE CUENTA'],
+        // [
+        //     'text' => 'Cerrar sesión',
+        //     'url' => 'logout',
+        //     'icon' => 'fas fa-fw fa-sign-out-alt',
+        // ]
         // [
         //     'text' => 'multilevel',
         //     'icon' => 'fas fa-fw fa-share',

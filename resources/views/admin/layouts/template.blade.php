@@ -37,4 +37,5 @@
 
 @section('js')
     @vite('resources/js/app.js')
+    <script src="https://kit.fontawesome.com/5a52c5581a.js" crossorigin="anonymous"></script>
 @endsection
